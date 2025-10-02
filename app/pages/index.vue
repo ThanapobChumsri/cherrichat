@@ -45,11 +45,11 @@
             <div
               v-for="(tab, index) in tabItem"
               :key="index"
-              class="w-1/4 px-4"
+              class="w-1/4 sm:px-4 px-1"
               @click="onChangeTab(tab.value)"
             >
               <UButton
-                class="font-extrabold text-sm sm:text-base liquid-glass w-full"
+                class="font-extrabold text-[10px] sm:text-base liquid-glass w-full"
                 :class="tabActive === tab.value ? 'active-bg' : ''"
                 style="border-radius: 8px !important"
               >
