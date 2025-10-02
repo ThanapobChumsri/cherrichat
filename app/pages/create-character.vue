@@ -11,6 +11,7 @@
         @submit="onGenerateCharacter"
         class="space-y-4"
       >
+        <div class="text-xl font-bold">Prompt</div>
         <UTextarea 
           v-model="form.prompt" 
           class="w-full mr-2 max-w-[600px]" 
@@ -50,8 +51,41 @@
         </div>
       </div>
 
-      <div>
-        <pre v-if="characterData" class="bg-gray-900 text-[#94a3b8] p-2 rounded overflow-auto whitespace-pre-wrap">{{ characterData }}</pre>
+      <div
+        v-if="characterData"
+        class="bg-gray-900 text-[#94a3b8] p-4 rounded space-y-4"
+      >
+        <div
+          v-for="(value, key) in characterData"
+          :key="key"
+          class="border-b border-gray-700 pb-2"
+        >
+          <!-- หัวข้อ -->
+          <h2 class="text-lg font-bold text-white capitalize">
+            {{ key }}
+          </h2>
+
+          <!-- ถ้า value เป็น object หรือ array -->
+          <div v-if="typeof value === 'object' && value !== null">
+            <ul class="list-disc list-inside ml-4">
+              <li v-for="(subVal, subKey) in value" :key="subKey">
+                <span class="font-semibold">{{ subKey }}:</span>
+                <span>
+                  <!-- เช็คถ้าเป็น object ซ้อน -->
+                  <span v-if="typeof subVal === 'object'">
+                    {{ JSON.stringify(subVal, null, 2) }}
+                  </span>
+                  <span v-else>
+                    {{ subVal }}
+                  </span>
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- ถ้า value เป็นข้อความธรรมดา -->
+          <p v-else>{{ value }}</p>
+        </div>
       </div>
 
     </div>
