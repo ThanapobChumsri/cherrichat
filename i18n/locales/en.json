@@ -1,0 +1,315 @@
+{
+  "app_name": "cherrichat AI",
+
+  "signin": "Sign in",
+  "or": "or",
+  "submit": "submit",
+  "dont_have_account": "Don't have an account?",
+  "create_account": "Create your account",
+  "file_limit_10mb": "The file exceeds the allowed size (more than 10MB)",
+  "account_suspended": "Your account has been suspended",
+  "pending_review": "pending review",
+  "signin_again": "Please sign in again",
+
+  "index": {
+    "section1": {
+      "title": "Roleplay AI Chat with Thai language",
+      "sub_title": "Chat with AI in smooth Thai, with lifelike roleplay characters. Fun and engaging, perfect for Thai teens.",
+      "create_character": "Create Character",
+      "landing_page": "Landing Page"
+    },
+    "section2": {
+      "title": "Meet the Characters of your dream",
+      "sub_title": "Chat with AI today",
+      "🔥 hot": "🔥 HOT",
+      "new": "NEW",
+      "top": "TOP",
+      "trending": "TRENDING",
+      "view_all": "View All"
+    }
+  },
+
+  "navbar": {
+    "character": "Character",
+    "group_chat": "Group chat",
+    "creator": "Creator",
+    "transactions": "Transactions",
+    "sign_in": "Sign in",
+    "sign_out": "Sign out",
+    "main": "Main",
+    "feature": "Feature",
+    "reaction": "Reaction",
+    "started": "Get started"
+  },
+
+  "footer": {
+    "description": "AI chat platform where you can create and chat with AI characters naturally, featuring a variety of immersive roles.",
+    "link": {
+      "title": "Link",
+      "sub_title1": "About me",
+      "sub_title2": "How to use",
+      "sub_title3": "Create character",
+      "sub_title4": "Community"
+    },
+    "help": {
+      "title": "Help",
+      "sub_title1": "Help center",
+      "sub_title2": "Contact Me",
+      "sub_title3": "Report",
+      "sub_title4": "Suggestion"
+    },
+    "copyright": {
+      "terms_of_service": "Terms of Service",
+      "privacy_policy": "Privacy Policy",
+      "cookies": "Cookies"
+    }
+  },
+
+  "character": {
+    "name": "Name",
+    "age": "Age",
+    "ethnicity": "Ethnicity",
+    "bio": "Character Bio",
+    "original_place": "Original Place",
+    "current_place": "Current Place",
+    "previous_place": "Previous Place",
+    "point": "Points",
+    "status": {
+      "title": "Status",
+      "soulmate": "Soulmate",
+      "confidant": "Confidant",
+      "best_friend": "Best Friend",
+      "close_friend": "Close Friend",
+      "good_friend": "Good Friend",
+      "friend": "Friend",
+      "casual_friend": "Casual Friend",
+      "acquaintance": "Acquaintance",
+      "stranger": "Stranger"
+    },
+    "intimacy": "Intimacy",
+    "trust_level": "Trust",
+    "comfort_level": "Comfort",
+    "interest_level": "Interest",
+    "affection_level": "Affection",
+    "knowledge": "Knowledge",
+    "statistics": {
+      "title": "Statistics",
+      "positive_interactions": "Positive Interaction",
+      "negative_interactions": "Negative Interaction",
+      "neutral_interactions": "Neutral Interaction",
+      "daily_streak": "Daily Streak",
+      "longest_streak": "Longest Streak",
+      "first_interaction_at": "First Interaction At",
+      "last_interaction_at": "Latest Interaction At",
+      "streak_started_at": "Streak Started At"
+    }
+  },
+
+  "location": {
+    "info": "Relationship",
+    "backstory": "Backstory", 
+    "appearance": "Appearance",
+    "eyes": "Eyes",
+    "hair": "Hair",
+    "style": "Style",
+    "height": "Height",
+    "usual_expression": "Usual Expression",
+    "distinctive_features": "Distinctive Features",
+    "goals": "Goals",
+    "living": "Living Situation",
+    "status": "Status",
+    "education": "Education",
+    "default_mood": "Default Mood",
+    "when_helping": "When Helping",
+    "when_praised": "When Praised",
+    "when_meeting_new": "When Meeting New People",
+    "empathy": "Empathy",
+    "cuteness": "Cuteness",
+    "kindness": "Kindness",
+    "introversion": "Introversion",
+    "likes": "Likes",
+    "skills": "Skills",
+    "hobbies": "Hobbies",
+    "dislikes": "Dislikes",
+    "favorite_animals": "Favorite Animals",
+    "current_situation": "Current Situation",
+    "behaviors": "Behaviors",
+    "core_traits": "Core Traits",
+    "emotional_traits": "Emotional Traits",
+    "traits": "Traits",
+    "expertise": "Expertise",
+    "intelligence": "Intelligence",
+    "position": "Position",
+    "research": "Research",
+    "experience": "Experience", 
+    "responsibilities": "Responsibilities",
+    "favorite_flowers": "Favorite Flowers",
+    "hometown_memories": "Hometown Memories",
+    "shyness_level": "Shyness Level",
+    "favorite_music": "Favorite Music",
+    "job": "Job",
+    "challenges": "Challenges",
+    "pets": "Pets",
+    "achievements": "Achievements",
+    "when_animal_topic": "When Animal Topic Comes Up",
+    "animal_love": "Animal Love",
+    "coolness": "Coolness"
+  },
+
+  "chat": {
+    "send": "Send",
+    "typing_here": "Type your message here...",
+    "description": "Press Enter to send. Shift+Enter for new line",
+    "oldest_message": "oldest message"
+  },
+
+  "create_character": {
+    "title": "Create Character",
+    "placeholder_prompt": "Example:\n      Jack is a young English boy who dreams of becoming a professional football player. He is currently part of the youth academy of a football club. Jack trains every day and is determined to rise to become a player for the England national team...",
+    "generate": "AI Generate",
+    "create": "Create Character",
+    "refresh_image": "Refresh Image"
+  },
+
+  "payment": {
+    "title": "Top up Package",
+    "package": "Package",
+    "history": "History",
+    "no_use_coin": "No coin history yet",
+    "bath": "Bath",
+    "success_page": {
+      "title": "Payment successful",
+      "sub_title_1": "Please wait",
+      "sub_title_2": "seconds to be redirected to the main website"
+    },
+    "coupon": {
+      "title": "Coupon",
+      "sub_title": "Coupon",
+      "placeholder": "Enter a coupon to receive coins"
+    }
+  },
+
+  "voice": {
+    "select_voice": "Voice",
+    "character_voice": "Character voice",
+    "select": "select"
+  },
+
+  "toast": {
+    "something_wrong": "Something went wrong",
+    "submit_register": "Successfully registered as a creator"
+  },
+
+  "landing": {
+    "button": "Go to Homepage",
+    "hero": {
+      "title_1": "Converse with AI Characters",
+      "title_2": "as if they were real",
+      "description": "Meet lifelike AI characters with unique personalities, emotions, and beliefs. Enjoy natural conversations that flow seamlessly and are remembered every time."
+    },
+    "feature": {
+      "title_1": "Powerful Features",
+      "title_2": "that bring AI Characters to life",
+      "sub_title": "Cutting-edge AI technology designed to make every interaction immersive and realistic.",
+      "option_1": {
+        "title": "Natural Conversations",
+        "description": "Engage with characters that express unique personalities and emotions in every dialogue."
+      },
+      "option_2": {
+        "title": "Relationship Tracking",
+        "description": "Monitor positive, negative, and neutral relationships in real time."
+      },
+      "option_3": {
+        "title": "Dynamic Memory",
+        "description": "Characters remember past conversations for truly continuous interactions."
+      },
+      "option_4": {
+        "title": "Emotional Expressions",
+        "description": "See characters react with joy, sadness, anger, or neutrality—just like humans."
+      },
+      "option_5": {
+        "title": "Adaptive Scenes",
+        "description": "Backgrounds shift automatically to match the tone and context of the conversation."
+      },
+      "option_6": {
+        "title": "Voice Interaction",
+        "description": "Experience conversations with natural, AI-generated character voices."
+      }
+    },
+    "emotion": {
+      "title_1": "Experience Real-Time",
+      "title_2": " Changes & Reactions",
+      "sub_title": "Watch characters’ expressions and backgrounds evolve naturally with every conversation.",
+      "emotion": {
+        "title": "Emotions & Expressions",
+        "option_1": "Neutral",
+        "option_2": "Happy",
+        "option_3": "Angry",
+        "option_4": "Sad"
+      },
+      "place": {
+        "title": "Scenes & Locations",
+        "option_1": "Park",
+        "option_2": "Café",
+        "option_3": "Beach",
+        "option_4": "Library"
+      },
+      "badge": "Automatic Adaptation: Our AI instantly analyzes conversations and adjusts expressions and scenes to create the most engaging experience."
+    },
+    "review": {
+      "title_1": "Are You Ready",
+      "title_2": "to Begin a New Adventure?",
+      "sub_title": "Join millions of users already enjoying dynamic, personalized conversations with AI characters that feel alive.",
+      "option_1": "Sign up and start instantly",
+      "option_2": "Available in Thai and English",
+      "option_3": "Voice-enabled conversations",
+      "balloon_1": "Active Users",
+      "balloon_2": "AI Characters",
+      "balloon_3": "Always Available",
+      "balloon_4": "Free to Get Started"
+    }
+  },
+
+  "profile": {
+    "profile_data": {
+      "title": "Profile",
+      "name": "Nickname",
+      "name_placeholder": "So the AI character can address you correctly and naturally",
+      "hobby": "Hobby",
+      "hobby_placeholder": "e.g. Listening to music, reading comics, watching series, playing games",
+      "color": "Favorite Color",
+      "color_placeholder": "For the AI character to use as metaphors in conversation",
+      "food": "Favorite Food or Snack",
+      "food_placeholder": "e.g. Pizza, Chicken Rice, Bubble Tea",
+      "animal": "Favorite Animal",
+      "animal_placeholder": "e.g. Dog, Cat, Rabbit",
+      "song": "Favorite Music Genre or Artist",
+      "song_placeholder": "So the AI character can recommend songs or artists",
+      "drink": "Favorite Drink",
+      "drink_placeholder": "e.g. Coffee, Tea, Soft Drink",
+      "movie": "Favorite Movie or Series Genre",
+      "movie_placeholder": "e.g. Romance, Action, Horror, Documentary",
+      "zodiac": "Zodiac Sign",
+      "zodiac_placeholder": "e.g. Leo, Pisces",
+      "collectibles": "Collectibles",
+      "collectibles_placeholder": "e.g. Figures, Stickers, Books, Trading Cards",
+      "cartoon": "Favorite Cartoon or Anime",
+      "cartoon_placeholder": "So the AI character can use it as a conversation topic",
+      "sport": "Favorite Sport (to Watch or Play)",
+      "sport_placeholder": "e.g. Football, Swimming, Badminton",
+      "file": "Upload File",
+      "file_placeholder": "Drop file here",
+      "file_description": "only PDF (max 2MB)",
+      "manual": "or fill in manually",
+      "optional": "optional"
+    },
+    "creator_data": {
+      "placeholder": "url address"
+    },
+    "character": "Character",
+    "transaction": "Transaction",
+    "creator": "Creator",
+    "save_change": "Save Changes",
+    "register_creator": "Register as a creator"
+  }
+}
