@@ -9,7 +9,7 @@
             <div>
               <img src="~/assets/images/logo.png" class="max-h-[30px]" />
             </div>
-            <div class="grid flex-1 grid-cols-4 text-sm sm:text-base pt-4">
+            <div class="grid flex-1 grid-cols-4 text-sm sm:text-base pt-4 gap-4">
               <div class="text-[#94a3b8] font-extrabold">
                 <p class="transition duration-100 mb-4">
                   {{ "Main" }}
@@ -45,24 +45,28 @@
                 <p class="transition duration-100 mb-4">
                   {{ "Get intouch" }}
                 </p>
-                <div class="flex gap-2">
+                <div class="flex flex-wrap gap-2">
                   <div
-                    class="bg-white text-black w-8 h-8 flex justify-center items-center rounded-full"
+                    class="bg-white text-black w-8 h-8 flex justify-center items-center rounded-full cursor-pointer"
+                    @click="redirect('https://www.facebook.com')"
                   >
                     <Icon name="jam:facebook" class="h-5 w-5" />
                   </div>
                   <div
-                    class="bg-white text-black w-8 h-8 flex justify-center items-center rounded-full"
+                    class="bg-white text-black w-8 h-8 flex justify-center items-center rounded-full cursor-pointer"
+                    @click="redirect('https://www.tiktok.com')"
                   >
                     <Icon name="ic:baseline-tiktok" class="h-5 w-5" />
                   </div>
                   <div
-                    class="bg-white text-black w-8 h-8 flex justify-center items-center rounded-full"
+                    class="bg-white text-black w-8 h-8 flex justify-center items-center rounded-full cursor-pointer"
+                    @click="redirect('https://www.instagram.com')"
                   >
                     <Icon name="mdi:instagram" class="h-5 w-5" />
                   </div>
                   <div
-                    class="bg-white text-black w-8 h-8 flex justify-center items-center rounded-full"
+                    class="bg-white text-black w-8 h-8 flex justify-center items-center rounded-full cursor-pointer"
+                    @click="redirect('https://www.twitter.com')"
                   >
                     <Icon name="ri:twitter-x-fill" class="h-5 w-5" />
                   </div>
@@ -83,7 +87,11 @@
 
 <script setup>
 const route = useRoute();
+const rounter = useRouter();
 const isDemoMode = computed(() => route.path.startsWith("/demo"));
+const redirect = (url) => {
+  window.open(url, "_blank");
+}
 </script>
 
 <style scoped></style>
