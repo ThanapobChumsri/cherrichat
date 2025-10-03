@@ -2,16 +2,17 @@
   <UContainer>
     <div class="max-w-[600px] mx-auto space-y-4 mb-4">
       <div class="text-center my-16">
-        <p class="text-2xl font-bold">{{ $t('app_name') }}</p>
-        <p class="text-[#9898A2]">{{ $t('create_character.create') }}</p>
+        <p class="text-2xl font-bold">{{ $t("app_name") }}</p>
+        <p class="text-[#9898A2]">{{ $t("create_character.create") }}</p>
       </div>
 
       <UForm
         :state="form"
+        :schema="schema"
         @submit="onGenerateCharacter"
         class="space-y-4"
       >
-        <div class="text-xl font-bold">Prompt</div>
+        <!-- <div class="text-xl font-bold">Prompt</div>
         <UTextarea 
           v-model="form.prompt" 
           class="w-full mr-2 max-w-[600px]" 
@@ -19,35 +20,127 @@
           :rows="4" 
           color="info"
           v-bind="textareaProps"
-        />
+        /> -->
+        <UFormField :label="$t('create_character.name')" name="name">
+          <UInput
+            v-model="form.name"
+            class="w-full mr-2 max-w-[600px]"
+            :placeholder="$t('create_character.placeholder_name')"
+            :rows="4"
+            color="info"
+          />
+        </UFormField>
+        <UFormField :label="$t('create_character.tagline')" name="tagline">
+          <UInput
+            v-model="form.tagline"
+            class="w-full mr-2 max-w-[600px]"
+            :placeholder="$t('create_character.placeholder_tagline')"
+            :rows="4"
+            color="info"
+          />
+        </UFormField>
+
+        <UFormField
+          :label="$t('create_character.description')"
+          name="description"
+        >
+          <UTextarea
+            v-model="form.description"
+            class="w-full mr-2 max-w-[600px]"
+            :placeholder="$t('create_character.placeholder_description')"
+            :rows="4"
+            color="info"
+          />
+        </UFormField>
+
+        <UFormField :label="$t('create_character.greeting')" name="greeting">
+          <UTextarea
+            v-model="form.greeting"
+            class="w-full mr-2 max-w-[600px]"
+            :placeholder="$t('create_character.placeholder_greeting')"
+            :rows="4"
+            color="info"
+          />
+        </UFormField>
+
+        <UFormField
+          :label="$t('create_character.character_biography')"
+          name="character_biography"
+        >
+          <UTextarea
+            v-model="form.character_biography"
+            class="w-full mr-2 max-w-[600px]"
+            :placeholder="
+              $t('create_character.placeholder_character_biography')
+            "
+            :rows="4"
+            color="info"
+          />
+        </UFormField>
+
+        <UFormField
+          :label="$t('create_character.default_role_name')"
+          name="default_role_name"
+        >
+          <UInput
+            v-model="form.default_role_name"
+            class="w-full mr-2 max-w-[600px]"
+            :placeholder="$t('create_character.placeholder_default_role_name')"
+            :rows="4"
+            color="info"
+          />
+        </UFormField>
+
+        <UFormField
+          :label="$t('create_character.default_role_detail')"
+          name="default_role_detail"
+        >
+          <UTextarea
+            v-model="form.default_role_detail"
+            class="w-full mr-2 max-w-[600px]"
+            :placeholder="
+              $t('create_character.placeholder_default_role_detail')
+            "
+            :rows="4"
+            color="info"
+          />
+        </UFormField>
 
         <div class="flex gap-4">
-          <UButton class="flex-1 justify-center cursor-pointer liquid-glass bg-gradient" color="info" variant="subtle" @click="onGenerateCharacter">{{ $t('create_character.generate') }}</UButton>
-          <UButton 
-            class="flex-1  justify-center cursor-pointer liquid-glass" 
+          <UButton
+            class="flex-1 justify-center cursor-pointer liquid-glass bg-gradient"
+            color="info"
+            variant="subtle"
+            type="submit"
+            >{{ $t("create_character.generate") }}</UButton
+          >
+          <UButton
+            class="flex-1 justify-center cursor-pointer liquid-glass"
             :color="!characterData || !imageUrl ? 'neutral' : 'info'"
-            @click="onCreateCharacter"  
+            @click="onCreateCharacter"
             :disabled="!characterData || !imageUrl"
           >
-            {{ $t('create_character.create') }}
+            {{ $t("create_character.create") }}
           </UButton>
         </div>
       </UForm>
 
       <div class="space-y-4 sm:flex sm:gap-4">
-        <div class="bg-[#27272B] flex-1 aspect-square border border-[#3F3F47] rounded-md">
-          <img :src="imageUrl" class="w-full"/>
+        <div
+          class="bg-[#27272B] flex-1 aspect-square border border-[#3F3F47] rounded-md"
+        >
+          <img :src="imageUrl" class="w-full" />
         </div>
         <div class="flex-1 flex items-center">
-          <UButton 
-            class="w-full justify-center cursor-pointer liquid-glass !bg-green-500" 
+          <UButton
+            class="w-full justify-center cursor-pointer liquid-glass !bg-green-500"
             :variant="!imageUrl ? 'solid' : 'subtle'"
-            :color="!imageUrl ? 'neutral' : 'success'" 
+            :color="!imageUrl ? 'neutral' : 'success'"
             :disabled="!imageUrl"
             @click="onRefreshImage"
           >
-            {{ $t('create_character.refresh_image') }}
-        </UButton>
+            {{ $t("create_character.refresh_image") }}
+          </UButton>
         </div>
       </div>
 
@@ -87,65 +180,99 @@
           <p v-else>{{ value }}</p>
         </div>
       </div>
-
     </div>
   </UContainer>
 </template>
 
 <script setup>
-  import { useNuxtui } from '#imports'
-  import { useCharacter } from '#imports';
+import { useNuxtui } from "#imports";
+import { useCharacter } from "#imports";
+import { object, string } from "yup";
 
-  definePageMeta({
-    layout: 'signin'
-  })
+definePageMeta({
+  layout: "signin",
+});
 
-  const { useSubmitOnEnter } = useNuxtui();
-  const { useGenerateCharacter, useGenerateCharacterImage, useCreateCharacter } = useCharacter();
-  const { $toast } = useNuxtApp()
+const { useSubmitOnEnter } = useNuxtui();
+const { useGenerateCharacter, useGenerateCharacterImage, useCreateCharacter } =
+  useCharacter();
+const { $toast } = useNuxtApp();
 
-  const userInfo = ref(null)
-  const form = ref({
-    prompt: '',
-  })
-  const characterData = ref(null)
-  const imageUrl = ref("")
+const userInfo = ref(null);
+const form = reactive({
+  prompt: "",
+  name: "",
+  tagline: "",
+  description: "",
+  greeting: "",
+  character_biography: "",
+  default_role_name: "",
+  default_role_detail: "",
+});
+const schema = object({
+  name: string().required("Name required"),
+  tagline: string().required("Tagline required"),
+  description: string().required("Description required"),
+  greeting: string().required("Greeting required"),
+});
+const characterData = ref(null);
+const imageUrl = ref("");
 
-  const textareaProps = useSubmitOnEnter(() => onGenerateCharacter())
+onMounted(() => {
+  const user_info = JSON.parse(localStorage.getItem("user-info"));
 
-  onMounted(() => {
-    const user_info = JSON.parse(localStorage.getItem('user-info'))
-
-    if (!user_info) {
-      navigateTo('/signin')
-    }
-
-    userInfo.value = user_info
-  })
-
-  const onGenerateCharacter = async () => {
-    if (form.value.prompt) {
-      const characterResponse = await useGenerateCharacter(form.value.prompt, userInfo.value.user_id)
-
-      if (characterResponse) {
-        characterData.value = characterResponse.key
-        await onRefreshImage()
-      }
-    }
+  if (!user_info) {
+    navigateTo("/signin");
   }
 
-  const onRefreshImage = async () => {
-    const imageResponse = await useGenerateCharacterImage(characterData.value.backstory, characterData.value.appearance, userInfo.value.user_id)
+  userInfo.value = user_info;
+});
 
-    if (imageResponse) {
-      imageUrl.value = imageResponse.image_url
-    }
-  }
+const onGenerateCharacter = async () => {
+  let promptData = "";
 
-  const onCreateCharacter = async () => {
-    await useCreateCharacter(characterData.value, imageUrl.value, userInfo.value.user_id)
-    navigateTo('/')
+  if (form.name) promptData += `Name: ${form.name}\n`;
+  if (form.tagline) promptData += `Tagline: ${form.tagline}\n`;
+  if (form.description) promptData += `Description: ${form.description}\n`;
+  if (form.greeting) promptData += `Greeting: ${form.greeting}\n`;
+  if (form.character_biography)
+    promptData += `Character Biography: ${form.character_biography}\n`;
+  if (form.default_role_name)
+    promptData += `Default Role Name: ${form.default_role_name}\n`;
+  if (form.default_role_detail)
+    promptData += `Default Role Detail: ${form.default_role_detail}\n`;
+
+  const characterResponse = await useGenerateCharacter(
+    promptData,
+    userInfo.value.user_id
+  );
+
+  if (characterResponse) {
+    characterData.value = characterResponse.key;
+    await onRefreshImage();
   }
+};
+
+const onRefreshImage = async () => {
+  const imageResponse = await useGenerateCharacterImage(
+    characterData.value.backstory,
+    characterData.value.appearance,
+    userInfo.value.user_id
+  );
+
+  if (imageResponse) {
+    imageUrl.value = imageResponse.image_url;
+  }
+};
+
+const onCreateCharacter = async () => {
+  await useCreateCharacter(
+    characterData.value,
+    imageUrl.value,
+    userInfo.value.user_id
+  );
+  navigateTo("/");
+};
 </script>
 
 <style scoped></style>

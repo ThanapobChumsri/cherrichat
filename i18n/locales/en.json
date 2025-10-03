@@ -107,7 +107,7 @@
 
   "location": {
     "info": "Relationship",
-    "backstory": "Backstory", 
+    "backstory": "Backstory",
     "appearance": "Appearance",
     "eyes": "Eyes",
     "hair": "Hair",
@@ -141,7 +141,7 @@
     "intelligence": "Intelligence",
     "position": "Position",
     "research": "Research",
-    "experience": "Experience", 
+    "experience": "Experience",
     "responsibilities": "Responsibilities",
     "favorite_flowers": "Favorite Flowers",
     "hometown_memories": "Hometown Memories",
@@ -166,6 +166,20 @@
   "create_character": {
     "title": "Create Character",
     "placeholder_prompt": "Example:\n      Jack is a young English boy who dreams of becoming a professional football player. He is currently part of the youth academy of a football club. Jack trains every day and is determined to rise to become a player for the England national team...",
+    "placeholder_name": "Example:\n      Albert Einstein",
+    "placeholder_tagline": "Example:\n      Genius who revolutionized physics",
+    "placeholder_description": "Example:\n      I am a physicist with a friendly personality who likes to explain complex concepts in simple terms. I am interested in science, the universe, and classical music",
+    "placeholder_greeting": "Example:\n      Hello, I'm Albert. Feel free to ask me about my scientific work",
+    "placeholder_character_biography": "Example:\n      Albert was born in Germany in 1879 and received the Nobel Prize for discovering the photoelectric effect",
+    "placeholder_default_role_name": "Example:\n      Physics Studuent",
+    "placeholder_default_role_detail": "Example:\n      A 4th student interested in relativity theorym wants to learn from Albert",
+    "name": "Name",
+    "tagline": "Tagline",
+    "description": "Description",
+    "greeting": "Greeting",
+    "character_biography": "Character Biography",
+    "default_role_name": "Default Role Name",
+    "default_role_detail": "Default Role Detail",
     "generate": "AI Generate",
     "create": "Create Character",
     "refresh_image": "Refresh Image"
