@@ -91,6 +91,9 @@
 </template>
 
 <script setup>
+import { driver } from "driver.js";
+import "driver.js/dist/driver.css";
+
 import coverImage from "~/assets/images/main-bg.png";
 import { useChat } from "#imports";
 import { useBreakpoint } from "#imports";
@@ -99,7 +102,6 @@ import { useWebSocket } from "#imports";
 import ChatContent from "~/components/chat/ChatContent.vue";
 import CharacterBio from "~/components/chat/CharacterBio.vue";
 import CharacterRelation from "~/components/chat/CharacterRelation.vue";
-
 definePageMeta({
   layout: "chat",
 });
@@ -113,7 +115,7 @@ const {
 const { isMobile } = useBreakpoint();
 const { $toast } = useNuxtApp();
 const { openChatConnection } = useWebSocket();
-
+const isFirstTime = useCookie("first-time");
 const latestChat = ref({});
 const characterData = ref([]);
 const characterRelationData = ref({});
@@ -125,6 +127,59 @@ let page = 1;
 let perPage = 10;
 
 onMounted(async () => {
+  if (!isFirstTime.value) {
+    let steps = [
+      {
+        element: "#step1",
+        popover: {
+          title: "พูดคุยด้วยเสียง",
+          description: "กดปุ่มเพื่อพูดคุยด้วยเสียง",
+        },
+      },
+      {
+        element: "#step2",
+        popover: {
+          title: "พูดคุยผ่านแชท",
+          description: "กดปุ่มส่งเพื่อส่งข้อความ",
+        },
+      },
+      {
+        element: "#step3",
+        popover: {
+          title: "ความสัมพันธ์",
+          description: "แสดงค่าสถานะต่างๆที่เกี่ยวข้องกับตัวเรา",
+        },
+      },
+      {
+        element: "#step4",
+        popover: {
+          title: "แชท",
+          description: "แสดงถึงอารมณ์ของตัวละคร และ คำพูดต่างๆ",
+        },
+      },
+      {
+        element: "#step5",
+        popover: {
+          title: "ฟังเสียง",
+          description: "สามารถฟังเสียงตัวละครได้",
+        },
+      },
+    ];
+
+    if (isMobile.value) {
+      steps = steps.filter((step) => step.element !== "#step3");
+    }
+    const driverObj = driver({
+      nextBtnText: "ถัดไป",
+      prevBtnText: "ย้อนกลับ",
+      doneBtnText: "เรียบร้อย",
+      showProgress: true,
+      steps: steps,
+    });
+
+    driverObj.drive();
+    isFirstTime.value = true;
+  }
   try {
     const latest_chat = localStorage.getItem("latest-chat");
 

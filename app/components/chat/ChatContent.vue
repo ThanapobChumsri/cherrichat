@@ -22,6 +22,7 @@
       </div>
     </div>
     <div
+      id="step4"
       ref="chatContainer"
       class="flex-1 px-6 overflow-y-auto sm:rounded-lg sm:mb-6 pt-24 sm:pt-6"
       :style="{
@@ -103,7 +104,7 @@
               {{ useFormattedTime12h(chat.created_at) }}
             </p>
             <!-- 2.2 play sound option -->
-            <div>
+            <div id="step5">
               <UButton
                 v-if="iconPlaySoundType(chat, index) === 'generate'"
                 icon="teenyicons:sound-on-solid"
@@ -176,12 +177,14 @@
         />
         <div class="text-end space-x-2 pt-2 flex justify-end">
           <UButton
+            id="step1"
             icon="mdi:microphone-outline"
             class="cursor-pointer rounded-full bg-[#D00000] text-white hover:text-black"
             color="neutral"
             @click="switchChatMode"
           />
           <UButton
+            id="step2"
             v-if="!sendChatLoad"
             :label="$t('chat.send')"
             color="neutral"

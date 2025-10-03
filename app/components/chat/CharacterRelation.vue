@@ -10,7 +10,7 @@
         </div>
       </div>
 
-      <BioCollapse disabled color="yellow" :label="$t('location.info')" test>
+      <BioCollapse id="step3" disabled color="yellow" :label="$t('location.info')" test>
         <div class="space-y-2">
           <div class="text-[#9898A2] flex items-center">
             <div class="w-[40%]">Level</div>
