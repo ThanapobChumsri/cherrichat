@@ -1,7 +1,31 @@
 <template>
-  <div class="flex-1 flex flex-col h-screen pb-4">
+  <div class="relative flex-1 flex flex-col h-screen pb-4">
+    <!-- collapse button -->
+    <div 
+      v-if="!isMobile" 
+      class="absolute h-16 flex items-center z-10 left-[-1px] border-t border-r border-b rounded-tr-md rounded-br-md bg-[#23211E]" 
+      @click="emit('toggleCollapse', 'bio')"
+    >
+      <Icon 
+        name="ri:arrow-left-s-line"
+        class="w-[40px] h-[40px] cursor-pointer hover:w-[44px] transition-width duration-200"
+        :class="isCollapseBio ? 'rotate-180' : 'rotate-0'"
+      />
+    </div>
+    <div 
+      v-if="!isMobile" 
+      class="absolute h-16 flex items-center z-10 right-[-1px] border-t border-l border-b rounded-tl-md rounded-bl-md bg-[#23211E]" 
+      @click="emit('toggleCollapse', 'relation')"
+    >
+      <Icon 
+        name="ri:arrow-right-s-line"
+        class="w-[40px] h-[40px] cursor-pointer hover:w-[44px] transition-width duration-200"
+        :class="isCollapseRelation ? 'rotate-180' : 'rotate-0'"
+      />
+    </div>
+    
     <div class="hidden sm:block py-4">
-      <div class="gradient-text">{{ characterData?.name }}</div>
+      <div class="gradient-text ml-16">{{ characterData?.name }}</div>
       <div class="flex gap-2 pt-5">
         <div class="flex items-center gap-4 w-[200px]">
           <div class="liquid-glass py-1 px-4 !bg-[#EF3E41] !text-[#34415C] text-[20px] font-medium">

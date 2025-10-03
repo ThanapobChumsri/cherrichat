@@ -299,7 +299,7 @@
       "sport_placeholder": "เช่น ฟุตบอล, ว่ายน้ำ, แบดมินตัน",
       "file": "อัปโหลดไฟล์",
       "file_placeholder": "วางไฟล์ตรงนี้",
-      "file_description": "เฉพาะไฟล์ PDF (สูงสุด 2MB)",
+      "file_description": "เฉพาะไฟล์ PDF (สูงสุด 10MB)",
       "manual": "หรือใส่ข้อมูลด้วยตัวเอง",
       "optional": "ไม่บังคับ"
     },

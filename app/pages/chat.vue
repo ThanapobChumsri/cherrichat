@@ -14,6 +14,7 @@
       :emotion="characterRelationData?.emotion"
       :relationship-id="characterRelationData?.id"
       :sound-id="characterRelationData?.sound_id"
+      :is-collapse="isCollapseBio"
     />
     <!-- </ClientOnly> -->
 
@@ -24,8 +25,11 @@
       :image="imagePlace"
       :image-object="characterData?.original_place_img"
       :sound-id="characterRelationData?.sound_id"
+      :is-collapse-bio="isCollapseBio"
+      :is-collapse-relation="isCollapseRelation"
       @sendNewChat="sendNewChat"
       @getChatHistoryInfinite="getChatHistoryInfinite"
+      @toggleCollapse="toggleCollapse"
     />
 
     <!-- DESKTOP (relation) -->
@@ -36,6 +40,7 @@
       :characterData="characterData"
       :image="imagePlace"
       :image-object="characterData?.original_place_img"
+      :is-collapse="isCollapseRelation"
     />
 
     <!-- MOBILE (character data) -->
@@ -111,7 +116,6 @@ const {
   useUpdateRelationship,
 } = useChat();
 const { isMobile } = useBreakpoint();
-const { $toast } = useNuxtApp();
 const { openChatConnection } = useWebSocket();
 
 const latestChat = ref({});
@@ -120,6 +124,8 @@ const characterRelationData = ref({});
 const chatHistory = ref([]);
 const imagePlace = ref(null);
 const isStopInfiniteLoading = ref(false);
+const isCollapseBio = ref(false)
+const isCollapseRelation = ref(false)
 
 let page = 1;
 let perPage = 10;
@@ -256,6 +262,14 @@ const getChatHistoryInfinite = async (state, chatContainer) => {
     state.complete();
   }
 };
+
+const toggleCollapse = (name) => {
+  if (name === "bio") {
+    isCollapseBio.value = !isCollapseBio.value
+  } else if (name === 'relation') {
+    isCollapseRelation.value = !isCollapseRelation.value
+  }
+}
 
 // provide function
 const updateCharacterRelationData = (object) => {
