@@ -25,7 +25,7 @@
             <UButton
               :disabled="userInfo?.user_type == 'client'"
               :size="isMobile ? 'md' : 'xl'"
-              class="w-[140px] sm:w-[200px] flex justify-center liquid-glass bg-gradient !rounded-lg !h-[42px]"
+              class="w-[140px] sm:w-[200px] flex justify-center liquid-glass !rounded-lg !h-[42px] bg-gradient"
               @click="clickCreateCharacter"
             >
               <div class="flex items-center w-full">

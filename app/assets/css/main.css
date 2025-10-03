@@ -111,17 +111,15 @@ b {
   animation: var(--animate-slow-bounce);
 }
 
-.liquid-glass,
-.driver-popover-prev-btn,
-.driver-popover-next-btn {
-  text-shadow: unset !important;
+.liquid-glass {
+  text-shadow: unset;
   background: #FFFFFF1A;
-  backdrop-filter: blur(20px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
 
-  border-radius: 9999px !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  color: white !important;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
   box-shadow:
     /* inner shadow บน */
     inset 0 1px 2px rgba(255, 255, 255, 1),
@@ -130,7 +128,7 @@ b {
     /* outer shadow ฟุ้ง */
     0 4px 12px rgba(0, 0, 0, 0.25),
     /* glow ขอบจาง ๆ */
-    0 0 6px rgba(255, 255, 255, 0.5) !important;
+    0 0 6px rgba(255, 255, 255, 0.5);
   /* --- กำหนด mask --- */
   -webkit-mask-image:
     /* base capsule (ไม่ให้ shape ขาด) */
@@ -143,9 +141,9 @@ b {
     /* fade บนขวา */
     radial-gradient(circle at top right,
       rgba(0, 0, 0, 0) -10%,
-      rgba(0, 0, 0, 1) 40%) !important;
+      rgba(0, 0, 0, 1) 40%);
 
-  -webkit-mask-composite: destination-in, destination-in, destination-in !important;
+  -webkit-mask-composite: destination-in, destination-in, destination-in;
 }
 
 .liquid-glass:hover {
@@ -188,4 +186,40 @@ b {
 .driver-popover-progress-text,
 .driver-popover-close-btn {
   color: white !important;
+}
+
+.driver-popover-prev-btn,
+.driver-popover-next-btn {
+  text-shadow: unset !important;
+  background: #FFFFFF1A !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+
+  border-radius: 9999px !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: white !important;
+  box-shadow:
+    /* inner shadow บน */
+    inset 0 1px 2px rgba(255, 255, 255, 1),
+    /* inner shadow ล่าง */
+    inset 0 1px 2px rgba(255, 255, 255, 1),
+    /* outer shadow ฟุ้ง */
+    0 4px 12px rgba(0, 0, 0, 0.25),
+    /* glow ขอบจาง ๆ */
+    0 0 6px rgba(255, 255, 255, 0.5) !important;
+  /* --- กำหนด mask --- */
+  -webkit-mask-image:
+    /* base capsule (ไม่ให้ shape ขาด) */
+    linear-gradient(white,
+      white),
+    /* fade ล่างซ้าย */
+    radial-gradient(circle at bottom left,
+      rgba(0, 0, 0, 0) -10%,
+      rgba(0, 0, 0, 1) 40%),
+    /* fade บนขวา */
+    radial-gradient(circle at top right,
+      rgba(0, 0, 0, 0) -10%,
+      rgba(0, 0, 0, 1) 40%) !important;
+
+  -webkit-mask-composite: destination-in, destination-in, destination-in !important;
 }

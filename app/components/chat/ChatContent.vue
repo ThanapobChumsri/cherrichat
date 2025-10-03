@@ -3,7 +3,7 @@
     <!-- collapse button -->
     <div 
       v-if="!isMobile" 
-      class="absolute h-16 flex items-center z-10 left-[-1px] border-t border-r border-b rounded-tr-md rounded-br-md bg-[#23211E]" 
+      class="absolute h-8 flex items-center z-10 left-[-1px] rounded-tr-md rounded-br-md" 
       @click="emit('toggleCollapse', 'bio')"
     >
       <Icon 
@@ -14,7 +14,7 @@
     </div>
     <div 
       v-if="!isMobile" 
-      class="absolute h-16 flex items-center z-10 right-[-1px] border-t border-l border-b rounded-tl-md rounded-bl-md bg-[#23211E]" 
+      class="absolute h-8 flex items-center z-10 right-[-1px] rounded-tl-md rounded-bl-md " 
       @click="emit('toggleCollapse', 'relation')"
     >
       <Icon 
@@ -24,8 +24,8 @@
       />
     </div>
     
-    <div class="hidden sm:block py-4">
-      <div class="gradient-text ml-16">{{ characterData?.name }}</div>
+    <div class="hidden sm:block py-4 min-h-[165px]">
+      <div class="gradient-text min-h-[72px]">{{ characterData?.name }}</div>
       <div class="flex gap-2 pt-5">
         <div class="flex items-center gap-4 w-[200px]">
           <div class="liquid-glass py-1 px-4 !bg-[#EF3E41] !text-[#34415C] text-[20px] font-medium">
