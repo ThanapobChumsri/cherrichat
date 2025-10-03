@@ -1,0 +1,1 @@
+export const useSearchBus = () => useEventBus("search-bus")

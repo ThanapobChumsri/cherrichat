@@ -7,7 +7,7 @@
       }"
     >
       <div
-        class="flex flex-col sm:flex-row sm:justify-between gap-20 px-4 sm:px-16 w-full py-16 sm:py-48"
+        class="flex flex-col sm:flex-row sm:justify-between gap-5 sm:gap-20 px-4 sm:px-16 w-full py-16 sm:py-48"
       >
         <!-- Left section -->
         <div
@@ -35,6 +35,27 @@
               </div>
             </UButton>
           </div>
+        </div>
+        <div class="flex sm:hidden items-center w-full">
+          <UInput
+            color="red"
+            class="input-liquid-glass w-full"
+            placeholder="Search"
+            v-model="search"
+            enterkeyhint="go"
+            @keypress="
+              (e) => {
+                if (e.key === 'Enter') getCharacterList();
+              }
+            "
+          >
+            <template #leading>
+              <Icon
+                name="i-lucide-search"
+                class="text-white opacity-50 flex items-center w-6"
+              />
+            </template>
+          </UInput>
         </div>
 
         <!-- Right section -->
@@ -85,7 +106,9 @@ import { useChat } from "#imports";
 import { useBreakpoint } from "#imports";
 import { useUser } from "#imports";
 import { UButton } from "#components";
+import { useSearchBus } from "#imports";
 
+const searchBus = useSearchBus();
 const { getAllCharacter } = useCharacter();
 const { getSoundList } = useChat();
 const { useGetUserById } = useUser();
@@ -114,35 +137,63 @@ const tabItem = ref([
 ]);
 
 const userInfo = useCookie("user-info");
-
+const search = ref("");
 const userType = computed(() => userInfo.value?.user_type || false);
 
 onMounted(async () => {
+  searchBus.on(async (term) => {
+    console.log("term", term);
+    
+    search.value = term;
+    await getCharacterList();
+  });
   localStorage.removeItem("latest-chat");
 
-  const characterRes = await getAllCharacter({
-    page: 1,
-    per_page: 100,
-    is_active: true,
-  });
-  characterList.value = characterRes.data;
-  loading.value = false;
+  await getCharacterList();
 
   if (!localStorage.getItem("sound-list")) {
-    const soundRes = await getSoundList();
-    localStorage.setItem("sound-list", JSON.stringify(soundRes));
+    await getSoundListData();
   }
 
   // Detect chagnes in the user's 'user_type'
   if (userInfo.value) {
-    const response = await useGetUserById(userInfo.value);
-    userInfo.value = {
-      ...userInfo.value,
-      user_type: response.user_type,
-    };
+    await getUserData();
   }
 });
 
+watch(
+  search,
+  async (newValue) => {
+    if (!newValue) {
+      await getCharacterList();
+    }
+  }
+)
+
+const getUserData = async () => {
+  const response = await useGetUserById(userInfo.value);
+  userInfo.value = {
+    ...userInfo.value,
+    user_type: response.user_type,
+  };
+};
+
+const getSoundListData = async () => {
+  const soundRes = await getSoundList();
+  localStorage.setItem("sound-list", JSON.stringify(soundRes));
+};
+
+const getCharacterList = async () => {
+  const characterRes = await getAllCharacter({
+    page: 1,
+    per_page: 100,
+    search: search.value,
+    is_active: true,
+  });
+  characterList.value = characterRes.data;
+  tabActive.value = 1;
+  loading.value = false;
+};
 const onChangeTab = (index) => {
   tabActive.value = index;
 };
@@ -159,5 +210,51 @@ const clickCreateCharacter = () => {
     #691a20 -18.01%,
     #d00000 96.17%
   ) !important;
+}
+.input-liquid-glass input {
+  background: #ffffff1a;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: white;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 1),
+    /* inner shadow ล่าง */ inset 0 1px 2px rgba(255, 255, 255, 1),
+    /* outer shadow ฟุ้ง */ 0 4px 12px rgba(0, 0, 0, 0.25),
+    /* glow ขอบจาง ๆ */ 0 0 6px rgba(255, 255, 255, 0.5);
+  /* --- กำหนด mask --- */
+  -webkit-mask-image:
+    /* base capsule (ไม่ให้ shape ขาด) */ linear-gradient(
+      white,
+      white
+    ),
+    /* fade ล่างซ้าย */
+      radial-gradient(
+        circle at bottom left,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 1) 40%
+      ),
+    /* fade บนขวา */
+      radial-gradient(
+        circle at top right,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 1) 40%
+      );
+
+  -webkit-mask-composite: destination-in, destination-in, destination-in;
+}
+
+.input-liquid-glass input::placeholder {
+  color: white;
+}
+.input-liquid-glass .ring-accented {
+  --tw-ring-color: unset !important;
+}
+.input-liquid-glass .ring-accented {
+  --tw-ring-color: unset !important;
+}
+.input-liquid-glass .ring {
+  --tw-ring-shadow: unset !important;
 }
 </style>

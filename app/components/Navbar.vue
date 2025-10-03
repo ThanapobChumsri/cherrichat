@@ -14,7 +14,13 @@
       <!-- Right: Menu -->
       <div class="flex items-center sm:space-x-6 space-x-2 text-white">
         <div class="hidden sm:flex items-center">
-          <UInput color="red" class="input-liquid-glass" placeholder="Search">
+          <UInput
+            color="red"
+            class="input-liquid-glass"
+            placeholder="Search"
+            @keydown.enter.prevent="onSearch"
+            v-model="search"
+          >
             <template #leading>
               <Icon
                 name="i-lucide-search"
@@ -31,7 +37,10 @@
         />
 
         <!-- Profile -->
-        <div @click="onNavigateProfile"  class="h-6 w-6 sm:h-10 sm:w-10 bg-[#DD344F] rounded-full cursor-pointer">
+        <div
+          @click="onNavigateProfile"
+          class="h-6 w-6 sm:h-10 sm:w-10 bg-[#DD344F] rounded-full cursor-pointer"
+        >
           <Icon
             name="tdesign:user-circle-filled"
             class="sm:w-full sm:h-full w-6 h-6"
@@ -49,7 +58,10 @@ import TopupModal from "./modal/TopupModal.vue";
 import { usePayment } from "#imports";
 import { useAuth } from "#imports";
 import { UButton } from "#components";
+import { useSearchBus } from "#imports";
 
+const search = ref("");
+const searchBus = useSearchBus();
 const route = useRoute();
 const { useGetWallet, useGetWalletDemo, coin_balance } = usePayment();
 const { signout } = useAuth();
@@ -133,6 +145,15 @@ onMounted(async () => {
     },
     { immediate: true }
   );
+  watch(
+    search,
+    async (newValue) => {
+      if (!newValue) {
+        searchBus.emit(search.value);
+      }
+    },
+    { immediate: true }
+  );
 });
 
 const onNavigateHome = () => {
@@ -173,7 +194,11 @@ const onNavigateProfile = () => {
   } else {
     navigateTo("/profile");
   }
-}
+};
+
+const onSearch = () => {
+  searchBus.emit(search.value); // send search term to index
+};
 </script>
 
 <style scoped>
@@ -203,10 +228,8 @@ const onNavigateProfile = () => {
   border-radius: 9999px;
   border: 1px solid rgba(255, 255, 255, 0.25);
   color: white;
-  box-shadow:
-    inset 0 1px 2px rgba(255, 255, 255, 1),
-    /* inner shadow ล่าง */
-    inset 0 1px 2px rgba(255, 255, 255, 1),
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 1),
+    /* inner shadow ล่าง */ inset 0 1px 2px rgba(255, 255, 255, 1),
     /* outer shadow ฟุ้ง */ 0 4px 12px rgba(0, 0, 0, 0.25),
     /* glow ขอบจาง ๆ */ 0 0 6px rgba(255, 255, 255, 0.5);
   /* --- กำหนด mask --- */
