@@ -260,6 +260,14 @@ const props = defineProps({
   characterData: {
     type: Object,
   },
+  isCollapseBio: {
+    type: Boolean,
+    default: false,
+  },
+  isCollapseRelation: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const route = useRoute();
@@ -282,7 +290,7 @@ const { isMobile } = useBreakpoint();
 const { $toast } = useNuxtApp();
 const updateChatHistory = inject("updateChatHistory");
 
-const emit = defineEmits(["sendNewChat", "getChatHistoryInfinite"]);
+const emit = defineEmits(["sendNewChat", "getChatHistoryInfinite", "toggleCollapse"]);
 
 const latestChat = ref({});
 const soundList = ref([]);

@@ -92,6 +92,12 @@
         />
       </template>
     </USlideover>
+
+    <ChangeVoiceModal          
+      :relationship-id="characterRelationData?.id"
+      :sound-id="characterRelationData?.sound_id"
+    />
+    
   </div>
 </template>
 
@@ -104,6 +110,7 @@ import { useWebSocket } from "#imports";
 import ChatContent from "~/components/chat/ChatContent.vue";
 import CharacterBio from "~/components/chat/CharacterBio.vue";
 import CharacterRelation from "~/components/chat/CharacterRelation.vue";
+import ChangeVoiceModal from "~/components/modal/ChangeVoiceModal.vue";
 
 definePageMeta({
   layout: "chat",

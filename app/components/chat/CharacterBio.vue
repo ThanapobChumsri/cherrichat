@@ -104,7 +104,6 @@
 
 <script setup>
 import BioCollapse from "./BioCollapse.vue";
-import ChangeVoiceModal from "../modal/ChangeVoiceModal.vue";
 
 const props = defineProps({
   data: {

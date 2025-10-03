@@ -59,6 +59,10 @@ export const usePayment = () => {
         },
       })
 
+      if (response?.redirectUrl) {
+        window.location.href = response?.redirectUrl
+      }
+
       return response
     } catch (error) {
       $toast.error(t('toast.something_wrong'), String(error?.data?.message || error))
