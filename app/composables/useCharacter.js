@@ -9,7 +9,7 @@ export const useCharacter = () => {
   const { t } = useI18n();
 
   const getAllCharacter = async (query = {}) => {
-    const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/55853333-a65d-4da5-b458-c6e4f74c3981`, {
+    const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/a6fb96a3-a0b4-4d06-bd59-97f3909fbaae`, {
       params: query
     });
 
@@ -19,7 +19,7 @@ export const useCharacter = () => {
   const useGenerateCharacter = async (data, user_id) => {
     try {
       open()
-      const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/f0edc73d-0691-4b2c-ba4b-49d05b77ccaa`, {
+      const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/3086a4c8-e488-4ba2-bc9e-ee39437db809`, {
         method: 'POST',
         body: {
           characterPrompt: data,
@@ -39,7 +39,7 @@ export const useCharacter = () => {
   const useGenerateCharacterImage = async (backstory, appearance, user_id) => {
     try {
       open()
-      const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/180d15b6-cc49-464d-94fc-9a035a37a2e6`, {
+      const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/a2cb17ee-9eb5-47ec-b6fb-4a0fb86202a3`, {
         method: 'POST',
         body: {
           backstory: backstory,
@@ -59,7 +59,7 @@ export const useCharacter = () => {
 
   const useCreateCharacter = async (data, image, user_id) => {
     open()
-    const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/ddd52635-f49c-4c7e-9e52-51bc312087ae`, {
+    const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/9ac7b2f1-f1b2-4330-b9e9-1c4cf7f5ae8c`, {
       method: 'POST',
       body: {
         ...data,
