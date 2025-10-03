@@ -115,7 +115,7 @@ b {
 .driver-popover-prev-btn,
 .driver-popover-next-btn {
   text-shadow: unset !important;
-  background: #FFFFFF1A !important;
+  background: #FFFFFF1A;
   backdrop-filter: blur(20px) saturate(180%) !important;
   -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
 
