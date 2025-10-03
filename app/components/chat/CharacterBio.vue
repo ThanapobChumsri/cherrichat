@@ -4,10 +4,25 @@
     :class="isCollapse ? 'w-[0px]' : 'sm:w-[280px] xl:w-[320px]'"
   >
     <div class="px-4 pb-4 flex flex-col gap-4">
+      <div
+        v-if="!isMediaReady"
+        class="w-full h-full bg-gray-700 animate-pulse"
+      />
       <img
-        v-if="currentImage"
+        v-if="!props.data.emotions_video"
         :src="currentImage"
         class="w-full h-full object-cover rounded-[10px]"
+        @load="onMediaReady"
+      />
+      <video
+        v-else
+        :src="currentVideo"
+        class="w-full h-full object-cover rounded-[10px]"
+        muted
+        loop
+        playsinline
+        autoplay
+        @loadeddata="onMediaReady"
       />
 
       <div class="space-y-2 mt-2">
@@ -111,12 +126,20 @@ const props = defineProps({
 });
 
 const latestChat = ref({});
+const isMediaReady = ref(false)
+
 const currentImage = computed(() => {
   if (!latestChat.value || !props.emotion || !latestChat.value.emotions)
     return latestChat.value.url_image;
 
   return latestChat.value.emotions[props.emotion];
 });
+const currentVideo = computed(() => {
+  if (!latestChat.value || !props.emotion || !latestChat.value.emotions_video)
+    return latestChat.value.url_video;
+
+  return latestChat.value.emotions_video[props.emotion]
+})
 
 onMounted(() => {
   refreshLocalStorage();
@@ -140,6 +163,11 @@ const refreshLocalStorage = () => {
 
   latestChat.value = JSON.parse(latest_chat);
 };
+
+const onMediaReady = () => {
+  isMediaReady.value = true
+}
+
 </script>
 
 <style scoped></style>
