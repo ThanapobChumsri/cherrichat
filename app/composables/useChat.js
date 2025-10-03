@@ -13,7 +13,7 @@ export const useChat = () => {
 
   const getChatHistory = async (data, page=1, per_page= 10) => {
     // const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/673fe006-46a0-4887-847c-0f5354f85aca`, {
-    const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/ae40359f-30d2-41c2-812b-2338d11f8524?page=${page}&per_page=${per_page}`, {
+    const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/03afa14f-d7b6-45bd-b735-bf166256f723?page=${page}&per_page=${per_page}`, {
       method: 'POST',
       body: data
     })
@@ -32,7 +32,7 @@ export const useChat = () => {
   }
 
   const deleteSessionChat = async (data) => {
-    await $fetch(`${runtimeConfig.public.N8N_URL_V3}/0647c8d7-6e61-4001-a7e6-70b919a24447`, {
+    await $fetch(`${runtimeConfig.public.N8N_URL_V3}/0038e233-b560-469c-944c-7992cf29f975`, {
       method: 'POST',
       body: data,
     })
@@ -48,7 +48,7 @@ export const useChat = () => {
   const getNewPlacePicture = async (data) => {
     generateImageLoad.value = true
     
-    const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/20ae73cd-ef2d-4f9a-ad58-ee3451a135c4`, {
+    const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/a5d28a4c-6ccd-4c30-87d5-eab394b7be0f`, {
       method: 'POST',
       body: data
     })
@@ -58,7 +58,7 @@ export const useChat = () => {
   }
 
   const getSelectSound = async (name, relationship_id) => {
-    const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/ed1785a7-9554-4014-a28c-c9b4d4a84805?name=${name}&relationship_id=${relationship_id}`)
+    const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/b1024ddb-03b9-481d-b1da-c3b6fd11fd6e?name=${name}&relationship_id=${relationship_id}`)
     return response
   }
 
@@ -71,7 +71,7 @@ export const useChat = () => {
     try {
     isGenerateSound.value = true
 
-    const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/5302f759-bb34-4293-a951-42977cf1b6a7`, {
+    const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/57733aae-5a1c-41a4-b893-a6336f5b45d2`, {
       method: 'POST',
       body: {
         text: text,
@@ -114,7 +114,7 @@ export const useChat = () => {
   }
 
   const getSoundList = async () => {
-    const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/d3f1b0e6-3d97-4096-a29d-75434f65fef6`)
+    const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/e3ec8775-7563-4ec8-b8fe-083d9f5c4b29`)
 
     return response
   }
@@ -124,7 +124,7 @@ export const useChat = () => {
     const formData = new FormData();
     formData.append('audio', audioData, 'recording.webm');
 
-    const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/speech-to-text`, {
+    const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/95a37fa4-f19d-40d7-97e2-5266ba58d224`, {
       method: 'POST',
       body: formData
     })
@@ -151,7 +151,7 @@ export const useChat = () => {
     try {
       sendChatLoad.value = true;
       
-      const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/48f2b27b-f038-4b05-bba3-e61a565a975e`, {
+      const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/0be311c5-3cab-4596-bf69-a40c1c7ff241`, {
         method: 'POST',
         body: {
           ...data,
@@ -189,7 +189,7 @@ export const useChat = () => {
   }
 
   const useUpdateRelationship = async (data) => {
-    const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/93ed4c3f-6947-401d-abde-781ba2d0ba46`, {
+    const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/4505f50c-852c-4534-95fe-7d9874ace5a4`, {
       method: 'POST',
       body: data
     })

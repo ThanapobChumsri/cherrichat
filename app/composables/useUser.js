@@ -7,13 +7,13 @@ export const useUser = () => {
   const { t } = useI18n();
 
   const useGetUserKnowledge = async (user_id) => {
-    const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/f295e762-6288-4131-a452-5dbf33a94d85?user_id=${user_id}`)
+    const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/17d636a7-0e17-4a6b-a6d5-17db8aa639eb?user_id=${user_id}`)
 
     return response
   }
 
   const useUpdateUserKnowledge = async (user_id, preferences) => {
-    const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/616dc524-e47e-4650-81a1-5aa04087ebc6`, {
+    const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/0a3b27d0-c760-4d54-a186-0375a0a70659`, {
       method: 'POST',
       body: {
         user_id,
@@ -27,7 +27,7 @@ export const useUser = () => {
     const formData = new FormData()
     formData.append('file', file)
 
-    const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/be2da6d6-e01c-40ce-a1d6-e03e8f1bc339`, {
+    const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/c5e91d01-ba95-4538-a2c1-cbea35f1b9b1`, {
       method: 'POST',
       body: formData,
     })
@@ -37,7 +37,7 @@ export const useUser = () => {
   }
 
   const useRegisterCreator = async (payload) => {
-    const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/408d3702-c0e8-4015-8330-fcfe8c2bad3b`, {
+    const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/84d16ebe-5a70-40ef-86c0-28db86810432`, {
       method: 'POST',
       body: payload,
     })
@@ -46,14 +46,14 @@ export const useUser = () => {
   }
 
   const useGetCreatorUser = async (query) => {
-    const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/3dc212a1-a10a-439d-81fa-07c7e52c4d2e`, {
+    const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/08ad7f6d-0851-4606-81f5-39a0d8ff2588`, {
       params: query
     })
     return response
   }
 
   const useGetUserById = async (query) => {
-    const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/6cf57b9a-1993-4f26-9158-5c329f1a2b3f`, {
+    const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/08825714-9f27-45d8-8797-31b38626f904`, {
       params: query
     })
     return response

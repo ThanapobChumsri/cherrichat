@@ -313,7 +313,7 @@
       "sport_placeholder": "e.g. Football, Swimming, Badminton",
       "file": "Upload File",
       "file_placeholder": "Drop file here",
-      "file_description": "only PDF (max 2MB)",
+      "file_description": "only PDF (max 10MB)",
       "manual": "or fill in manually",
       "optional": "optional"
     },

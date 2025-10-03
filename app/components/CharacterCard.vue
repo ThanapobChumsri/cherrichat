@@ -1,9 +1,29 @@
 <template>
   <div class="rounded-xl border border-[#2c2c30] bg-[#212126] overflow-hidden hover:shadow-xl shadow-[#D00000]/30 group cursor-pointer" @click="goToChat">
     <div class="w-full aspect-square overflow-hidden">
-      <img 
+      <!-- <img 
         :src="`${runtimeConfig.public.N8N_IMAGE}${props.data.url_image}`" 
         class="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-110" 
+      /> -->
+      <div
+        v-if="!isMediaReady"
+        class="w-full h-full bg-gray-700 animate-pulse"
+      />
+      <img 
+        v-if="!props.data.url_video"
+        :src="`${runtimeConfig.public.N8N_IMAGE}${props.data.url_image}`" 
+        class="object-cover w-full h-full transition-transform duration-300 ease-in-out group-hover:scale-110" 
+        @load="onMediaReady"
+      />
+      <video
+        ref="videoRef"ไ
+        :src="`${runtimeConfig.public.N8N_VIDEO}${props.data.url_video}`"
+        class="object-cover w-full h-full transition-transform duration-300 ease-in-out group-hover:scale-110"
+        muted
+        loop
+        playsinline
+        autoplay
+        @loadeddata="onMediaReady"
       />
     </div>
     <div class="p-4">
@@ -21,6 +41,12 @@ const props = defineProps({
     type: Object
   }
 })
+
+const isMediaReady = ref(false)
+
+const onMediaReady = () => {
+  isMediaReady.value = true
+}
 
 const goToChat = () => {
   const route = useRoute()
@@ -43,6 +69,12 @@ const goToChat = () => {
     : null
   ;
 
+  let setVidelURL = props.data.emotions_video ? 
+    Object.fromEntries(
+      Object.entries(props.data.emotions_video).map(([key, value]) => [key, `${runtimeConfig.public.N8N_VIDEO}${value}`])
+    )
+    : null
+
   localStorage.setItem('latest-chat', JSON.stringify({
     character_info: props.data,
     user_id: userInfo.user_id,
@@ -50,6 +82,8 @@ const goToChat = () => {
     session_key: `session_${userInfo.user_id}_${props.data.id}_ver_0`,
     url_image: `${runtimeConfig.public.N8N_IMAGE}${props.data.url_image}`,
     emotions: setImageURL,
+    url_video: `${runtimeConfig.public.N8N_VIDEO}${props.data.url_video}`,
+    emotions_video: setVidelURL,
     original_place: props.data.original_place,
   }))
 

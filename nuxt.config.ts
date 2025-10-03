@@ -26,6 +26,7 @@ export default defineNuxtConfig({
     public: {
       N8N_URL_V3: process.env.N8N_URL_V3,
       N8N_IMAGE: process.env.N8N_IMAGE,
+      N8N_VIDEO: process.env.N8N_VIDEO,
 
       WS_URL: process.env.WS_URL,
     },

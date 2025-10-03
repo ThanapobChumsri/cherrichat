@@ -4,8 +4,6 @@
       :title="$t('voice.character_voice')"
       v-model:open="isSoundModalOpen"
     >
-      <UButton color="warning" variant="subtle" class="text-white px-3 py-2 cursor-pointer"><Icon name="ri:speak-ai-line" /> {{ buttonDisplay }}</UButton>
-
       <template #body>
         <div class="space-y-4 sm:space-y-2 h-[400px] overflow-y-scroll px-2">
           <div 

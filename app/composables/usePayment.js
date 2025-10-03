@@ -10,7 +10,7 @@ export const usePayment = () => {
 
   const useGetWallet = async (user_id) => {
     try {
-      const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/37c05e5b-ce22-4a7d-ab83-f1351d44f7a4?user_id=${user_id}`)
+      const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/7d08babd-b462-4c99-98b0-d64457efbf09?user_id=${user_id}`)
       
       coin_balance.value = Number(response.coin_balance)
     } catch (error) {
@@ -30,7 +30,7 @@ export const usePayment = () => {
 
   const useGetHistoryPayment = async (user_id, page, per_page) => {
     try {
-      const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/8b7bc7e3-5b9d-4675-a488-3c302ea2758c?user_id=${user_id}&page=${page}&per_page=${per_page}`)
+      const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/7d675b86-8dab-4a2b-8c3d-6a512b0298bd?user_id=${user_id}&page=${page}&per_page=${per_page}`)
       
       return response
     } catch (error) {
@@ -40,7 +40,7 @@ export const usePayment = () => {
 
   const useGetTopUpPackage = async () => {
     try {
-    const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/4c2191fa-1989-45b5-93db-78de7411ded9`)
+    const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/512d6edf-bee5-4e6b-a3c1-6ca8fcb5a0f7`)
 
     return response
     } catch (error) {
@@ -51,13 +51,17 @@ export const usePayment = () => {
   const useSelectTopUpPackage = async (user_id, package_id) => {
     try {
       open()
-      const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/da6c8011-4459-4870-9a00-fa86d117c897`, {
+      const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/10676008-63f3-4ae1-a452-68359757e5f3`, {
         method: 'POST',
         body: {
           user_id: user_id,
           exchange_id: package_id,
         },
       })
+
+      if (response?.redirectUrl) {
+        window.location.href = response?.redirectUrl
+      }
 
       return response
     } catch (error) {
@@ -70,7 +74,7 @@ export const usePayment = () => {
 
   const useRedeemCoupon = async (user_id, coupon_code) => {
     try {
-      const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/7c2fc6a7-6b16-4a56-babd-7aae70cbe0d8`, {
+      const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/d2304ad9-2505-47a9-88a8-2d9a2e08a427`, {
         method: 'POST',
         body: {
           user_id: user_id,
