@@ -65,7 +65,7 @@ onMounted(async () => {
   userInfo.value = user_info
 
   const response = await useGetUserKnowledge(user_info.user_id)
-  preferences.value = response.preferences
+  preferences.value = { ...preferences.value, ...response.preferences }
 })
 
 const clickUpdateUserKnowledge = async () => {
