@@ -1,23 +1,10 @@
 <template>
   <div class="rounded-xl border border-[#2c2c30] bg-[#212126] overflow-hidden hover:shadow-xl shadow-[#D00000]/30 group cursor-pointer" @click="goToChat">
     <div class="w-full aspect-square overflow-hidden">
-      <!-- <img 
-        :src="`${runtimeConfig.public.N8N_IMAGE}${props.data.url_image}`" 
-        class="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-110" 
-      /> -->
-      <div
-        v-if="!isMediaReady"
-        class="w-full h-full bg-gray-700 animate-pulse"
-      />
-      <img 
-        v-if="!props.data.url_video"
-        :src="`${runtimeConfig.public.N8N_IMAGE}${props.data.url_image}`" 
-        class="object-cover w-full h-full transition-transform duration-300 ease-in-out group-hover:scale-110" 
-        @load="onMediaReady"
-      />
       <video
-        ref="videoRef"ไ
+        ref="videoRef"
         :src="`${runtimeConfig.public.N8N_VIDEO}${props.data.url_video}`"
+        :poster="`${runtimeConfig.public.N8N_IMAGE}${props.data.url_image}`"
         class="object-cover w-full h-full transition-transform duration-300 ease-in-out group-hover:scale-110"
         muted
         loop
