@@ -2,14 +2,19 @@
   "app_name": "cherrichat AI",
 
   "signin": "Sign in",
+  "signup": "Sign up",
   "or": "or",
   "submit": "submit",
   "dont_have_account": "Don't have an account?",
-  "create_account": "Create your account",
+  "have_account": "Already have an account?",
   "file_limit_10mb": "The file exceeds the allowed size (more than 10MB)",
   "account_suspended": "Your account has been suspended",
   "pending_review": "pending review",
   "signin_again": "Please sign in again",
+  "signup_success": "Sign up successfully",
+  "greeting_email": "We've sent a greeting email to your address. Please check your inbox",
+  "signin_success": "Sign in successfully",
+  "signin_fail": "Invalid email or password",
 
   "index": {
     "section1": {

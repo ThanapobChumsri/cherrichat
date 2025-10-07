@@ -3,7 +3,7 @@ export default defineNuxtRouteMiddleware((to, from) => {
 
   const userInfo = useCookie('user-info')
 
-  const publicPages = ['/', '/landing', '/signin', '/demo', '/demo/', '/demo/signin']
+  const publicPages = ['/', '/landing', '/signin', '/signup', '/demo', '/demo/', '/demo/signin']
 
   if (publicPages.includes(to.path)) return
 

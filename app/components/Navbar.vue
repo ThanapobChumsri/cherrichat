@@ -64,14 +64,13 @@ const search = ref("");
 const searchBus = useSearchBus();
 const route = useRoute();
 const { useGetWallet, useGetWalletDemo, coin_balance } = usePayment();
-const { signout } = useAuth();
+const { signout, storeAuthData, clearAuthData } = useAuth()
 
 const userInfo = useCookie("user-info");
 
 const mode = computed(() =>
   route.path.includes("/landing") ? "landing" : "homepage"
 );
-const isDemoMode = computed(() => route.path.startsWith("/demo"));
 
 const dropdownItem = computed(() => [
   ...(userInfo.value
@@ -96,21 +95,9 @@ onMounted(() => {
       email: route.query.email,
       user_type: route.query.user_type,
     };
-    localStorage.setItem("user-info", JSON.stringify(user_info));
 
-    const userInfoCookie = useCookie("user-info", {
-      maxAge: 60 * 60 * 24 * 365, // 1 year
-      secure: true,
-      sameSite: "lax",
-    });
-    userInfoCookie.value = user_info;
-
-    // Check if we came from demo mode to redirect back to demo
-    if (route.query.demo === "true" || route.path.startsWith("/demo")) {
-      navigateTo("/demo");
-    } else {
-      navigateTo("/");
-    }
+    storeAuthData(user_info)
+    navigateTo("/");
   } else {
     const user_info = JSON.parse(localStorage.getItem("user-info"));
 
@@ -119,7 +106,6 @@ onMounted(() => {
         localStorage.removeItem("user-info");
         // Don't redirect if we're already on a demo page - let user stay
         if (
-          !route.path.startsWith("/demo") &&
           route.path !== "/" &&
           route.path !== "/landing" &&
           route.path !== "/signin"
@@ -136,11 +122,7 @@ onMounted(async () => {
     userInfo,
     async (newValue) => {
       if (newValue?.user_id) {
-        if (isDemoMode.value) {
-          await useGetWalletDemo(newValue.user_id);
-        } else {
-          await useGetWallet(newValue.user_id);
-        }
+        await useGetWallet(newValue.user_id);
       }
     },
     { immediate: true }
@@ -157,43 +139,24 @@ onMounted(async () => {
 });
 
 const onNavigateHome = () => {
-  if (isDemoMode.value) {
-    navigateTo("/demo");
-  } else {
-    navigateTo("/");
-  }
+  navigateTo("/");
 };
 
 const onSignin = () => {
-  if (isDemoMode.value) {
-    navigateTo("/demo/signin");
-  } else {
-    navigateTo("/signin");
-  }
+  navigateTo("/signin");
 };
 
 const onSignout = async () => {
-  if (isDemoMode.value) {
-    // For demo mode, just clear local data without API call
-    localStorage.removeItem("user-info");
-    userInfo.value = null;
+  const response = await signout(userInfo.value.user_id);
+  if (response) {
+    clearAuthData('user-info')
     window.location.reload();
-  } else {
-    const response = await signout(userInfo.value.user_id);
-    if (response) {
-      localStorage.removeItem("user-info");
-      window.location.reload();
-    }
-    userInfo.value = null;
   }
+  userInfo.value = null;
 };
 
 const onNavigateProfile = () => {
-  if (isDemoMode.value) {
-    navigateTo("/demo/profile");
-  } else {
-    navigateTo("/profile");
-  }
+  navigateTo("/profile");
 };
 
 const onSearch = () => {
