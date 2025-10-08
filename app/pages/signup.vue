@@ -74,10 +74,13 @@ const form = ref({
   password: '',
   confirm_password: '',
 })
-const schema = yup.object({
-  email: yup.string().required('กรุณากรอกอีเมล์').email('กรุณากรอกอีเมลให้ถูกต้อง'),
-  password: yup.string().required('กรุณากรอกรหัสผ่าน').min(6, 'รหัสผ่านต้องยาวอย่างน้อย 6 ตัวอักษร'),
-  confirm_password: yup.string().required('กรุณายืนยันรหัสผ่าน').oneOf([yup.ref('password')], 'รหัสผ่านไม่ตรงกัน'),
+
+const schema = computed(() => {
+  return yup.object({
+    email: yup.string().required($t('enter_email')).email($t('validate_email')),
+    password: yup.string().required($t('enter_password')).min(6, $t('password_must_6')),
+    confirm_password: yup.string().required($t('enter_confirm_password')).oneOf([yup.ref('password')], $t('password_not_match')),
+  })
 })
 
 const onSigninGoogle = async () => {

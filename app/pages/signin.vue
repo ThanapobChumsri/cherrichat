@@ -73,9 +73,12 @@ const form = ref({
   email: '',
   password: '',
 })
-const schema = yup.object({
-  email: yup.string().required('กรุณากรอกอีเมล์'),
-  password: yup.string().required('กรุณากรอกรหัสผ่าน'),
+
+const schema = computed(() => {
+  return yup.object({
+    email: yup.string().required($t('enter_email')),
+    password: yup.string().required($t('enter_password')),
+  })
 })
 
 onMounted(() => {

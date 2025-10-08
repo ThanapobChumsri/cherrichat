@@ -15,11 +15,17 @@
   "greeting_email": "We've sent a greeting email to your address. Please check your inbox",
   "signin_success": "Sign in successfully",
   "signin_fail": "Invalid email or password",
+  "enter_email": "Enter email",  
+  "enter_password": "Enter password",
+  "enter_confirm_password": "Enter Confirm Password",
+  "validate_email": "Enter a valid email",
+  "password_must_6": "Password must be at least 6 characters long",
+  "password_not_match": "Passwords do not match",
 
   "index": {
     "section1": {
-      "title": "Roleplay AI Chat with Thai language",
-      "sub_title": "Chat with AI in smooth Thai, with lifelike roleplay characters. Fun and engaging, perfect for Thai teens.",
+      "title": "YOUR THOUGHTS, AMPLIFIED. YOUR PRIVACY, GUARANTEED.",
+      "sub_title": "Cherrichat isn't just a chat app. It's where your ideas find their voice. Get personal expert advice or a confidential ear from a friend. All of it is secure and just for you.",
       "create_character": "Create Character",
       "landing_page": "Landing Page"
     },
@@ -30,7 +36,11 @@
       "new": "NEW",
       "top": "TOP",
       "trending": "TRENDING",
-      "view_all": "View All"
+      "view_all": "View All",
+      "all": "ALL",
+      "popular": "POPULAR",
+      "category_1": "CATEGORY 1", 
+      "category_2": "CATEGORY 2"
     }
   },
 
@@ -49,20 +59,20 @@
 
   "footer": {
     "description": "AI chat platform where you can create and chat with AI characters naturally, featuring a variety of immersive roles.",
-    "link": {
-      "title": "Link",
-      "sub_title1": "About me",
-      "sub_title2": "How to use",
-      "sub_title3": "Create character",
-      "sub_title4": "Community"
+    "main": {
+      "title": "main",
+      "sub_title1": "Home",
+      "sub_title2": "Character",
+      "sub_title3": "Member",
+      "sub_title4": "About us",
+      "sub_title5": "Contact"
     },
-    "help": {
-      "title": "Help",
-      "sub_title1": "Help center",
-      "sub_title2": "Contact Me",
-      "sub_title3": "Report",
-      "sub_title4": "Suggestion"
+    "started": {
+      "title": "Get Started",
+      "sub_title1": "For company",
+      "sub_title2": "For developer"
     },
+    "link": "Get intouch",
     "copyright": {
       "terms_of_service": "Terms of Service",
       "privacy_policy": "Privacy Policy",

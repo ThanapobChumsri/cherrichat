@@ -30,6 +30,7 @@
           </UInput>
         </div>
 
+        <ChangeLang />
         <TopupModal
           v-if="userInfo"
           class="cursor-pointer"

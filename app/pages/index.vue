@@ -14,18 +14,16 @@
           class="w-full sm:w-1/2 text-center sm:text-left mt-10 sm:mt-0 space-y-10"
         >
           <div class="text-xl sm:text-[36px] font-extrabold text-white">
-            YOUR THOUGHTS, AMPLIFIED. YOUR PRIVACY, GUARANTEED.
+            {{ $t('index.section1.title') }}
           </div>
           <div class="text-sm sm:text-[16px] text-[#94A3B8]">
-            Cherrichat isn't just a chat app. It's where your ideas find their
-            voice. Get personal expert advice or a confidential ear from a
-            friend. All of it is secure and just for you.
+            {{ $t('index.section1.sub_title') }}
           </div>
           <div class="flex justify-center sm:justify-start">
             <UButton
               :disabled="userInfo?.user_type == 'client'"
               :size="isMobile ? 'md' : 'xl'"
-              class="w-[140px] sm:w-[200px] flex justify-center liquid-glass !rounded-lg !h-[42px] bg-gradient"
+              class="w-[140px] sm:w-[200px] flex justify-center liquid-glass !rounded-lg !h-[42px] bg-gradient cursor-pointer"
               @click="clickCreateCharacter"
             >
               <div class="flex items-center w-full">
@@ -74,7 +72,7 @@
                 :class="tabActive === tab.value ? 'active-bg' : ''"
                 style="border-radius: 8px !important"
               >
-                <div class="w-full truncate">{{ tab.label }}</div>
+                <div class="w-full truncate">{{ $t(`index.section2.${tab.label}`) }}</div>
               </UButton>
             </div>
           </div>
@@ -120,19 +118,19 @@ const tabActive = ref(1);
 const tabItem = ref([
   {
     value: 1,
-    label: "ALL",
+    label: "all",
   },
   {
     value: 2,
-    label: "POPULAR",
+    label: "popular",
   },
   {
     value: 3,
-    label: "CATEGORY 1",
+    label: "category_1",
   },
   {
     value: 4,
-    label: "CATEGORY 2",
+    label: "category_2",
   },
 ]);
 

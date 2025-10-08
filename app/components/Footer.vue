@@ -12,38 +12,38 @@
             <div class="grid flex-1 grid-cols-4 text-sm sm:text-base pt-4 gap-4">
               <div class="text-[#94a3b8] font-extrabold">
                 <p class="transition duration-100 mb-4">
-                  {{ "Main" }}
+                  {{ $t('footer.main.title') }}
                 </p>
-                <p class="transition duration-100 ease-in-out hover:text-white">
-                  {{ "Home" }}
+                <p class="transition duration-100 ease-in-out hover:text-white cursor-pointer">
+                  {{ $t('footer.main.sub_title1') }}
                 </p>
-                <p class="transition duration-100 ease-in-out hover:text-white">
-                  {{ "Charecter" }}
+                <p class="transition duration-100 ease-in-out hover:text-white cursor-pointer">
+                  {{ $t('footer.main.sub_title2') }}
                 </p>
-                <p class="transition duration-100 ease-in-out hover:text-white">
-                  {{ "Member" }}
+                <p class="transition duration-100 ease-in-out hover:text-white cursor-pointer">
+                  {{ $t('footer.main.sub_title3') }}
                 </p>
-                <p class="transition duration-100 ease-in-out hover:text-white">
-                  {{ "About us" }}
+                <p class="transition duration-100 ease-in-out hover:text-white cursor-pointer">
+                  {{ $t('footer.main.sub_title4') }}
                 </p>
-                <p class="transition duration-100 ease-in-out hover:text-white">
-                  {{ "Contact" }}
-                </p>
-              </div>
-              <div class="text-[#94a3b8] font-extrabold">
-                <p class="transition duration-100 mb-4">
-                  {{ "Get Started" }}
-                </p>
-                <p class="transition duration-100 ease-in-out hover:text-white">
-                  {{ "For company" }}
-                </p>
-                <p class="transition duration-100 ease-in-out hover:text-white">
-                  {{ "For developer" }}
+                <p class="transition duration-100 ease-in-out hover:text-white cursor-pointer">
+                  {{ $t('footer.main.sub_title5') }}
                 </p>
               </div>
               <div class="text-[#94a3b8] font-extrabold">
                 <p class="transition duration-100 mb-4">
-                  {{ "Get intouch" }}
+                  {{ $t('footer.started.title') }}
+                </p>
+                <p class="transition duration-100 ease-in-out hover:text-white cursor-pointer">
+                  {{ $t('footer.started.sub_title1') }}
+                </p>
+                <p class="transition duration-100 ease-in-out hover:text-white cursor-pointer">
+                  {{ $t('footer.started.sub_title2') }}
+                </p>
+              </div>
+              <div class="text-[#94a3b8] font-extrabold">
+                <p class="transition duration-100 mb-4">
+                  {{ $t('footer.link') }}
                 </p>
                 <div class="flex flex-wrap gap-2">
                   <div
