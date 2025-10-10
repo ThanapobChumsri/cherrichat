@@ -5,7 +5,7 @@
         ref="videoRef"
         :src="`${runtimeConfig.public.N8N_VIDEO}${props.data.url_video}`"
         :poster="`${runtimeConfig.public.N8N_IMAGE}${props.data.url_image}`"
-        class="object-cover w-full h-full transition-transform duration-300 ease-in-out group-hover:scale-110"
+        class="object-cover w-full h-full transition-transform duration-300 ease-in-out"
         muted
         loop
         playsinline

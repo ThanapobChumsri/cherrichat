@@ -21,6 +21,19 @@
   "validate_email": "Enter a valid email",
   "password_must_6": "Password must be at least 6 characters long",
   "password_not_match": "Passwords do not match",
+  "forgot_password": "Forgot Password",
+  "reset_password": "Reset Password",
+  "reset_password_description": "Provide the email address associated with your account to recover your password",
+  "send_forgot_password_success": "Password reset request sent successfully",
+  "send_email_forgot_password": "We've sent you an email to reset your password. Please check your inbox",
+  "email_not_found": "Email not found",
+  "reset_password_success": "Reset password successfully",
+  "for_email": "For email",
+  "link_expired": "Link Expired",
+  "reset_password_text1": "To reset your password. return to the signin page and select",
+  "reset_password_text2": "to send a new email",
+  "email_already_in_use": "This email is already in use",
+  "choose_different_password": "Please choose a new password different from your current one",
 
   "index": {
     "section1": {

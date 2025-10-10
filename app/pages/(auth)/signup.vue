@@ -1,7 +1,7 @@
 <template>
-  <div class="flex">
+  <div class="flex min-h-screen">
     <div 
-      class="w-1/2 bg-cover bg-center min-h-screen"
+      class="sm:w-1/2 hidden sm:block bg-cover bg-center"
       :style="{ backgroundImage: `url(${authCover})` }"
     >
       <div class="mx-auto sm:mx-0 sm:pl-32 py-44">
@@ -11,7 +11,7 @@
       </div>
     </div>
     <div
-      class="w-1/2 flex items-center justify-center"
+      class="w-full sm:w-1/2 flex items-center justify-center"
       style="
         background: 
           linear-gradient(0deg, rgba(0, 0, 0, 0.5), transparent),
@@ -23,15 +23,16 @@
       "
     >
       <div class="w-[600px] p-8 space-y-8 flex flex-col items-center">
-        <img :src="logo" alt="" class="max-h-[80px] w-auto" />
-        <p class="text-[32px] font-medium">Create your account</p>
+        <img :src="logo" alt="" class="max-h-[60px] sm:max-h-[80px] w-auto" />
+        <p class="text-[24px] sm:text-[32px] font-medium">Create your account</p>
         <UButton block size="lg" class="p-2 border-[1px] border-[#333333] bg-black cursor-pointer" icon="flat-color-icons:google" variant="ghost" color="neutral" label="Continue with Google" @click="onSigninGoogle"/>
         <USeparator :label="$t('or')" size="md" />
         <UForm 
           ref="formRef"
           :state="form" 
+          :schema="schema"
           class="space-y-4 w-full"
-          @submit="onSigninRegister"
+          @submit="onSignup"
         >
           <UFormField label="Email address" name="email">
             <UInput 
@@ -117,8 +118,10 @@ const onSigninGoogle = async () => {
 }
 
 const onSignup = async () => {
-  await signup(form.value)
-  navigateTo('/signin')
+  const response = await signup(form.value)
+  if (response) {
+    navigateTo('/signin')
+  }
 }
 
 </script>

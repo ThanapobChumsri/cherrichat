@@ -9,7 +9,7 @@ export default defineNuxtRouteMiddleware((to, from) => {
 
   if (!userInfo.value) {
     userInfo.value = null
-    $toast.error($i18n.t('toast.something_wrong'), $i18n.t('signin_again'))
+    // $toast.error($i18n.t('toast.something_wrong'), $i18n.t('signin_again'))
 
     if (process.client) {
       localStorage.removeItem('user-info')

@@ -3,7 +3,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   const showToast = (type, title = '', description = '') => {
     const typeColorMap = {
-      success: 'warning',
+      success: 'error',
       error: 'error',
       info: 'info',
       default: 'default'

@@ -33,8 +33,9 @@ export const useAuth = () => {
         body: payload
       })
       $toast.success(t('signup_success'), t('greeting_email'))
+      return response
     } catch (error) {
-      $toast.error(t('toast.something_wrong'), String(error?.data?.message || error))
+      $toast.error(t('toast.something_wrong'), error?.data?.message === "email already in use" ? t('email_already_in_use') : String(error?.data?.message || error))
     }
   }
 
@@ -47,7 +48,7 @@ export const useAuth = () => {
       $toast.success(t('signin_success'))
       return response
     } catch (error) {
-      $toast.error(t('toast.something_wrong'), t('signin_fail'))
+      $toast.error(t('toast.something_wrong'), error?.data?.message === "suspended" ? t('account_suspended') : t('signin_fail'))
     }
   }
 
