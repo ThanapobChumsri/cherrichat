@@ -1,5 +1,6 @@
 <template>
   <div>
+    <PDPAModal />
     <div
       class="min-h-screen w-full bg-cover bg-center flex justify-center items-start"
       :style="{
@@ -97,6 +98,7 @@
 <script setup>
 import CharacterCard from "~/components/CharacterCard.vue";
 import CharacterCardSkeleton from "~/components/skeletons/CharacterCardSkeleton.vue";
+import PDPAModal from "~/components/modal/PDPAModal.vue";
 
 import coverImage from "~/assets/images/main-bg.png";
 import { useCharacter } from "~/composables/useCharacter.js";
@@ -105,12 +107,15 @@ import { useBreakpoint } from "#imports";
 import { useUser } from "#imports";
 import { UButton } from "#components";
 import { useSearchBus } from "#imports";
+import { useModal } from "#imports";
 
 const searchBus = useSearchBus();
 const { getAllCharacter } = useCharacter();
 const { getSoundList } = useChat();
 const { useGetUserById } = useUser();
 const { isMobile } = useBreakpoint();
+const { onOpenPdpaModal } = useModal();
+const isPdpaFirst = useCookie("pdpa-accept");
 
 const characterList = ref([]);
 const loading = ref(true);
@@ -156,6 +161,10 @@ onMounted(async () => {
   // Detect chagnes in the user's 'user_type'
   if (userInfo.value) {
     await getUserData();
+
+    if (userInfo.value && !isPdpaFirst.value) {
+      onOpenPdpaModal();
+    }
   }
 });
 

@@ -1,5 +1,5 @@
 <template>
-  <UContainer class="my-8">
+  <UContainer class="my-8  py-12 sm:py-24">
     <div class="space-y-4">
       <div class="flex items-center gap-2">
         <UAvatar :text="avatarString" size="3xl" />
@@ -28,10 +28,6 @@ import { USeparator } from '#components'
 import ProfileDetail from '~/components/profile/ProfileDetail.vue'
 import HistoryCoin from '~/components/profile/HistoryCoin.vue'
 import Creator from '~/components/profile/Creator.vue'
-
-definePageMeta({
-  layout: "signin",
-})
 
 const userInfo = ref(null)
 const avatarString = ref("")

@@ -1,5 +1,6 @@
 const isSoundModalOpen = ref(false)
 const isTopUpModalOpen = ref(false)
+const isPdpaModalOpen = ref(false)
 
 export const useModal = () => {
 
@@ -15,6 +16,14 @@ export const useModal = () => {
     isTopUpModalOpen.value = true
   }
 
+  const onOpenPdpaModal = () => {
+    isPdpaModalOpen.value = true
+  }
+
+  const onClosePdpaModal = () => {
+    isPdpaModalOpen.value = false
+  }
+
   return {
     isSoundModalOpen,
     onOpenSoundModal,
@@ -22,5 +31,9 @@ export const useModal = () => {
 
     isTopUpModalOpen,
     onOpenTopUpModal,
+
+    isPdpaModalOpen,
+    onOpenPdpaModal,
+    onClosePdpaModal,
   }
 }

@@ -1,6 +1,6 @@
 <template>
-  <div class="min-h-screen bg-neutral-50 dark:bg-zinc-900 relative flex flex-col py-12 sm:py-24">
-    <Navbar />
+  <div class="min-h-screen bg-neutral-50 dark:bg-zinc-900 relative flex flex-col">
+    <!-- <Navbar /> -->
     <div class="flex-1" data-page-transition>
       <slot />
     </div>
@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-import Navbar from "~/components/Navbar.vue";
+// import Navbar from "~/components/Navbar.vue";
 
 // Enable color mode
 const colorMode = useColorMode();
