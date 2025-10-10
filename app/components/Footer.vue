@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bg-[#18181C]">
     <div class="shrink-0 bg-border h-[1px] w-full" />
 
     <div class="py-4 sm:py-10">

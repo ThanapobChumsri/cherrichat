@@ -227,3 +227,8 @@ b {
 
   -webkit-mask-composite: destination-in, destination-in, destination-in !important;
 }
+
+@theme {
+  --color-cherri: #EF3E5C;
+  --color-dark-cherri: #B51D32;
+}

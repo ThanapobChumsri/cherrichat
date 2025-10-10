@@ -1,6 +1,6 @@
 <template>
   <div>
-    <UForm v-if="status !== 'approved'" :state="form" class="w-full max-w-[600px] mx-auto space-y-4">
+    <UForm v-if="status !== 'approved'" :state="form" class="w-full max-w-[800px] bg-[#1F272F] p-4 sm:p-8 rounded-[20px] mx-auto space-y-4">
       <UFormField
         v-for="field in Object.keys(form)" :key="field" :name="field" :label="field"
       >

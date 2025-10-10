@@ -1,14 +1,13 @@
 <template>
 <UModal
-  class="max-w-none"
   v-model:open="isPdpaModalOpen"
   :dismissible="false"
   :ui="{ 
     header: 'bg-[linear-gradient(314.28deg,#20333D_19.54%,#1D2C34_99.22%)]',
-    content: 'w-[900px] bg-black',
+    content: 'max-w-[900px] bg-black',
   }"
 >
-  <template #header class="bg-red-100">
+  <template #header>
     <div class="space-y-2">
       <p class="text-[36px] font-bold leading-12">โปรดอ่านและยอมรับ ‘นโยบายความเป็นส่วนตัว’ และ ‘เงื่อนไขการให้บริการ’</p>
       <p class="text-[14px] opacity-[50%]">เราได้อัปเดตนโยบายความเป็นส่วนตัวและเงื่อนไขการให้บริการของแอป เพื่อให้สอดคล้องกับการพัฒนาแอปและการให้บริการที่ดีขึ้น เราได้ทำการปรับปรุง นโยบายความเป็นส่วนตัว และ เงื่อนไขการให้บริการ กรุณาอ่านและยอมรับก่อนใช้งาน ]</p>

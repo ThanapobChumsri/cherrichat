@@ -1,5 +1,5 @@
 <template>
-  <UContainer class="my-8  py-12 sm:py-24">
+  <UContainer class="my-8 pt-12 sm:pt-24">
     <div class="space-y-4">
       <div class="flex items-center gap-2">
         <UAvatar :text="avatarString" size="3xl" />

@@ -1,5 +1,9 @@
 <template>
-  <div class="min-h-screen bg-neutral-50 dark:bg-zinc-900 relative flex flex-col">
+  <div class="min-h-screen relative flex flex-col"
+      :style="{
+        backgroundImage: `url(${coverImage})`,
+      }"
+  >
     <Navbar />
     <div class="flex-1" data-page-transition>
       <slot />
@@ -13,6 +17,7 @@
 import "@/assets/css/main.css";
 import Navbar from "~/components/Navbar.vue";
 import Footer from "~/components/Footer.vue";
+import coverImage from "~/assets/images/main-bg.png";
 
 // Set page title and meta
 

@@ -1,5 +1,5 @@
 <template>
-  <UForm :state="preferences" class="w-full max-w-[600px] mx-auto space-y-4">
+  <UForm :state="preferences" class="w-full max-w-[800px] bg-[#1F272F] p-4 sm:p-8 rounded-[20px] mx-auto space-y-4">
 
     <UFormField :label="$t('profile.profile_data.file')" :hint="$t('profile.profile_data.optional')">
       <UFileUpload

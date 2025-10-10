@@ -1,5 +1,10 @@
 <template>
-  <UModal :title="$t('payment.title')" v-model:open="modalOpen">
+  <UModal 
+    v-model:open="modalOpen"
+    :ui="{
+      content: 'max-w-[800px] bg-[radial-gradient(127.11%_127.11%_at_94.62%_-46.17%,rgba(152,4,4,0.18)_0%,rgba(0,0,0,0.18)_98.07%)]'
+    }"
+  >
     <UButton variant="none" class="w-full justify-center sm:w-fit liquid-glass">
       {{ "$" + (coin_balance ? coin_balance : "") }}
       <Icon
@@ -9,6 +14,12 @@
       />
     </UButton>
 
+    <template #header>
+      <div class="space-y-2">
+        <p class="text-[36px] font-semibold">{{ $t('payment.title') }}</p>
+        <p class="text-[14px] opacity-[50%]">Starting from 1 Coin = 1 Message</p>
+      </div>
+    </template>
     <template #body>
       <UTabs
         v-model="selectTab"
@@ -25,47 +36,37 @@
             v-if="item.key === 'package'"
             class="space-y-2 h-[400px] sm:h-[390px] overflow-y-scroll p-2"
           >
-            <UCard
+            <div 
               v-for="(packages, index) in topupPackageList"
-              :key="index"
-              variant="solid"
-              class="text-sm text-center cursor-pointer transition active:scale-99 hover:bg-gray-200"
-              @click="clickSelectPackage(packages.id)"
+              class="flex justify-between rounded-[8px] p-6 bg-[linear-gradient(314.28deg,rgba(40,40,40,0.72)_19.54%,rgba(56,56,56,0.72)_99.22%)]"
             >
-              <p>{{ packages.min_amount }} {{ $t("payment.bath") }}</p>
-              <p class="flex justify-center items-center gap-2">
-                {{ packages.notes }}<Icon name="fluent-emoji-flat:coin" />
-              </p>
-            </UCard>
+              <div class="space-y-1">
+                <div class="flex items-center gap-2">
+                  <img :src="CoinImg" alt="coin_image" class="w-6" />
+                  <p class="text-[12px]">Starter Pack</p>
+                  <UBadge v-show="index === 0" size="sm" color="neutral">Best Price</UBadge>
+                </div>
+                <div class="flex items-end gap-2">
+                  <p class="font-semibold">{{ packages.notes.split("=")[1].split(" ")[1] }} Coins</p>
+                  <p class="text-[14px] text-[#989898]">({{ Number(packages.max_amount) }} + {{ packages.notes.split("=")[1].split(" ")[1] - packages.max_amount }}) |</p>
+                  <p class="text-[14px] text-[#34852A]">+{{ Math.round(((packages.notes.split("=")[1].split(" ")[1] - Number(packages.max_amount)) / Number(packages.max_amount) ) * 100) }}% Bonus</p>
+                </div>
+                <p class="text-[12px] text-[#989898]" :class="{ 'invisible': index !== 0}">Perfect for beginners to get started</p>
+              </div>
+              <div class="space-y-4">
+                <UButton 
+                  :ui="{ 
+                    base: 'w-full justify-center bg-gradient-to-r from-cherri from-30% to-dark-cherri cursor-pointer transition-all duration-100 hover:opacity-80', 
+                    label: 'text-white font-semibold' 
+                  }" 
+                  :label="packages.max_amount"
+                  @click="clickSelectPackage(packages.id)"
+                />
+                <p class="text-[12px] text-[#989898]">{{ packages.rate }} Coins /THB</p>
+              </div>
+            </div>
+            
           </div>
-
-          <!-- <div v-else-if="item.key === 'history'" class="space-y-2 h-[400px] sm:h-[390px] overflow-y-scroll p-2">
-            <div v-if="historyPaymentList.length === 0 && !hasMore" class="h-full flex justify-center items-center">
-              <p class="text-sm text-[#9898A2] h-full flex justify-center items-center">{{ $t('payment.no_use_coin') }}</p>
-            </div>
-            <div
-              v-else
-              v-for="(history, index) in historyPaymentList" :key="index"
-              class="text-sm text-[#0F172B] p-4 border rounded-md flex bg-white"
-            >
-              <Icon name="hugeicons:reverse-withdrawal-02" class="text-gray-500 w-[40px] h-[40px]"/>
-              <div class="flex-1 ml-4">
-                <p>{{ history.transaction_type }}</p>
-                <p>{{ Number(history.balance_after) > Number(history.balance_before) ? '+' : '-' }} {{ history.amount }}</p>
-              </div>
-              <div class="text-end">
-                <p class="text-gray-500">{{ useFormattedDateTime(history.created_at) }}</p>
-                <p>{{ history.status }}</p>
-              </div>
-            </div>
-            <InfiniteLoading @infinite="getHistoryPayment">
-              <template #spinner>
-                <p class="text-center"><Icon name="eos-icons:loading" style="width: 28px; height: 28px" /></p class="text-center">
-              </template>
-              <template #complete><span></span></template>
-            </InfiniteLoading>
-          </div> -->
-
           <div
             v-else-if="item.key === 'coupon'"
             class="space-y-4 h-[400px] sm:h-[390px] overflow-y-scroll p-2"
@@ -97,6 +98,7 @@
 <script setup>
 import { usePayment } from "#imports";
 import { useModal } from "#imports";
+import CoinImg from "~/assets/images/coin.png"
 
 const route = useRoute();
 const {

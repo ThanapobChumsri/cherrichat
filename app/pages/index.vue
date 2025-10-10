@@ -1,14 +1,9 @@
 <template>
   <div>
     <PDPAModal />
-    <div
-      class="min-h-screen w-full bg-cover bg-center flex justify-center items-start"
-      :style="{
-        backgroundImage: `url(${coverImage})`,
-      }"
-    >
+    <div class="min-h-screen w-full bg-cover bg-center flex justify-center items-start">
       <div
-        class="flex flex-col sm:flex-row sm:justify-between gap-5 sm:gap-20 px-4 sm:px-16 w-full py-16 sm:py-48"
+        class="flex flex-col sm:flex-row sm:justify-between gap-5 sm:gap-20 px-4 sm:px-16 w-full pt-16 sm:pt-48"
       >
         <!-- Left section -->
         <div
@@ -100,7 +95,6 @@ import CharacterCard from "~/components/CharacterCard.vue";
 import CharacterCardSkeleton from "~/components/skeletons/CharacterCardSkeleton.vue";
 import PDPAModal from "~/components/modal/PDPAModal.vue";
 
-import coverImage from "~/assets/images/main-bg.png";
 import { useCharacter } from "~/composables/useCharacter.js";
 import { useChat } from "#imports";
 import { useBreakpoint } from "#imports";
