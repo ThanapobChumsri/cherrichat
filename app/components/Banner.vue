@@ -1,11 +1,11 @@
 <template>
-  <div class="relative overflow-hidden mb-12 bg-gradient-to-r from-dark-cherri-2 from-[10%] via-cherri-2 via-[70%] to-dark-cherri-2 to-[100%] mx-16 rounded-[16px]">
-    <div class="px-24 py-8 space-y-6">
-      <p class="text-[36px] leading-12 font-bold">Personal AI <br>Professional privacy</p>
+  <div class="relative overflow-hidden mt-10 sm:mt-0 mb-4 sm:mb-12 mx-4 sm:mx-16 bg-gradient-to-r from-dark-cherri-2 from-[10%] via-cherri-2 via-[70%] to-dark-cherri-2 to-[100%] rounded-[16px]">
+    <div class="relative z-[1] px-6 sm:px-16 py-6 sm:py-8 space-y-4 sm:space-y-6">
+      <p class="text-[20px] sm:text-[36px] sm:leading-12 font-bold">Personal AI <br>Professional privacy</p>
       <p class="opacity-60">From quick questions to deep chats <br>CherriChat keeps it yours</p>
       <UButton size="xl" label="LET'S TALK" class="bg-cherri-gradient text-white uhover w-40" />
     </div>
-    <img :src="BannerCharacter" alt="banner-character" class="absolute w-160 top-[-20px] right-[10%]" />
+    <img :src="BannerCharacter" alt="banner-character" class="absolute w-160 top-[-20px] right-[-80px] md:right-[-40px] xl:right-[40px] opacity-40 md:opacity-100" />
   </div>
 </template>
 

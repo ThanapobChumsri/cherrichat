@@ -34,7 +34,7 @@
           class="space-y-4 w-full"
           @submit="onSignup"
         >
-          <UFormField label="Email address" name="email">
+          <UFormField label="Email Address" name="email">
             <UInput 
               v-model="form.email"
               class="w-full border-[1px] border-[#333333]"
@@ -43,7 +43,7 @@
               variant="ghost"
             />
           </UFormField>
-          <UFormField label="password" name="password">
+          <UFormField label="Password" name="password">
             <UInput 
               v-model="form.password"
               class="w-full border-[1px] border-[#333333]"
@@ -53,7 +53,7 @@
               type="password"
             />
           </UFormField>
-          <UFormField label="confirm password" name="confirm_password">
+          <UFormField label="Confirm Password" name="confirm_password">
             <UInput 
               v-model="form.confirm_password"
               class="w-full border-[1px] border-[#333333]"
