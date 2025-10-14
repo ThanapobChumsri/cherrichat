@@ -9,17 +9,17 @@
 >
   <template #header>
     <div class="space-y-2">
-      <p class="text-[36px] font-bold leading-12">โปรดอ่านและยอมรับ ‘นโยบายความเป็นส่วนตัว’ และ ‘เงื่อนไขการให้บริการ’</p>
-      <p class="text-[14px] opacity-[50%]">เราได้อัปเดตนโยบายความเป็นส่วนตัวและเงื่อนไขการให้บริการของแอป เพื่อให้สอดคล้องกับการพัฒนาแอปและการให้บริการที่ดีขึ้น เราได้ทำการปรับปรุง นโยบายความเป็นส่วนตัว และ เงื่อนไขการให้บริการ กรุณาอ่านและยอมรับก่อนใช้งาน ]</p>
+      <p class="text-[20px] sm:text-[36px] font-bold sm:leading-12">โปรดอ่านและยอมรับ ‘นโยบายความเป็นส่วนตัว’ และ ‘เงื่อนไขการให้บริการ’</p>
+      <p class="hidden sm:block text-[14px] opacity-[50%]">เราได้อัปเดตนโยบายความเป็นส่วนตัวและเงื่อนไขการให้บริการของแอป เพื่อให้สอดคล้องกับการพัฒนาแอปและการให้บริการที่ดีขึ้น เราได้ทำการปรับปรุงนโยบายความเป็นส่วนตัวและเงื่อนไขการให้บริการกรุณาอ่านและยอมรับก่อนใช้งาน</p>
       <p class="text-[12px] opacity-[50%]">ปรับปรุงล่าสุด: 26 กรกฎาคม 2568</p>
     </div>
   </template>
   <template #body> 
     <div class="h-[500px] overflow-y-scroll px-2 space-y-4">
-      <p class="text-lg text-center font-semibold">นโยบายความเป็นส่วนตัว (CherriChat)</p>
-      <div v-for="(item, index) in pdpaContent" class="mb-4">
+      <p class="sm:text-lg text-center font-semibold">นโยบายความเป็นส่วนตัว (CherriChat)</p>
+      <div v-for="(item) in pdpaContent" class="mb-4 text-sm sm:text-base">
         <p>{{ item.title }}</p>
-        <p class="whitespace-pre-line">{{ item.content }}</p>
+        <p class=" whitespace-pre-line">{{ item.content }}</p>
       </div>
 
       <div class="bg-[#2D2D2D] rounded-lg px-6 py-4 space-y-4">
@@ -34,7 +34,7 @@
           <li>ได้อ่านและยอมรับ ข้อกำหนดการใช้งาน และนโยบายความเป็นส่วนตัว</li>
         </ul>
       </div>
-      <UButton type="submit" @click="clickClosePdpaModal" :disabled="!isFormValid" block size="lg" class="liquid-glass bg-gradient cursor-pointer">ยืนยันและยอมรับ</UButton>
+      <UButton @click="clickClosePdpaModal" :disabled="!isFormValid" block size="lg" class="bg-cherri-gradient text-white cursor-pointer" :class="{ 'uhover': isFormValid }">ยืนยันและยอมรับ</UButton>
     </div>
   </template>
 </UModal>

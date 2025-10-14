@@ -1,9 +1,10 @@
 <template>
   <div>
     <PDPAModal />
-    <div class="min-h-screen w-full bg-cover bg-center flex justify-center items-start">
+    <div class="min-h-screen w-full bg-cover bg-center pt-16 sm:pt-32">
+      <Banner />
       <div
-        class="flex flex-col sm:flex-row sm:justify-between gap-5 sm:gap-20 px-4 sm:px-16 w-full pt-16 sm:pt-48"
+        class="flex flex-col sm:flex-row sm:justify-between gap-5 sm:gap-20 px-4 sm:px-16 w-full"
       >
         <!-- Left section -->
         <div
@@ -94,6 +95,7 @@
 import CharacterCard from "~/components/CharacterCard.vue";
 import CharacterCardSkeleton from "~/components/skeletons/CharacterCardSkeleton.vue";
 import PDPAModal from "~/components/modal/PDPAModal.vue";
+import Banner from "~/components/Banner.vue";
 
 import { useCharacter } from "~/composables/useCharacter.js";
 import { useChat } from "#imports";

@@ -9,7 +9,7 @@
             <div>
               <img src="~/assets/images/logo.png" class="max-h-[30px]" />
             </div>
-            <div class="grid flex-1 grid-cols-4 text-sm sm:text-base pt-4 gap-4">
+            <div class="grid flex-1 grid-cols-2 sm:grid-cols-4 text-sm sm:text-base pt-4 gap-4">
               <div class="text-[#94a3b8] font-extrabold">
                 <p class="transition duration-100 mb-4">
                   {{ $t('footer.main.title') }}
@@ -86,9 +86,6 @@
 </template>
 
 <script setup>
-const route = useRoute();
-const rounter = useRouter();
-const isDemoMode = computed(() => route.path.startsWith("/demo"));
 const redirect = (url) => {
   window.open(url, "_blank");
 }
