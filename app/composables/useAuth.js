@@ -82,6 +82,43 @@ export const useAuth = () => {
     userInfoCookie.value = null
   }
 
+  const sendEmailForgotPassword = async (payload) => {
+    try {
+      const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/58312121-ba32-43de-b367-84742f20aeac`, {
+        method: "POST",
+        body: payload,
+      })
+      $toast.success(t('send_forgot_password_success'), t('send_email_forgot_password'))
+      return response
+    } catch (error) {
+      $toast.error(t('toast.something_wrong'), error?.data?.message === "email not found" ? t('email_not_found') : String(error?.data?.message || error))
+    }
+  }
+
+  const getForgotPasswordOrder = async (query) => {
+    try {
+      const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/fb4f861b-2efb-4267-a418-1a1e56aa7983`, {
+        params: query
+      })
+      return response
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const updateUserPassword = async (payload) => {
+    try {
+      const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/21667d08-799a-4f11-b840-11f78e3f0dfe`, {
+        method: "POST",
+        body: payload,
+      })
+      $toast.success(t('reset_password_success'))
+      return response
+    } catch (error) {
+      $toast.error(t('toast.something_wrong'), error?.data?.message === "choose different password" ? t('choose_different_password') : String(error?.data?.message || error))
+    }
+  }
+
   return {
     signin,
     signout,
@@ -90,5 +127,8 @@ export const useAuth = () => {
     signinRegister,
     storeAuthData,
     clearAuthData,
+    sendEmailForgotPassword,
+    getForgotPasswordOrder,
+    updateUserPassword,
   }
 }

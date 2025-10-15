@@ -23,7 +23,7 @@
   "password_not_match": "Passwords do not match",
   "forgot_password": "Forgot Password",
   "reset_password": "Reset Password",
-  "reset_password_description": "Provide the email address associated with your account to recover your password",
+  "reset_password_description": "Provide the email address associated with your account to reset your password",
   "send_forgot_password_success": "Password reset request sent successfully",
   "send_email_forgot_password": "We've sent you an email to reset your password. Please check your inbox",
   "email_not_found": "Email not found",

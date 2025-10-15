@@ -41,7 +41,7 @@
             <p class="text-[14px]">เช็กอินต่อเนื่อง ยิ่งนาน ยิ่งได้โบนัสเพิ่ม!</p>
           </div>
         </div>
-        <UButton class="bg-cherri-gradient text-white w-full uhover" size="lg" label="เช็คอิน" @click="clickSendDailyLogin"/>
+        <UButton class="bg-cherri-gradient text-white w-full uhover" size="lg" label="เช็คอิน" @click="clickSendDailyLogin" loading-auto/>
       </div>
     </template>
   </UModal>
