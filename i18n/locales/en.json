@@ -353,5 +353,15 @@
     "creator": "Creator",
     "save_change": "Save Changes",
     "register_creator": "Register as a creator"
+  },
+
+  "modal": {
+    "daily_login": {
+      "title": "Check In Daily for Free Rewards!",
+      "sub_title": "Build your streak to unlock exclusive rewards and bigger bonuses",
+      "text_1": "Get free Cheeri coins daily",
+      "text_2": "Longer streaks = bigger bonuses!",
+      "check_in": "Check In"
+    }
   }
 }

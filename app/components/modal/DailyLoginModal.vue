@@ -9,8 +9,8 @@
   >
     <template #header>
       <div class="space-y-2 flex flex-col items-center">
-        <p class="text-[24px] sm:text-[36px] font-semibold">อย่าลืมเช็คอินทุกวันเพื่อรับรางวัลฟรี! 🍒</p>
-        <p class="text-[14px] opacity-[50%]">สะสมครบตามจำนวนวันเพื่อปลดล็อกของรางวัลสุดพิเศษและโบนัสระดับสูง!</p>
+        <p class="text-[24px] sm:text-[36px] font-semibold">{{ $t('modal.daily_login.title') }} 🍒</p>
+        <p class="text-[14px] opacity-[50%]">{{ $t('modal.daily_login.sub_title') }}</p>
       </div>
     </template>
     <template #body>
@@ -37,11 +37,11 @@
         <div class="flex gap-4 p-4 bg-cherri/16 rounded-[13px]">
           <img :src="CoinImage" alt="coin-image" class="w-12" />
           <div class="text-cherri">
-            <p class="font-semibold">รับ Cherry coin ฟรีทุกวัน</p>
-            <p class="text-[14px]">เช็กอินต่อเนื่อง ยิ่งนาน ยิ่งได้โบนัสเพิ่ม!</p>
+            <p class="font-semibold">{{ $t('modal.daily_login.text_1') }}</p>
+            <p class="text-[14px]">{{ $t('modal.daily_login.text_2') }}</p>
           </div>
         </div>
-        <UButton class="bg-cherri-gradient text-white w-full uhover" size="lg" label="เช็คอิน" @click="clickSendDailyLogin" loading-auto/>
+        <UButton class="bg-cherri-gradient text-white w-full uhover" size="lg" :label="$t('modal.daily_login.check_in')" @click="clickSendDailyLogin" loading-auto/>
       </div>
     </template>
   </UModal>
@@ -61,6 +61,8 @@ const dailyList = ref([])
 
 onMounted(async () => {
   userInfo.value = JSON.parse(localStorage.getItem('user-info'))
+  if (!userInfo.value) return;
+
   dailyCounter.value = await getDailyLoginCounterById(userInfo.value)
   const dailyReward = await getAllDailyLoginReward()
 
@@ -88,22 +90,6 @@ onMounted(async () => {
 
 const clickSendDailyLogin = async () => {
   await sendDailyLogin(userInfo.value)
-
-  const now = new Date()
-
-  const midnight = new Date(
-    now.getFullYear(),
-    now.getMonth(),
-    now.getDate() + 1,
-    0, 0, 0
-  )
-
-  const secondsUntilMidnight = Math.floor((midnight.getTime() - now.getTime()) / 1000)
-
-  const dailyLoginCookie = useCookie('daily-login', {
-    maxAge: secondsUntilMidnight,
-  })
-  dailyLoginCookie.value = true
 
   onCloseDailyLoginModal()
 }

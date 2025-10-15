@@ -63,7 +63,6 @@ export const useFormat = () => {
     const d2 = new Date(date2.getFullYear(), date2.getMonth(), date2.getDate());
     const diffTime = d2 - d1;
     const diffDay = diffTime / (1000 * 60 * 60 * 24);
-    console.log(diffDay)
     return diffDay
   }
 
