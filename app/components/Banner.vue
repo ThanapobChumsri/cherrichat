@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import BannerCharacter from '~/assets/images/banner-character.png'
+import BannerCharacter from '@/assets/images/banner-character.png'
 
 </script>
 

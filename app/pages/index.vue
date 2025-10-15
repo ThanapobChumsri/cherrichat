@@ -1,6 +1,7 @@
 <template>
   <div>
     <PDPAModal />
+    <DailyLoginModal />
     <div class="min-h-screen w-full bg-cover bg-center pt-16 sm:pt-32">
       <Banner />
       <div
@@ -95,6 +96,7 @@
 import CharacterCard from "~/components/CharacterCard.vue";
 import CharacterCardSkeleton from "~/components/skeletons/CharacterCardSkeleton.vue";
 import PDPAModal from "~/components/modal/PDPAModal.vue";
+import DailyLoginModal from "~/components/modal/DailyLoginModal.vue";
 import Banner from "~/components/Banner.vue";
 
 import { useCharacter } from "~/composables/useCharacter.js";
@@ -160,7 +162,7 @@ onMounted(async () => {
 
     if (userInfo.value && !isPdpaFirst.value) {
       onOpenPdpaModal();
-    }
+    } 
   }
 });
 

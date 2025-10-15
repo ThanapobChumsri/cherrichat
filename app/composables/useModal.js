@@ -1,13 +1,13 @@
 const isSoundModalOpen = ref(false)
 const isTopUpModalOpen = ref(false)
 const isPdpaModalOpen = ref(false)
+const isDailyLoginModalOpen = ref(false)
 
 export const useModal = () => {
 
   const onOpenSoundModal = () => {
     isSoundModalOpen.value = true
   }
-
   const onCloseSoundModal = () => {
     isSoundModalOpen.value = false
   }
@@ -19,9 +19,15 @@ export const useModal = () => {
   const onOpenPdpaModal = () => {
     isPdpaModalOpen.value = true
   }
-
   const onClosePdpaModal = () => {
     isPdpaModalOpen.value = false
+  }
+
+  const onOpenDailyLoginModal = () => {
+    isDailyLoginModalOpen.value = true
+  }
+  const onCloseDailyLoginModal = () => {
+    isDailyLoginModalOpen.value = false
   }
 
   return {
@@ -35,5 +41,9 @@ export const useModal = () => {
     isPdpaModalOpen,
     onOpenPdpaModal,
     onClosePdpaModal,
+
+    isDailyLoginModalOpen,
+    onOpenDailyLoginModal,
+    onCloseDailyLoginModal,
   }
 }

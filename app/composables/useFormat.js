@@ -50,11 +50,30 @@ export const useFormat = () => {
       .trim();
   };
 
+  const useIsSameDay = (date1, date2) => {
+    // date1, date2 input utc+7 thailand timezone
+    const d1 = new Date(date1.getFullYear(), date1.getMonth(), date1.getDate());
+    const d2 = new Date(date2.getFullYear(), date2.getMonth(), date2.getDate());
+    return d1.getTime() === d2.getTime();
+  }
+
+  const useCalcDiffDay = (date1, date2) => {
+    // date1, date2 input utc+7 thailand timezone
+    const d1 = new Date(date1.getFullYear(), date1.getMonth(), date1.getDate());
+    const d2 = new Date(date2.getFullYear(), date2.getMonth(), date2.getDate());
+    const diffTime = d2 - d1;
+    const diffDay = diffTime / (1000 * 60 * 60 * 24);
+    console.log(diffDay)
+    return diffDay
+  }
+
   return {
     useFormattedTime12h,
     useFormattedDateTime,
     useDisplayMessage,
     useSplitTypeMessage,
     useCleanTextForAudio,
+    useIsSameDay,
+    useCalcDiffDay,
   }
 }

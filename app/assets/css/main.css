@@ -244,6 +244,7 @@ b {
     var(--color-cherri) 30%,
     var(--color-dark-cherri)
   );
+  outline-style: none;
 }
 
 .uhover {

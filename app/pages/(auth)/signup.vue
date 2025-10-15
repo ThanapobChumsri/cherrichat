@@ -63,7 +63,7 @@
               type="password"
             />
           </UFormField>
-          <UButton type="submit" class="w-full justify-center liquid-glass bg-gradient">{{ $t('signup') }}</UButton>
+          <UButton type="submit" class="w-full justify-center liquid-glass bg-gradient" loading-auto>{{ $t('signup') }}</UButton>
         </UForm>
         <USeparator size="md" />
         <p class="text-center text-sm">{{ $t('have_account') }} <span class="underline cursor-pointer" @click="navigateTo('/signin')">{{ $t('signin' )}}</span></p>

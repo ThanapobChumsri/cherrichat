@@ -2,6 +2,7 @@ import { useBackdrop } from "#imports";
 
 export const useUser = () => {
   const runtimeConfig = useRuntimeConfig();
+  const { useGetWallet } = usePayment()
   const { open, close } = useBackdrop()
   const { $toast } = useNuxtApp()
   const { t } = useI18n();
@@ -59,6 +60,48 @@ export const useUser = () => {
     return response
   }
 
+  const getDailyLoginCounterById = async (query) => {
+    const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/d10834a5-279d-4eb3-89f7-fa9f667df534`, {
+      params: query
+    })
+    return response
+  }
+
+  const getAllDailyLoginReward = async () => {
+    try {
+      const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/1f9b1210-e3a9-45eb-bcee-f2febe21df59`)
+      const result = [];
+
+      for (const item of response) {
+        const range = item.streak_day_range;
+        const coin = parseFloat(item.coin);
+
+        const match = range.match(/\[([0-9]*),([0-9]*)\)/);
+        if (!match) continue;
+
+        const start = parseInt(match[1]);
+        const end = match[2] ? parseInt(match[2]) - 1 : start;
+        for (let day = start; day <= end; day++) {
+          result.push({ day, coin });
+        }
+      }
+
+      return result.sort((a, b) => a.day - b.day)
+    } catch (error) {
+      console.error(String(error?.data?.message || error))
+    }
+  }
+
+  const sendDailyLogin = async (payload) => {
+    const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/ee4ffd6a-5542-4e47-af6b-6b25357ecbb3`, {
+      method: "POST",
+      body: payload,
+    })
+
+    await useGetWallet(payload.user_id);
+    return response
+  }
+
   return {
     useGetUserKnowledge,
     useUpdateUserKnowledge,
@@ -66,5 +109,8 @@ export const useUser = () => {
     useRegisterCreator,
     useGetCreatorUser,
     useGetUserById,
+    getDailyLoginCounterById,
+    getAllDailyLoginReward,
+    sendDailyLogin,
   }
 }
