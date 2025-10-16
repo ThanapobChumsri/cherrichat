@@ -1,7 +1,7 @@
 <template>
   <UContainer>
-    <div class="max-w-[600px] mx-auto space-y-4 mb-4 pt-12 sm:pt-24">
-      <div class="text-center my-16">
+    <div class="max-w-[600px] mx-auto space-y-4 mb-4">
+      <div class="text-center mb-16">
         <p class="text-2xl font-bold">{{ $t("app_name") }}</p>
         <p class="text-[#9898A2]">{{ $t("create_character.create") }}</p>
       </div>

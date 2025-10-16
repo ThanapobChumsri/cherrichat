@@ -5,7 +5,7 @@
       }"
   >
     <Navbar />
-    <div class="flex-1" data-page-transition>
+    <div class="flex-1 pt-24 sm:pt-32" data-page-transition>
       <slot />
     </div>
     <Footer />

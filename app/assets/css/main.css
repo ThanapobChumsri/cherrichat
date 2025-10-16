@@ -259,17 +259,13 @@ b {
 .liquid-glass-cherri {
   text-shadow: unset;
 
-  /* border-radius: 9999px; */
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow:
-    /* inner shadow บน */
     inset 0 1px 2px rgba(255, 255, 255, 1),
-    /* inner shadow ล่าง */
     inset 0 1px 2px rgba(255, 255, 255, 1),
-    /* outer shadow ฟุ้ง */
     0 4px 12px rgba(0, 0, 0, 0.25),
-    /* glow ขอบจาง ๆ */
     0 0 6px rgba(255, 255, 255, 0.5);
+
   -webkit-mask-image:
     linear-gradient(white,white),
     radial-gradient(circle at bottom left,
@@ -278,5 +274,5 @@ b {
     radial-gradient(circle at top right,
       rgba(0, 0, 0, 0) -10%,
       rgba(0, 0, 0, 1) 40%);
-  -webkit-mask-composite: destination-in, destination-in, destination-in;
+  /* -webkit-mask-composite: destination-in, destination-in, destination-in; */
 }

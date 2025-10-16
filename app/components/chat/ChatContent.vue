@@ -3,28 +3,28 @@
     <!-- collapse button -->
     <div 
       v-if="!isMobile" 
-      class="absolute h-8 flex items-center z-10 left-[-1px] rounded-tr-md rounded-br-md" 
+      class="absolute bg-cherri-gradient h-20 flex items-center z-10 left-[-1px] rounded-tr-md rounded-br-md" 
       @click="emit('toggleCollapse', 'bio')"
     >
       <Icon 
         name="ri:arrow-left-s-line"
-        class="w-[40px] h-[40px] cursor-pointer hover:w-[44px] transition-width duration-200"
+        class="w-[32px] h-[32px] text-dark-cherri-2 cursor-pointer hover:w-[44px] transition-width duration-200"
         :class="isCollapseBio ? 'rotate-180' : 'rotate-0'"
       />
     </div>
     <div 
       v-if="!isMobile" 
-      class="absolute h-8 flex items-center z-10 right-[-1px] rounded-tl-md rounded-bl-md " 
+      class="absolute bg-cherri-gradient h-20 flex items-center z-10 right-[-1px] rounded-tl-md rounded-bl-md " 
       @click="emit('toggleCollapse', 'relation')"
     >
       <Icon 
         name="ri:arrow-right-s-line"
-        class="w-[40px] h-[40px] cursor-pointer hover:w-[44px] transition-width duration-200"
+        class="w-[32px] h-[32px] text-dark-cherri-2 cursor-pointer hover:w-[44px] transition-width duration-200"
         :class="isCollapseRelation ? 'rotate-180' : 'rotate-0'"
       />
     </div>
     
-    <div class="hidden sm:block py-4 min-h-[165px]">
+    <div class="hidden sm:block py-4 px-12 min-h-[165px]">
       <div class="gradient-text min-h-[72px]">{{ characterData?.name }}</div>
       <div class="flex gap-2 pt-5">
         <div class="flex items-center gap-4 w-[200px]">
