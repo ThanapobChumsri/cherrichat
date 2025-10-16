@@ -9,7 +9,7 @@
       >
         <!-- Left section -->
         <div
-          class="w-full sm:w-1/2 text-center sm:text-left mt-10 sm:mt-0 space-y-10"
+          class="w-full sm:w-1/2 text-center sm:text-left mt-4 sm:mt-0 space-y-4 sm:space-y-10"
         >
           <div class="text-xl sm:text-[36px] font-extrabold text-white">
             {{ $t('index.section1.title') }}

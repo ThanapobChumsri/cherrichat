@@ -34,6 +34,12 @@
   "reset_password_text2": "to send a new email",
   "email_already_in_use": "This email is already in use",
   "choose_different_password": "Please choose a new password different from your current one",
+  "lets_talk": "let's talk",
+  "tagline": {
+    "text_1": "Personal AI",
+    "text_2": "Professional privacy",
+    "text_3": "From quick questions to deep chats CherriChat keeps it yours"
+  },
 
   "index": {
     "section1": {

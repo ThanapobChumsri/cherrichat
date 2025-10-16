@@ -1,9 +1,9 @@
 <template>
   <div class="w-full mx-auto space-y-2 bg-[#1F272F] p-4 sm:p-8 rounded-[20px]">
-    <p class="text-sm sm:text-base opacity-60">From quick questions to deep chats CherriChat keeps it yours</p>
-    <div class="text-end space-x-2">
-      <USelect v-model="day" :items="dayItems" variant="outline" color="neutral" class="w-40"/>
-      <USelect v-model="transactionType" :items="transactionTypeItem" variant="outline" color="neutral" class="w-40"/>
+    <p class="text-sm sm:text-base opacity-60">{{ $t('tagline.text_3') }}</p>
+    <div class="flex justify-end gap-2">
+      <USelect v-model="day" :items="dayItems" variant="outline" color="neutral" class="w-full sm:w-40"/>
+      <USelect v-model="transactionType" :items="transactionTypeItem" variant="outline" color="neutral" class="w-full sm:w-40"/>
     </div>
     
     <div v-if="historyPaymentList.length === 0 && !hasMore" class="h-full flex justify-center items-center">

@@ -10,7 +10,7 @@
               <img src="~/assets/images/logo.png" class="max-h-[30px]" />
             </div>
             <div class="grid flex-1 grid-cols-2 sm:grid-cols-4 text-sm sm:text-base pt-4 gap-4">
-              <div class="text-[#94a3b8] font-extrabold">
+              <div class="text-[#94a3b8] font-semibold sm:font-extrabold">
                 <p class="transition duration-100 mb-4">
                   {{ $t('footer.main.title') }}
                 </p>
@@ -30,7 +30,7 @@
                   {{ $t('footer.main.sub_title5') }}
                 </p>
               </div>
-              <div class="text-[#94a3b8] font-extrabold">
+              <div class="text-[#94a3b8] font-semibold sm:font-extrabold">
                 <p class="transition duration-100 mb-4">
                   {{ $t('footer.started.title') }}
                 </p>
@@ -41,7 +41,7 @@
                   {{ $t('footer.started.sub_title2') }}
                 </p>
               </div>
-              <div class="text-[#94a3b8] font-extrabold">
+              <div class="text-[#94a3b8] font-semibold sm:font-extrabold">
                 <p class="transition duration-100 mb-4">
                   {{ $t('footer.link') }}
                 </p>
@@ -72,7 +72,7 @@
                   </div>
                 </div>
               </div>
-              <div class="text-[#94a3b8] font-extrabold">
+              <div class="text-[#94a3b8] font-semibold sm:font-extrabold">
                 <p class="transition duration-100 text-[13px]">
                   Copyright © 2025 Cherrichat. All rights reserved.
                 </p>
