@@ -137,6 +137,20 @@ const tabItem = ref([
 const userInfo = useCookie("user-info");
 const search = ref("");
 
+// get user-info and set cookie on server before mounted
+await useAsyncData('user-info', async () => {
+    if (userInfo.value) {
+      const response = await useGetUserById(userInfo.value);
+      userInfo.value = {
+        ...userInfo.value,
+        user_type: response.user_type,
+        pdpa_consent: response.pdpa_consent,
+        chat_tutorial: response.chat_tutorial,
+      };
+    }
+  }
+)
+
 onMounted(async () => {
   searchBus.on(async (term) => {
     
@@ -150,11 +164,6 @@ onMounted(async () => {
   if (!localStorage.getItem("sound-list")) {
     await getSoundListData();
   }
-
-  // Detect chagnes in the user's 'user_type'
-  if (userInfo.value) {
-    await getUserData();
-  }
 });
 
 watch(
@@ -165,14 +174,6 @@ watch(
     }
   }
 )
-
-const getUserData = async () => {
-  const response = await useGetUserById(userInfo.value);
-  userInfo.value = {
-    ...userInfo.value,
-    user_type: response.user_type,
-  };
-};
 
 const getSoundListData = async () => {
   const soundRes = await getSoundList();

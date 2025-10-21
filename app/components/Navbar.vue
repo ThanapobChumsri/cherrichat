@@ -58,50 +58,29 @@ import ChangeLang from "./ChangeLang.vue";
 import TopupModal from "./modal/TopupModal.vue";
 import { usePayment } from "#imports";
 import { useAuth } from "#imports";
-import { UButton } from "#components";
 import { useSearchBus } from "#imports";
 
 const search = ref("");
 const searchBus = useSearchBus();
 const route = useRoute();
-const { useGetWallet, useGetWalletDemo, coin_balance } = usePayment();
-const { signout, storeAuthData, clearAuthData } = useAuth()
+const { useGetWallet, coin_balance } = usePayment();
+const { storeAuthData } = useAuth()
 
 const userInfo = useCookie("user-info");
 
-const mode = computed(() =>
-  route.path.includes("/landing") ? "landing" : "homepage"
-);
-
-const dropdownItem = computed(() => [
-  ...(userInfo.value
-    ? [
-        [
-          { label: "username", preventClose: true },
-          { label: "coin", icon: "fluent-emoji-flat:coin" },
-        ],
-      ]
-    : []),
-  [{ label: "language" }],
-  ...(userInfo.value
-    ? [[{ label: "navbar.sign_out", onSelect: () => onSignout() }]]
-    : [[{ label: "navbar.sign_in", onSelect: () => onSignin() }]]),
-]);
-
 onMounted(() => {
-  if (route.query.user_id) {
-    const user_info = {
-      user_id: route.query.user_id,
-      username: route.query.username,
-      email: route.query.email,
-      user_type: route.query.user_type,
-    };
+  // if (route.query.user_id) {
+  //   const user_info = {
+  //     user_id: route.query.user_id,
+  //     username: route.query.username,
+  //     email: route.query.email,
+  //     user_type: route.query.user_type,
+  //   };
 
-    storeAuthData(user_info)
-    navigateTo("/");
-  } else {
+  //   storeAuthData(user_info)
+  //   navigateTo("/");
+  // } else {
     const user_info = JSON.parse(localStorage.getItem("user-info"));
-
     if (user_info) {
       if (!user_info.user_id || !user_info.username || !user_info.email) {
         localStorage.removeItem("user-info");
@@ -115,7 +94,7 @@ onMounted(() => {
         }
       }
     }
-  }
+  // }
 });
 
 onMounted(async () => {
@@ -141,19 +120,6 @@ onMounted(async () => {
 
 const onNavigateHome = () => {
   navigateTo("/");
-};
-
-const onSignin = () => {
-  navigateTo("/signin");
-};
-
-const onSignout = async () => {
-  const response = await signout(userInfo.value.user_id);
-  if (response) {
-    clearAuthData('user-info')
-    window.location.reload();
-  }
-  userInfo.value = null;
 };
 
 const onNavigateProfile = () => {

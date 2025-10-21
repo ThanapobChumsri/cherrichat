@@ -103,9 +103,18 @@ watch(locale, async () => {
 })
 
 onMounted(() => {
-  if (route?.query?.error === "suspended") {
+  if (route.query.user_id) {
+    const user_info = {
+      user_id: route.query.user_id,
+      username: route.query.username,
+      email: route.query.email,
+      user_type: route.query.user_type,
+    };
+
+    storeAuthData(user_info)
+    navigateTo("/");
+  } else if (route?.query?.error === "suspended") {
     $toast.error($t('toast.something_wrong'), $t('account_suspended'))
-    navigateTo('/signin')
   }
 
   const user_info = localStorage.getItem('user-info')

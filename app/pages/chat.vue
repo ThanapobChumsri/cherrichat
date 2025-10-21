@@ -127,9 +127,11 @@ const {
   useSendNewChatv2,
   useUpdateRelationship,
 } = useChat();
+const { updateUserField } = useUser();
 const { isMobile } = useBreakpoint();
 const { openChatConnection } = useWebSocket();
-const isFirstTime = useCookie("first-time");
+const userInfo = useCookie("user-info");
+
 const latestChat = ref({});
 const characterData = ref([]);
 const characterRelationData = ref({});
@@ -143,7 +145,7 @@ let page = 1;
 let perPage = 10;
 
 onMounted(async () => {
-  if (!isFirstTime.value) {
+  if (!userInfo.value?.chat_tutorial) {
     let steps = [
       {
         element: "#step1",
@@ -194,7 +196,16 @@ onMounted(async () => {
     });
 
     driverObj.drive();
-    isFirstTime.value = true;
+
+    updateUserField({
+      user_id: userInfo.value.user_id,
+      column: "chat_tutorial",
+      value: true,
+    });
+    userInfo.value = {
+      ...userInfo.value,
+      chat_tutorial: true,
+    }
   }
   try {
     const latest_chat = localStorage.getItem("latest-chat");

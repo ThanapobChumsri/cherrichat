@@ -102,6 +102,16 @@ export const useUser = () => {
     return response
   }
 
+  // pdpa_consent, chat_tutorial
+  const updateUserField = async (payload) => {
+    const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/95b81027-abc7-42f3-850e-42b52d9eab45`, {
+      method: 'POST',
+      body: payload
+    })
+
+    return response
+  }
+
   return {
     useGetUserKnowledge,
     useUpdateUserKnowledge,
@@ -112,5 +122,6 @@ export const useUser = () => {
     getDailyLoginCounterById,
     getAllDailyLoginReward,
     sendDailyLogin,
+    updateUserField,
   }
 }

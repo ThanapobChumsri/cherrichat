@@ -63,9 +63,9 @@ import { useModal } from '#imports';
 import { pdpaContent } from '~/constants/pdpaContent'
 
 const { isPdpaModalOpen, onOpenPdpaModal, onClosePdpaModal } = useModal();
-const isPdpaFirst = useCookie("pdpa-accept");
+const { updateUserField } = useUser();
 
-const userInfo = ref({})
+const userInfo = useCookie('user-info')
 const form = ref({
   isOver18: false,
   acceptedPrivacyPolicy: false,
@@ -81,15 +81,18 @@ const isFormValid = computed(() =>
 )
 
 onMounted(() => {
-  userInfo.value = JSON.parse(localStorage.getItem('user-info'))
-  if (userInfo.value && !isPdpaFirst.value) {
+  if (!userInfo.value?.pdpa_consent) {
     onOpenPdpaModal()
   }
 })
 
-const clickClosePdpaModal = () => {
-  const isPdpaFirst = useCookie('pdpa-accept')
-  isPdpaFirst.value = true
+const clickClosePdpaModal = async () => {
+  await updateUserField({
+    user_id: userInfo.value.user_id,
+    column: "pdpa_consent",
+    value: true,
+  });
+
   onClosePdpaModal();  
 }
 
