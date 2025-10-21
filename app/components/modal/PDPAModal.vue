@@ -17,10 +17,10 @@
     <template #body> 
       <div class="relative">
         <div ref="scrollContainer" @scroll="handleScroll" class="h-[500px] overflow-y-scroll px-2 space-y-2 sm:space-y-4">
-          <p class="sm:text-lg text-center font-semibold">นโยบายความเป็นส่วนตัว (CherriChat)</p>
-          <div v-for="(item) in pdpaContent" class="mb-2 sm:mb-4 text-sm sm:text-base">
+          <p class="font-semibold text-center sm:text-lg">นโยบายความเป็นส่วนตัว (CherriChat)</p>
+          <div v-for="(item) in pdpaContent" class="mb-2 text-sm sm:mb-4 sm:text-base">
             <p>{{ item.title }}</p>
-            <p class=" whitespace-pre-line">{{ item.content }}</p>
+            <p class="whitespace-pre-line ">{{ item.content }}</p>
           </div>
 
           <div class="bg-[#2D2D2D] rounded-lg px-6 py-4 space-y-4">
@@ -30,12 +30,12 @@
           </div>
           <div class="text-xs sm:text-sm text-[#4A4A4A]">
             <p>การยอมรับนี้แสดงว่าคุณ:</p>
-            <ul class="list-disc ml-4">
+            <ul class="ml-4 list-disc">
               <li>มีอายุ 18 ปีขึ้นไป</li>
               <li>ได้อ่านและยอมรับ ข้อกำหนดการใช้งาน และนโยบายความเป็นส่วนตัว</li>
             </ul>
           </div>
-          <UButton @click="clickClosePdpaModal" :disabled="!isFormValid" block size="lg" class="bg-cherri-gradient text-white cursor-pointer" :class="{ 'uhover': isFormValid }">ยืนยันและยอมรับ</UButton>
+          <UButton @click="clickClosePdpaModal" :disabled="!isFormValid" block size="lg" class="text-white cursor-pointer bg-cherri-gradient" :class="{ 'uhover': isFormValid }">ยืนยันและยอมรับ</UButton>
         </div>
 
         <Transition
@@ -47,7 +47,7 @@
           <UButton
             v-if="showScrollButton"
             @click="scrollToBottom"
-            class="absolute bottom-4 right-4 bg-white/90 hover:bg-white text-black cursor-pointer rounded-full p-2 shadow-lg transition-all duration-200 hover:scale-110"
+            class="absolute p-2 text-black transition-all duration-200 rounded-full shadow-lg cursor-pointer bottom-4 right-4 bg-white/90 hover:bg-white hover:scale-110"
             color="neutral"
             icon="stash:arrow-down-solid"
             aria-label="scroll-to-bottom"
@@ -81,7 +81,7 @@ const isFormValid = computed(() =>
 )
 
 onMounted(() => {
-  if (!userInfo.value?.pdpa_consent) {
+  if (userInfo.value && !userInfo.value?.pdpa_consent) {
     onOpenPdpaModal()
   }
 })
