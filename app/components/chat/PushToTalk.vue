@@ -1,13 +1,13 @@
 <template>
-  <div class="m-4">
-    <div class="flex flex-col gap-4 items-center justify-center h-[112px]">
+  <div>
+    <div class="flex flex-col gap-4 items-center justify-center h-[80px]">
       <div 
-        class="border-2 rounded-full w-12 h-12 flex items-center justify-center relative hover:bg-yellow-500 duration-200 ease-in-out cursor-pointer" 
+        class="border-2 rounded-full w-12 h-12 flex items-center justify-center relative hover:bg-cherri duration-200 ease-in-out cursor-pointer" 
         @click="clickToggleRecord"
       >
         <span 
           class="absolute inline-flex h-full w-full rounded-full opacity-75" 
-          :class="{ 'animate-ping bg-yellow-500': isRecording }" 
+          :class="{ 'animate-ping bg-cherri': isRecording }" 
         />
         <Icon 
           :name="isRecording ? 'material-symbols:stop-rounded' : sendChatLoad ? 'eos-icons:loading' : 'mdi:microphone-outline'" 

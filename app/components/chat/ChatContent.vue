@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex-1 flex flex-col h-screen pb-4">
+  <div class="relative flex-1 flex flex-col h-screen">
     <!-- collapse button -->
     <div 
       v-if="!isMobile" 
@@ -24,6 +24,7 @@
       />
     </div>
     
+    <!-- Character zone -->
     <div class="hidden sm:block py-4 px-12 min-h-[165px]">
       <div class="gradient-text min-h-[72px]">{{ characterData?.name }}</div>
       <div class="flex gap-2 pt-5">
@@ -45,10 +46,12 @@
         </div>
       </div>
     </div>
+
+    <!-- Chat zone -->
     <div
       id="step4"
       ref="chatContainer"
-      class="flex-1 px-6 overflow-y-auto sm:rounded-lg sm:mb-6 pt-24 sm:pt-6"
+      class="flex-1 px-6 overflow-y-auto sm:rounded-lg sm:mb-4 pt-24 sm:pt-6"
       :style="{
         background: `linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.3))`,
       }"
@@ -180,15 +183,9 @@
 
     <audio id="main-audio" />
 
+    <!-- Type & Talk zone -->
     <div
-      class="border-t border-[#2c2c30] p-4 sm:rounded-xl"
-      :style="{
-        background: `linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.3))`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        opacity: 0.8,
-      }"
-    >
+      class="z-20 sm:mb-4 bg-[#163854F2] border-t border-[#2c2c30] p-2 sm:p-4 sm:rounded-xl">
       <div v-if="chatMode === 'type'">
         <UTextarea
           v-model="newMessage"

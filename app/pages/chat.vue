@@ -5,6 +5,8 @@
       backgroundImage: `url(${coverImage})`,
     }"
   >
+    <div class="z-10 absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-black/80 to-transparent pointer-events-none" />
+
     <!-- DESKTOP (character data) -->
     <!-- <ClientOnly> -->
     <CharacterBio
