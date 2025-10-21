@@ -51,7 +51,7 @@
     <div
       id="step4"
       ref="chatContainer"
-      class="flex-1 px-6 overflow-y-auto sm:rounded-lg sm:mb-4 pt-24 sm:pt-6"
+      class="flex-1 overflow-y-auto sm:rounded-lg sm:mb-4 px-2 sm:px-6 pt-24 sm:pt-6"
       :style="{
         background: `linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.3))`,
       }"
@@ -84,7 +84,7 @@
         <img
           v-if="chat.role !== 'user'"
           :src="latestChat.url_image"
-          class="w-[40px] h-[40px] rounded-full mr-2"
+          class="hidden sm:block w-[40px] h-[40px] rounded-full mr-2"
         />
         <!-- message section -->
         <div class="sm:max-w-3/5">
@@ -174,7 +174,7 @@
         <div
           v-if="chat.role == 'user'"
           :src="latestChat.url_image"
-          class="w-[40px] h-[40px] rounded-full ml-2"
+          class="hidden sm:block w-[40px] h-[40px] rounded-full ml-2"
         >
           <Icon name="tdesign:user-circle-filled" class="w-full h-full" />
         </div>

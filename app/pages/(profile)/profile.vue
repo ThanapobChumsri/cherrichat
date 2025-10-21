@@ -1,5 +1,6 @@
 <template>
   <UContainer class="mb-8">
+    <SignoutModal :onSignout="onSignout" />
     <div class="space-y-4">
       <div class="flex items-center gap-2">
         <UAvatar :text="avatarString" size="3xl" />
@@ -9,7 +10,7 @@
         <p class="cursor-pointer" :class="{'text-[#9898A2]': state !== 1}" @click="clickState(1)">{{ $t('profile.profile_data.title') }}</p>
         <p class="cursor-pointer" :class="{'text-[#9898A2]': state !== 2}" @click="clickState(2)">{{ $t('profile.creator') }}</p>
         <p class="cursor-pointer" :class="{'text-[#9898A2]': state !== 3}" @click="clickState(3)">{{ $t('profile.transaction') }}</p>
-        <p class="cursor-pointer" :class="{'text-[#9898A2]': state !== 4}" @click="onSignout()">{{ $t('navbar.sign_out') }}</p>
+        <p class="cursor-pointer" :class="{'text-[#9898A2]': state !== 4}" @click="onOpenSignoutModal">{{ $t('navbar.sign_out') }}</p>
       </div>
     </div>
 
@@ -28,11 +29,15 @@ import { USeparator } from '#components'
 import ProfileDetail from '~/components/profile/ProfileDetail.vue'
 import HistoryCoin from '~/components/profile/HistoryCoin.vue'
 import Creator from '~/components/profile/Creator.vue'
+import SignoutModal from "~/components/modal/SignoutModal.vue";
+import { useModal } from '#imports';
+
+const { onOpenSignoutModal } = useModal();
+const { signout } = useAuth()
 
 const userInfo = ref(null)
 const avatarString = ref("")
 const state = ref(1)
-const { signout } = useAuth()
 
 onMounted(() => {
   const user_info = JSON.parse(localStorage.getItem('user-info'))

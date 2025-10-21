@@ -2,6 +2,7 @@ const isSoundModalOpen = ref(false)
 const isTopUpModalOpen = ref(false)
 const isPdpaModalOpen = ref(false)
 const isDailyLoginModalOpen = ref(false)
+const isSignoutModalOpen = ref(false)
 
 export const useModal = () => {
 
@@ -30,6 +31,13 @@ export const useModal = () => {
     isDailyLoginModalOpen.value = false
   }
 
+  const onOpenSignoutModal = () => {
+    isSignoutModalOpen.value = true
+  }
+  const onCloseSignoutModal = () => {
+    isSignoutModalOpen.value = false
+  }
+
   return {
     isSoundModalOpen,
     onOpenSoundModal,
@@ -45,5 +53,9 @@ export const useModal = () => {
     isDailyLoginModalOpen,
     onOpenDailyLoginModal,
     onCloseDailyLoginModal,
+
+    isSignoutModalOpen,
+    onOpenSignoutModal,
+    onCloseSignoutModal, 
   }
 }
