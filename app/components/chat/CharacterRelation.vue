@@ -5,13 +5,13 @@
   >
     <div class="px-4 pb-4 flex flex-col gap-4">
       <div class="bg-bio">
-        <div class="text-2xl font-semibold mb-4">Bio</div>
+        <div class="text-lg font-semibold mb-4">{{ $t("character.bio") }}</div>
         <div class="text-sm">
           {{ characterData?.backstory }}
         </div>
       </div>
 
-      <BioCollapse id="step3" disabled color="yellow" :label="$t('location.info')" test>
+      <BioCollapse id="step3" color="yellow" :label="$t('location.info')" test>
         <div class="space-y-2">
           <div class="text-[#9898A2] flex items-center">
             <div class="w-[40%]">Level</div>
@@ -50,47 +50,45 @@
         </div>
       </BioCollapse>
 
-      <div class="space-y-2 mt-2">
-        <BioCollapse disabled color="yellow" :label="$t('character.knowledge')">
-          <div
-            v-for="[key, value] in Object.entries(overall?.knowledge || {})"
-            :key="key"
-            class="text-sm mb-2"
-          >
-            <p class="text-white text-base">{{ key }}</p>
-            <span>{{ value }}</span>
-          </div>
-        </BioCollapse>
-
-        <!-- <USeparator size="md" /> -->
-
-        <BioCollapse
-          disabled
-          color="yellow"
-          :label="$t('character.statistics.title')"
+      <BioCollapse color="yellow" :label="$t('character.knowledge')">
+        <div
+          v-for="[key, value] in Object.entries(overall?.knowledge || {})"
+          :key="key"
+          class="text-sm mb-2"
         >
-          <div
-            v-for="stat in StatisticsDisplayList"
-            :key="stat"
-            class="flex justify-between text-sm mb-2"
-          >
-            <p class="text-white text-base">
-              {{ $t(`character.statistics.${stat}`, "-") }}
-            </p>
-            <p>
-              {{
-                [
-                  "first_interaction_at",
-                  "last_interaction_at",
-                  "streak_started_at",
-                ].includes(stat)
-                  ? useFormattedDateTime(overall[stat])
-                  : overall[stat]
-              }}
-            </p>
-          </div>
-        </BioCollapse>
-      </div>
+          <p class="text-white text-base">{{ key }}</p>
+          <span>{{ value }}</span>
+        </div>
+      </BioCollapse>
+
+      <!-- <USeparator size="md" /> -->
+
+      <BioCollapse
+        color="yellow"
+        :label="$t('character.statistics.title')"
+      >
+        <div
+          v-for="stat in StatisticsDisplayList"
+          :key="stat"
+          class="flex justify-between text-sm mb-2"
+        >
+          <p class="text-white text-base">
+            {{ $t(`character.statistics.${stat}`, "-") }}
+          </p>
+          <p>
+            {{
+              [
+                "first_interaction_at",
+                "last_interaction_at",
+                "streak_started_at",
+              ].includes(stat)
+                ? useFormattedDateTime(overall[stat])
+                : overall[stat]
+            }}
+          </p>
+        </div>
+      </BioCollapse>
+
     </div>
   </div>
 </template>

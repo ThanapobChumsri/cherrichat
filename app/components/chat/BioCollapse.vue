@@ -3,11 +3,11 @@
     <UCollapsible v-model:open="open" :disabled="disabled">
       <!-- Header Button -->
       <UButton
-        class="group text-gray-900 text-lg font-medium w-full rounded-t-3xl px-4 py-3 cursor-pointer"
+        class="group text-gray-900 text-lg font-medium w-full rounded-t-3xl px-4 py-3 cursor-pointer transition-all duration-100"
         :class="[
           open
             ? `rounded-b-none bg-${color} text-gray-900`
-            : 'rounded-b-lg bg-[#292825] text-gray-300',
+            : `rounded-b-3xl bg-${color} text-gray-300`,
         ]"
         :label="props.label"
         color="yellow"
@@ -15,7 +15,7 @@
         trailing-icon="i-lucide-chevron-up"
         :ui="{
           trailingIcon:
-            'group-data-[state=closed]:rotate-180 transition-transform duration-200 hidden',
+            'group-data-[state=closed]:rotate-180 transition-transform duration-200',
           base: 'bg-[#FDE824] focus:ring-[#FDE824] justify-between',
         }"
         block

@@ -14,30 +14,23 @@
                 <p class="transition duration-100 mb-4">
                   {{ $t('footer.main.title') }}
                 </p>
-                <p class="transition duration-100 ease-in-out hover:text-white cursor-pointer">
-                  {{ $t('footer.main.sub_title1') }}
-                </p>
-                <p class="transition duration-100 ease-in-out hover:text-white cursor-pointer">
-                  {{ $t('footer.main.sub_title2') }}
-                </p>
-                <p class="transition duration-100 ease-in-out hover:text-white cursor-pointer">
-                  {{ $t('footer.main.sub_title3') }}
-                </p>
-                <p class="transition duration-100 ease-in-out hover:text-white cursor-pointer">
-                  {{ $t('footer.main.sub_title4') }}
-                </p>
-                <p class="transition duration-100 ease-in-out hover:text-white cursor-pointer">
-                  {{ $t('footer.main.sub_title5') }}
+                <p v-for="value in main" 
+                  class="transition duration-100 ease-in-out" 
+                  :class="value.enable ? 'hover:text-white cursor-pointer' : 'cursor-not-allowed'"
+                  @click="value.enable && navigateTo(value.url)"
+                >
+                  {{ $t(value.title) }}
                 </p>
               </div>
+
               <div class="text-[#94a3b8] font-semibold sm:font-extrabold">
                 <p class="transition duration-100 mb-4">
                   {{ $t('footer.started.title') }}
                 </p>
-                <p class="transition duration-100 ease-in-out hover:text-white cursor-pointer">
+                <p class="transition duration-100 ease-in-out cursor-not-allowed">
                   {{ $t('footer.started.sub_title1') }}
                 </p>
-                <p class="transition duration-100 ease-in-out hover:text-white cursor-pointer">
+                <p class="transition duration-100 ease-in-out cursor-not-allowed">
                   {{ $t('footer.started.sub_title2') }}
                 </p>
               </div>
@@ -47,25 +40,25 @@
                 </p>
                 <div class="flex flex-wrap gap-2">
                   <div
-                    class="bg-white text-black w-8 h-8 flex justify-center items-center rounded-full cursor-pointer"
+                    class="bg-white text-black w-8 h-8 flex justify-center items-center rounded-full"
                     @click="redirect('https://www.facebook.com')"
                   >
                     <Icon name="jam:facebook" class="h-5 w-5" />
                   </div>
                   <div
-                    class="bg-white text-black w-8 h-8 flex justify-center items-center rounded-full cursor-pointer"
+                    class="bg-white text-black w-8 h-8 flex justify-center items-center rounded-full"
                     @click="redirect('https://www.tiktok.com')"
                   >
                     <Icon name="ic:baseline-tiktok" class="h-5 w-5" />
                   </div>
                   <div
-                    class="bg-white text-black w-8 h-8 flex justify-center items-center rounded-full cursor-pointer"
+                    class="bg-white text-black w-8 h-8 flex justify-center items-center rounded-full"
                     @click="redirect('https://www.instagram.com')"
                   >
                     <Icon name="mdi:instagram" class="h-5 w-5" />
                   </div>
                   <div
-                    class="bg-white text-black w-8 h-8 flex justify-center items-center rounded-full cursor-pointer"
+                    class="bg-white text-black w-8 h-8 flex justify-center items-center rounded-full"
                     @click="redirect('https://www.twitter.com')"
                   >
                     <Icon name="ri:twitter-x-fill" class="h-5 w-5" />
@@ -89,6 +82,41 @@
 const redirect = (url) => {
   window.open(url, "_blank");
 }
+
+const main = [
+  {
+    title: "footer.main.sub_title1",
+    url: "/",
+    enable: true,
+  },
+  {
+    title: "footer.main.sub_title2",
+    url: "/character",
+    enable: false,
+  },
+  {
+    title: "footer.main.sub_title3",
+    url: "/profile",
+    enable: true,
+  },
+  { 
+    title: "footer.main.sub_title4",
+    url: "/about-us",
+    enable: false,
+  },
+  {
+    title: "footer.main.sub_title5",
+    url: "/contact",
+    enable: false,
+  },
+]
+
+const clickNav = (value) => {
+  if (value.enable) {
+    navigateTo(value.url)
+  }
+}
+
 </script>
 
 <style scoped></style>

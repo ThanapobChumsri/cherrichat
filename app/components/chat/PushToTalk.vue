@@ -16,8 +16,9 @@
       </div>
       <p class="text-sm text-[#9898A2]">{{ formattedTime }}</p>
     </div>
-    <div class="text-end space-x-2 pt-2">
-      <UButton icon="fluent:keyboard-16-regular" color="neutral" class="cursor-pointer rounded-full bg-[#3D3D3D] text-white hover:text-black" @click="emit('switchChatMode')"/>
+    <div class="flex gap-2 justify-between items-center pt-2">
+      <p class="text-xs text-[#9898A2]">{{ $t("chat.description") }}</p>
+      <UButton icon="fluent:keyboard-16-regular" color="neutral" class="bg-cherri cursor-pointer rounded-full text-white hover:text-black" @click="emit('switchChatMode')"/>
     </div>
   </div>
 </template>

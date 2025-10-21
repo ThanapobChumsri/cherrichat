@@ -19,7 +19,7 @@
           </div>
           <div class="flex justify-center sm:justify-start">
             <UButton
-              :disabled="userInfo?.user_type == 'client'"
+              v-if="userInfo?.user_type === 'creator'"
               :size="isMobile ? 'md' : 'xl'"
               class="w-[140px] sm:w-[200px] flex justify-center liquid-glass !rounded-lg !h-[42px] bg-gradient cursor-pointer"
               @click="clickCreateCharacter"
@@ -62,7 +62,7 @@
             <div
               v-for="(tab, index) in tabItem"
               :key="index"
-              class="w-1/4 sm:px-4 px-1"
+              class="w-1/4 px-1 sm:px-4"
               @click="onChangeTab(tab.value)"
             >
               <UButton
@@ -136,11 +136,9 @@ const tabItem = ref([
 
 const userInfo = useCookie("user-info");
 const search = ref("");
-const userType = computed(() => userInfo.value?.user_type || false);
 
 onMounted(async () => {
   searchBus.on(async (term) => {
-    console.log("term", term);
     
     search.value = term;
     await getCharacterList();

@@ -79,7 +79,7 @@
   "footer": {
     "description": "AI chat platform where you can create and chat with AI characters naturally, featuring a variety of immersive roles.",
     "main": {
-      "title": "main",
+      "title": "Page",
       "sub_title1": "Home",
       "sub_title2": "Character",
       "sub_title3": "Member",
@@ -193,7 +193,7 @@
   "chat": {
     "send": "Send",
     "typing_here": "Type your message here...",
-    "description": "Press Enter to send. Shift+Enter for new line",
+    "description": "This character is fictional. Please use discretion while chatting.",
     "oldest_message": "oldest message"
   },
 

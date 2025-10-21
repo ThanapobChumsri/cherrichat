@@ -276,3 +276,8 @@ b {
       rgba(0, 0, 0, 1) 40%);
   /* -webkit-mask-composite: destination-in, destination-in, destination-in; */
 }
+
+button:disabled {
+  filter: brightness(0.75);
+  cursor: not-allowed;
+}

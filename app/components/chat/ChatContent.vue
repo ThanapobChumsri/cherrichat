@@ -196,33 +196,33 @@
           variant="ghost"
           v-bind="textareaProps"
         />
-        <div class="text-end space-x-2 pt-2 flex justify-end">
-          <UButton
-            id="step1"
-            icon="mdi:microphone-outline"
-            class="cursor-pointer rounded-full bg-[#D00000] text-white hover:text-black"
-            color="neutral"
-            @click="switchChatMode"
-          />
-          <UButton
-            id="step2"
-            v-if="!sendChatLoad"
-            :label="$t('chat.send')"
-            color="neutral"
-            class="cursor-pointer rounded-full bg-[#D00000] text-white hover:text-black px-4"
-            @click="sendNewMessage"
-          />
-          <UButton
-            v-else
-            icon="eos-icons:loading"
-            color="neutral"
-            variant="ghost"
-            disabled
-          />
+        <div class="relative pt-2 flex gap-2 justify-between items-center">
+          <p class="text-xs text-[#9898A2]">{{ $t("chat.description") }}</p>
+          <div class="flex gap-2">
+            <UButton
+              id="step1"
+              icon="mdi:microphone-outline"
+              class="cursor-pointer rounded-full bg-cherri text-white hover:text-black"
+              color="neutral"
+              @click="switchChatMode"
+            />
+            <UButton
+              id="step2"
+              v-if="!sendChatLoad"
+              :label="$t('chat.send')"
+              color="neutral"
+              class="cursor-pointer rounded-full bg-cherri text-white hover:text-black px-4"
+              @click="sendNewMessage"
+            />
+            <UButton
+              v-else
+              icon="eos-icons:loading"
+              color="neutral"
+              variant="ghost"
+              disabled
+            />
+          </div>
         </div>
-        <!-- <p class="hidden sm:block text-center text-xs text-[#9898A2]">
-          {{ $t("chat.description") }}
-        </p> -->
       </div>
       <PushToTalk
         v-else-if="chatMode === 'talk'"
