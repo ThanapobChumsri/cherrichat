@@ -55,12 +55,11 @@ const { isDailyLoginModalOpen, onCloseDailyLoginModal, onOpenDailyLoginModal } =
 const { getDailyLoginCounterById, getAllDailyLoginReward, sendDailyLogin } = useUser();
 const { useIsSameDay } = useFormat();
 
-const userInfo = ref({})
+const userInfo = useCookie('user-info')
 const dailyCounter = ref({})
 const dailyList = ref([])
 
 onMounted(async () => {
-  userInfo.value = JSON.parse(localStorage.getItem('user-info'))
   if (!userInfo.value) return;
 
   dailyCounter.value = await getDailyLoginCounterById(userInfo.value)

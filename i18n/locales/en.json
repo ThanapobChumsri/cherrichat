@@ -5,6 +5,7 @@
   "signup": "Sign up",
   "or": "or",
   "submit": "submit",
+  "cancel": "cancel",
   "dont_have_account": "Don't have an account?",
   "have_account": "Already have an account?",
   "file_limit_10mb": "The file exceeds the allowed size (more than 10MB)",

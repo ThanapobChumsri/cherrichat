@@ -81,7 +81,7 @@ const isFormValid = computed(() =>
 )
 
 onMounted(() => {
-  if (!userInfo.value?.pdpa_consent) {
+  if (userInfo.value && !userInfo.value?.pdpa_consent) {
     onOpenPdpaModal()
   }
 })
