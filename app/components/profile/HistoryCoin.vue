@@ -1,9 +1,9 @@
 <template>
   <div class="w-full mx-auto space-y-2 bg-[#1F272F] p-4 sm:p-8 rounded-[20px]">
-    <p class="text-sm sm:text-base opacity-60">{{ $t('tagline.text_3') }}</p>
-    <div class="flex justify-end gap-2">
-      <USelect v-model="day" :items="dayItems" variant="outline" color="neutral" class="w-full sm:w-40"/>
-      <USelect v-model="transactionType" :items="transactionTypeItem" variant="outline" color="neutral" class="w-full sm:w-40"/>
+    <p class="text-sm sm:text-base opacity-60">{{ $t('tagline.text_4') }}</p>
+    <div class="flex flex-col sm:flex-row justify-end gap-2">
+      <UInput type="date" v-model="day" class="w-full sm:w-50" variant="outline" color="neutral"/>
+      <USelect v-model="transactionType" :items="transactionTypeItem" class="w-full sm:w-50" variant="outline" color="neutral"/>
     </div>
     
     <div v-if="historyPaymentList.length === 0 && !hasMore" class="h-full flex justify-center items-center">
@@ -29,7 +29,7 @@
         <p class="flex items-center gap-2" :class="Number(history.balance_after) > Number(history.balance_before) ? 'text-green-600' : 'text-red-600'">{{ Number(history.balance_after) > Number(history.balance_before) ? '+' : '-' }} {{ history.amount }}<img :src="CoinImg" alt="coin_image" class="w-4" /></p>
       </div>
     </div>
-    <InfiniteLoading @infinite="getHistoryPayment">
+    <InfiniteLoading :identifier="infiniteId" @infinite="getHistoryPayment">
       <template #spinner>
         <p class="text-center"><Icon name="eos-icons:loading" style="width: 28px; height: 28px" /></p class="text-center">
       </template>
@@ -44,30 +44,17 @@ import { useFormat } from '#imports';
 import InfiniteLoading from "v3-infinite-loading";
 import CoinImg from "~/assets/images/coin.png"
 
-const { useGetHistoryPayment } = usePayment()
+const { useGetHistoryPayment, getTransactionType } = usePayment()
 const { useFormattedDateTime } = useFormat()
 
-const day = ref('Today')
-const dayItems = ref([
-  {
-    label: "Today",
-    value: "today",
-  },
-  { 
-    label: "Yesterday",
-    value: "yesterday",
-  },
-])
-const transactionType = ref('Type')
+const infiniteId = ref(0)
+const day = ref('')
+const transactionType = ref('all')
 const transactionTypeItem = ref([
   {
-    label: "Type",
+    label: "All",
     value: "all",
   },
-  {
-    label: "Free Credit",
-    value: "free credit",
-  }
 ])
 const userInfo = ref(null)
 const historyPaymentList = ref([])
@@ -78,10 +65,38 @@ let perPage = 10
 onMounted(async () => {
   const user_info = JSON.parse(localStorage.getItem('user-info'))
   userInfo.value = user_info
+
+  const transactionTypeData = await getTransactionType();
+  transactionTypeItem.value = [...transactionTypeItem.value, ...transactionTypeData.data.map(e => ({
+    label: e.split("_").join(" "),
+    value: e,
+  }))]
+})
+
+watch([day, transactionType], async ([newDay, newTransactionType]) => {
+  historyPaymentPage = 1
+  hasMore.value = true
+  
+  const response = await useGetHistoryPayment({
+    user_id: userInfo.value.user_id, 
+    page: historyPaymentPage, 
+    per_page: perPage,
+    transaction_type: newTransactionType === 'all' ? '' : newTransactionType,
+    created_at: newDay,
+  })
+  historyPaymentPage++
+  historyPaymentList.value = response.data
+  infiniteId.value++
 })
 
 const getHistoryPayment = async ($state) => {
-  const response = await useGetHistoryPayment(userInfo.value.user_id, historyPaymentPage, perPage)
+  const response = await useGetHistoryPayment({
+    user_id: userInfo.value.user_id, 
+    page: historyPaymentPage, 
+    per_page: perPage,
+    transaction_type: transactionType.value === 'all' ? '' : transactionType.value,
+    created_at: day.value,
+  })
   const hasRealData = Array.isArray(response.data) && response.data.some(item => Object.keys(item).length > 0)
 
   if (hasRealData) {

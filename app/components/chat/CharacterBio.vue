@@ -26,7 +26,7 @@
       />
 
       <div class="space-y-2 mt-2">
-        <BioCollapse disabled :label="$t('location.appearance')">
+        <BioCollapse :label="$t('location.appearance')">
           <div
             v-for="[key, value] in Object.entries(data?.appearance || {})"
             :key="key"
@@ -39,7 +39,6 @@
 
         <div v-for="(value, key) in data?.knowledge_base" :key="key">
           <BioCollapse
-            disabled
             :label="$t(`location.${key}`)"
             class="text-sm mb-2"
           >
@@ -64,7 +63,6 @@
         <div v-for="(value, key) in data?.personality" :key="key">
           <div v-if="key !== 'age' && key !== 'ethnicity'">
             <BioCollapse
-              disabled
               :label="$t(`location.${key}`)"
               class="text-sm mb-2"
             >
@@ -94,7 +92,7 @@
           </div>
         </div>
 
-        <BioCollapse disabled :label="$t('location.traits')">
+        <BioCollapse :label="$t('location.traits')">
           <span class="text-sm mb-2">{{ data?.traits?.join(", ") || "-" }}</span>
         </BioCollapse>
       </div>

@@ -142,11 +142,11 @@ onMounted(async () => {
   const user_info = JSON.parse(localStorage.getItem("user-info"));
   userInfo.value = user_info;
 
-  const historyPaymentData = await useGetHistoryPayment(
-    userInfo.value.user_id,
-    historyPaymentPage,
-    perPage
-  );
+  const historyPaymentData = await useGetHistoryPayment({
+    user_id: userInfo.value.user_id,
+    page: historyPaymentPage,
+    per_page: perPage
+  });
   historyPaymentList.value = historyPaymentData.data;
   historyPaymentPage++;
 
@@ -165,11 +165,11 @@ const clickSelectPackage = async (package_id) => {
 };
 
 const getHistoryPayment = async ($state) => {
-  const response = await useGetHistoryPayment(
-    userInfo.value.user_id,
-    historyPaymentPage,
-    perPage
-  );
+  const response = await useGetHistoryPayment({
+    user_id: userInfo.value.user_id,
+    page: historyPaymentPage,
+    per_page: perPage,
+  });
   const hasRealData =
     Array.isArray(response.data) &&
     response.data.some((item) => Object.keys(item).length > 0);

@@ -28,9 +28,12 @@ export const usePayment = () => {
     }
   }
 
-  const useGetHistoryPayment = async (user_id, page, per_page) => {
+  const useGetHistoryPayment = async (query) => {
     try {
-      const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/7d675b86-8dab-4a2b-8c3d-6a512b0298bd?user_id=${user_id}&page=${page}&per_page=${per_page}`)
+      const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/7d675b86-8dab-4a2b-8c3d-6a512b0298bd`, {
+        method: "GET",
+        params: query
+      })
       
       return response
     } catch (error) {
@@ -92,6 +95,11 @@ export const usePayment = () => {
     }
   }
 
+  const getTransactionType = async () => {
+    const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/3f0680f9-9a8a-43cf-936e-9215f1251515`)
+    return response
+  }
+
 
   return {
     useGetWallet,
@@ -100,6 +108,7 @@ export const usePayment = () => {
     useSelectTopUpPackage,
     useRedeemCoupon,
     coin_balance,
-    useGetWalletDemo
+    useGetWalletDemo,
+    getTransactionType,
   }
 }
