@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex-1 flex flex-col h-screen"
+  <div class="relative flex flex-col flex-1 h-screen"
     :style="{
       background: `linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.4)), url(${currentImage})`,
       backgroundSize: 'cover',
@@ -32,14 +32,14 @@
     </div>
     
     <!-- Character zone -->
-    <div class="hidden sm:block py-4 px-12">
+    <div class="hidden px-12 py-4 sm:block">
       <p class="gradient-text text-[40px]">{{ characterData?.name }}</p>
       <div class="flex gap-2 pt-2">
         <div class="flex items-center gap-4 w-[200px]">
           <div class="liquid-glass py-1 px-4 !bg-[#EF3E41] !text-[#34415C] font-medium">
             {{ $t('chat.age') }}
           </div>
-          <div class="text-white font-medium truncate">
+          <div class="font-medium text-white truncate">
             {{ characterData?.personality?.age }}
           </div>
         </div>
@@ -47,7 +47,7 @@
           <div class="liquid-glass py-1 px-4 !bg-[#EF3E41] !text-[#34415C] font-medium">
             {{ $t('chat.gender') }}
           </div>
-          <div class="text-white font-medium truncate">
+          <div class="font-medium text-white truncate">
             {{ characterData?.gender === "m" ? $t('chat.m') : $t('chat.f') }}
           </div>
         </div>
@@ -58,7 +58,7 @@
     <!-- <div
       id="step4"
       ref="chatContainer"
-      class="flex-1 overflow-y-auto sm:rounded-lg sm:mb-4 px-2 sm:px-6 pt-24 sm:pt-6"
+      class="flex-1 px-2 pt-24 overflow-y-auto sm:rounded-lg sm:mb-4 sm:px-6 sm:pt-6"
       :style="{
         background: `linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.3))`,
       }"
@@ -66,7 +66,7 @@
     <div
       id="step4"
       ref="chatContainer"
-      class="flex-1 overflow-y-auto sm:rounded-lg sm:mb-4 px-2 sm:px-6 pt-24 sm:pt-0"
+      class="flex-1 px-2 pt-24 overflow-y-auto sm:rounded-lg sm:mb-4 sm:px-6 sm:pt-0"
     >
       <InfiniteLoading top @infinite="getMoreChatHistory" class="mb-2">
         <template #spinner>
@@ -89,7 +89,7 @@
       <div
         v-for="(chat, index) in props.data"
         :key="index"
-        class="mb-6 text-sm flex items-end z-100"
+        class="flex items-end mb-6 text-sm z-100"
         :class="{ 'justify-end': chat.role === 'user' }"
       >
         <!-- image section -->
@@ -102,7 +102,7 @@
         <div class="sm:max-w-3/5">
           <!-- 1. message box -->
           <div
-            class="py-3 px-4 rounded-tl-lg rounded-tr-lg"
+            class="px-4 py-3 rounded-tl-lg rounded-tr-lg"
             :class="{
               'bg-[#FF9C08] rounded-bl-lg': chat.role === 'user',
               'bg-[#EF3E41] rounded-br-lg border border-[#2c2c30]':
@@ -208,13 +208,13 @@
           variant="ghost"
           v-bind="textareaProps"
         />
-        <div class="relative pt-2 flex gap-2 justify-between items-center">
+        <div class="relative flex items-center justify-between gap-2 pt-2">
           <p class="text-xs text-[#9898A2]">{{ $t("chat.description") }}</p>
           <div class="flex gap-2">
             <UButton
               id="step1"
               icon="mdi:microphone-outline"
-              class="cursor-pointer rounded-full bg-cherri text-white hover:text-black"
+              class="text-white rounded-full cursor-pointer bg-cherri hover:text-black"
               color="neutral"
               @click="switchChatMode"
             />
@@ -223,7 +223,7 @@
               v-if="!sendChatLoad"
               :label="$t('chat.send')"
               color="neutral"
-              class="cursor-pointer rounded-full bg-cherri text-white hover:text-black px-4"
+              class="px-4 text-white rounded-full cursor-pointer bg-cherri hover:text-black"
               @click="sendNewMessage"
             />
             <UButton
@@ -391,9 +391,6 @@ const checkTypeMessage = (message) => {
 };
 
 const clickGenerateAudio = async (message_id, message, index) => {
-  if (!props.soundId) {
-    onOpenSoundModal();
-  } else {
     playSoundIndex.value = index;
 
     const text = useCleanTextForAudio(message);
@@ -401,16 +398,14 @@ const clickGenerateAudio = async (message_id, message, index) => {
       '"',
       ""
     );
-    const voice = soundList.value.find((e) => e.id === props.soundId).name;
-
     const responseData = await (isDemoMode.value
       ? getGenerateSoundDemo
       : getGenerateSound)(
       message_id,
       text,
       style,
-      voice,
-      latestChat.value.user_id
+      latestChat.value.user_id,
+      props.characterData.id
     );
 
     if (!responseData) {
@@ -447,7 +442,6 @@ const clickGenerateAudio = async (message_id, message, index) => {
       // handle error type not support
       playSoundIndex.value = null;
     }
-  }
 };
 
 // play after clickGenerateAudio function
