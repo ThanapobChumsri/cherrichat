@@ -17,6 +17,7 @@
       </div>
     </template>
     <template #footer="{ close }">
+        <UButton :label="$t('cancel')" class="uhover w-full" color="neutral" variant="outline" @click="close"/>
         <UButton :label="$t('submit')" class="bg-cherri-gradient text-white uhover w-full" @click="onSignout" loading-auto/>
     </template>
   </UModal>

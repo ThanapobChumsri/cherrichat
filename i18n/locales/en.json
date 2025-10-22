@@ -5,6 +5,7 @@
   "signup": "Sign up",
   "or": "or",
   "submit": "submit",
+  "cancel": "cancel",
   "dont_have_account": "Don't have an account?",
   "have_account": "Already have an account?",
   "file_limit_10mb": "The file exceeds the allowed size (more than 10MB)",
@@ -38,7 +39,8 @@
   "tagline": {
     "text_1": "Personal AI",
     "text_2": "Professional privacy",
-    "text_3": "From quick questions to deep chats CherriChat keeps it yours"
+    "text_3": "From quick questions to deep chats CherriChat keeps it yours",
+    "text_4": "Check Cherri Coin transaction history"
   },
 
   "index": {
@@ -194,7 +196,11 @@
     "send": "Send",
     "typing_here": "Type your message here...",
     "description": "This character is fictional. Please use discretion while chatting.",
-    "oldest_message": "oldest message"
+    "oldest_message": "oldest message",
+    "m": "Male",
+    "f": "Female",
+    "age": "Age",
+    "gender": "Gender"
   },
 
   "create_character": {

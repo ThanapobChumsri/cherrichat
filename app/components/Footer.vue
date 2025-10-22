@@ -40,26 +40,22 @@
                 </p>
                 <div class="flex flex-wrap gap-2">
                   <div
-                    class="bg-white text-black w-8 h-8 flex justify-center items-center rounded-full"
-                    @click="redirect('https://www.facebook.com')"
+                    class="bg-white text-black w-8 h-8 flex justify-center items-center rounded-full cursor-not-allowed"
                   >
                     <Icon name="jam:facebook" class="h-5 w-5" />
                   </div>
                   <div
-                    class="bg-white text-black w-8 h-8 flex justify-center items-center rounded-full"
-                    @click="redirect('https://www.tiktok.com')"
+                    class="bg-white text-black w-8 h-8 flex justify-center items-center rounded-full cursor-not-allowed"
                   >
                     <Icon name="ic:baseline-tiktok" class="h-5 w-5" />
                   </div>
                   <div
-                    class="bg-white text-black w-8 h-8 flex justify-center items-center rounded-full"
-                    @click="redirect('https://www.instagram.com')"
+                    class="bg-white text-black w-8 h-8 flex justify-center items-center rounded-full cursor-not-allowed"
                   >
                     <Icon name="mdi:instagram" class="h-5 w-5" />
                   </div>
                   <div
-                    class="bg-white text-black w-8 h-8 flex justify-center items-center rounded-full"
-                    @click="redirect('https://www.twitter.com')"
+                    class="bg-white text-black w-8 h-8 flex justify-center items-center rounded-full cursor-not-allowed"
                   >
                     <Icon name="ri:twitter-x-fill" class="h-5 w-5" />
                   </div>

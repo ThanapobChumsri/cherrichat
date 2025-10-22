@@ -3,7 +3,7 @@
     <div class="relative z-[1] px-6 sm:px-16 py-6 sm:py-8 space-y-4 sm:space-y-6">
       <p class="text-[20px] sm:text-[36px] sm:leading-12 font-bold">{{ $t('tagline.text_1') }} <br>{{ $t('tagline.text_2') }}</p>
       <p class="text-[14px] sm:text-base opacity-60">{{ $t('tagline.text_3') }}</p>
-      <UButton :size="isMobile ? 'md' : 'xl'" :label="$t('lets_talk').toUpperCase()" class="invisible bg-cherri-gradient text-white uhover w-40" />
+      <UButton :size="isMobile ? 'md' : 'xl'" :label="$t('lets_talk').toUpperCase()" class="bg-cherri-gradient text-white uhover w-40" @click="navigateTo('/character')" />
     </div>
     <img :src="BannerCharacter" alt="banner-character" class="absolute w-160 top-[-20px] right-[-80px] md:right-[-40px] xl:right-[40px] opacity-40 md:opacity-100" />
   </div>

@@ -1,5 +1,12 @@
 <template>
-  <div class="relative flex-1 flex flex-col h-screen">
+  <div class="relative flex-1 flex flex-col h-screen"
+    :style="{
+      background: `linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.4)), url(${currentImage})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      // opacity: 0.8
+    }"
+  >
     <!-- collapse button -->
     <div 
       v-if="!isMobile" 
@@ -25,36 +32,41 @@
     </div>
     
     <!-- Character zone -->
-    <div class="hidden sm:block py-4 px-12 min-h-[165px]">
-      <div class="gradient-text min-h-[72px]">{{ characterData?.name }}</div>
-      <div class="flex gap-2 pt-5">
+    <div class="hidden sm:block py-4 px-12">
+      <p class="gradient-text text-[40px]">{{ characterData?.name }}</p>
+      <div class="flex gap-2 pt-2">
         <div class="flex items-center gap-4 w-[200px]">
-          <div class="liquid-glass py-1 px-4 !bg-[#EF3E41] !text-[#34415C] text-[20px] font-medium">
-            Age
+          <div class="liquid-glass py-1 px-4 !bg-[#EF3E41] !text-[#34415C] font-medium">
+            {{ $t('chat.age') }}
           </div>
-          <div class="text-white text-[24px] font-medium truncate">
+          <div class="text-white font-medium truncate">
             {{ characterData?.personality?.age }}
           </div>
         </div>
         <div class="flex items-center gap-4 w-[200px]">
-          <div class="liquid-glass py-1 px-4 !bg-[#EF3E41] !text-[#34415C] text-[20px] font-medium">
-            Gender
+          <div class="liquid-glass py-1 px-4 !bg-[#EF3E41] !text-[#34415C] font-medium">
+            {{ $t('chat.gender') }}
           </div>
-          <div class="text-white text-[24px] font-medium truncate">
-            {{ characterData?.gender == "m" ? "Male" : "Female" }}
+          <div class="text-white font-medium truncate">
+            {{ characterData?.gender === "m" ? $t('chat.m') : $t('chat.f') }}
           </div>
         </div>
       </div>
     </div>
 
     <!-- Chat zone -->
-    <div
+    <!-- <div
       id="step4"
       ref="chatContainer"
       class="flex-1 overflow-y-auto sm:rounded-lg sm:mb-4 px-2 sm:px-6 pt-24 sm:pt-6"
       :style="{
         background: `linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.3))`,
       }"
+    > -->
+    <div
+      id="step4"
+      ref="chatContainer"
+      class="flex-1 overflow-y-auto sm:rounded-lg sm:mb-4 px-2 sm:px-6 pt-24 sm:pt-0"
     >
       <InfiniteLoading top @infinite="getMoreChatHistory" class="mb-2">
         <template #spinner>
@@ -552,6 +564,5 @@ const getMoreChatHistory = async ($state) => {
   color: transparent;
   font-weight: 700;
   font-style: Bold;
-  font-size: 48px;
 }
 </style>

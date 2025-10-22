@@ -3,11 +3,11 @@
     <UCollapsible v-model:open="open" :disabled="disabled">
       <!-- Header Button -->
       <UButton
-        class="group text-gray-900 text-lg font-medium w-full rounded-t-3xl px-4 py-3 cursor-pointer transition-all duration-100"
+        class="group text-gray-900 text-lg font-medium w-full rounded-t-xl px-4 py-3 cursor-pointer transition-all duration-100"
         :class="[
           open
             ? `rounded-b-none bg-${color} text-gray-900`
-            : `rounded-b-3xl bg-${color} text-gray-300`,
+            : `rounded-b-xl bg-${color} text-gray-300`,
         ]"
         :label="props.label"
         color="yellow"
@@ -77,7 +77,7 @@ const props = defineProps({
 }
 .glass-border {
   position: relative;
-  border-radius: 0 0 1.5rem 1.5rem;
+  border-radius: 0 0 0.75rem 0.75rem;
 }
 .glass-border::before {
   margin-top: -2.5px;
@@ -95,7 +95,7 @@ const props = defineProps({
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   /* clip off top border */
-  clip-path: inset(2.5px 0 0 0 round 0 0 1.5rem 1.5rem);
+  /* clip-path: inset(2.5px 0 0 0 round 0 0 1.5rem 1.5rem); */
   mask-composite: exclude;
   pointer-events: none;
 }
