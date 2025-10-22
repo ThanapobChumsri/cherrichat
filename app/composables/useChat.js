@@ -67,7 +67,7 @@ export const useChat = () => {
     return response
   }
 
-  const getGenerateSound = async (message_id, text, style, voice, user_id) => {
+  const getGenerateSound = async (message_id, text, style, user_id, character_id) => {
     try {
     isGenerateSound.value = true
 
@@ -76,9 +76,9 @@ export const useChat = () => {
       body: {
         text: text,
         style: style ?? "นุ่มนวล",
-        voice: voice,
         message_id: message_id,
         user_id: user_id,
+        character_id: character_id,
       }
     })
 

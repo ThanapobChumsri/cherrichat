@@ -189,7 +189,8 @@
     "achievements": "ผลงาน",
     "when_animal_topic": "เมื่อพูดถึงสัตว์",
     "animal_love": "ความรักสัตว์",
-    "coolness": "ความเท่"
+    "coolness": "ความเท่",
+    "fears": "ความกลัว"
   },
 
   "chat": {
@@ -222,7 +223,8 @@
     "default_role_detail":"รายละเอียดบทบาทเริ่มต้น",
     "generate": "AI ช่วยสร้าง",
     "create": "สร้างตัวละคร",
-    "refresh_image": "โหลดรูปภาพใหม่"
+    "refresh_image": "โหลดรูปภาพใหม่",
+    "default_role_sounding": "เสียงบทบาทเริ่มต้น"
   },
 
   "payment": {

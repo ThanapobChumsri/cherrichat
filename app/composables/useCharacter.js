@@ -57,7 +57,7 @@ export const useCharacter = () => {
     }
   }
 
-  const useCreateCharacter = async (data, image, user_id) => {
+  const useCreateCharacter = async (data, image, user_id, sound_id) => {
     open()
     const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/9ac7b2f1-f1b2-4330-b9e9-1c4cf7f5ae8c`, {
       method: 'POST',
@@ -65,6 +65,7 @@ export const useCharacter = () => {
         ...data,
         url_image: image,
         user_id: user_id,
+        sound_id: sound_id,
       }
     })
 

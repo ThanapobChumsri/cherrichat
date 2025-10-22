@@ -1,7 +1,7 @@
 <template>
   <UContainer>
     <div class="max-w-[600px] mx-auto space-y-4 mb-4">
-      <div class="text-center mb-16">
+      <div class="mb-16 text-center">
         <p class="text-2xl font-bold">{{ $t("app_name") }}</p>
         <p class="text-[#9898A2]">{{ $t("create_character.create") }}</p>
       </div>
@@ -106,16 +106,26 @@
           />
         </UFormField>
 
+        <UFormField
+          :label="$t('create_character.default_role_sounding')"
+          name="sound_id"
+        >
+          <div class="role-voice-container">
+            <DefaultRoleVoiceSelector
+              v-model="form.sound_id"
+            />
+          </div>
+        </UFormField>
         <div class="flex gap-4">
           <UButton
-            class="flex-1 justify-center cursor-pointer liquid-glass bg-gradient"
+            class="justify-center flex-1 cursor-pointer liquid-glass bg-gradient"
             color="info"
             variant="subtle"
             type="submit"
             >{{ $t("create_character.generate") }}</UButton
           >
           <UButton
-            class="flex-1 justify-center cursor-pointer liquid-glass"
+            class="justify-center flex-1 cursor-pointer liquid-glass"
             :color="!characterData || !imageUrl ? 'neutral' : 'info'"
             @click="onCreateCharacter"
             :disabled="!characterData || !imageUrl"
@@ -131,7 +141,7 @@
         >
           <img :src="imageUrl" class="w-full" />
         </div>
-        <div class="flex-1 flex items-center">
+        <div class="flex items-center flex-1">
           <UButton
             class="w-full justify-center cursor-pointer liquid-glass !bg-green-500"
             :variant="!imageUrl ? 'solid' : 'subtle'"
@@ -151,7 +161,7 @@
         <div
           v-for="(value, key) in characterData"
           :key="key"
-          class="border-b border-gray-700 pb-2"
+          class="pb-2 border-b border-gray-700"
         >
           <!-- หัวข้อ -->
           <h2 class="text-lg font-bold text-white capitalize">
@@ -160,7 +170,7 @@
 
           <!-- ถ้า value เป็น object หรือ array -->
           <div v-if="typeof value === 'object' && value !== null">
-            <ul class="list-disc list-inside ml-4">
+            <ul class="ml-4 list-disc list-inside">
               <li v-for="(subVal, subKey) in value" :key="subKey">
                 <span class="font-semibold">{{ subKey }}:</span>
                 <span>
@@ -204,12 +214,14 @@ const form = reactive({
   character_biography: "",
   default_role_name: "",
   default_role_detail: "",
+  sound_id: "",
 });
 const schema = object({
   name: string().required("Name required"),
   tagline: string().required("Tagline required"),
   description: string().required("Description required"),
   greeting: string().required("Greeting required"),
+  sound_id: string().required("Voice required"),
 });
 const characterData = ref(null);
 const imageUrl = ref("");
@@ -265,10 +277,17 @@ const onCreateCharacter = async () => {
   await useCreateCharacter(
     characterData.value,
     imageUrl.value,
-    userInfo.value.user_id
+    userInfo.value.user_id,
+    form.sound_id
   );
   navigateTo("/");
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.role-voice-container {
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+}
+</style>

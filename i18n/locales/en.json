@@ -189,7 +189,8 @@
     "achievements": "Achievements",
     "when_animal_topic": "When Animal Topic Comes Up",
     "animal_love": "Animal Love",
-    "coolness": "Coolness"
+    "coolness": "Coolness",
+    "fears": "Fears"
   },
 
   "chat": {
@@ -222,7 +223,8 @@
     "default_role_detail": "Default Role Detail",
     "generate": "AI Generate",
     "create": "Create Character",
-    "refresh_image": "Refresh Image"
+    "refresh_image": "Refresh Image",
+    "default_role_sounding": "Default Role Sounding"
   },
 
   "payment": {
