@@ -255,6 +255,9 @@ b {
   opacity: 80%;
   cursor: pointer;
 }
+.uhover:active {
+  scale: 95%;
+}
 
 .liquid-glass-cherri {
   text-shadow: unset;

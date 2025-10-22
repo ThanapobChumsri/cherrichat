@@ -1,5 +1,8 @@
 <template>
-  <header class="top-0 z-50 w-full sm:px-8 sm:py-4 px-1 py-2 fixed">
+  <header 
+    class="flex-1 top-0 z-50 sm:px-8 sm:py-4 px-1 py-2 fixed left-0 right-0"
+    :class="{'left-20': userInfo?.user_id}"
+  >
     <div
       class="flex items-center justify-between h-[65px] rounded-xl bg-gradient shadow-blur sm:px-8 px-8"
     >

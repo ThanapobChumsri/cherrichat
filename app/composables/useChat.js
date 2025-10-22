@@ -206,6 +206,13 @@ export const useChat = () => {
     return response
   }
 
+  const getSessionChatByUserId = async (user_id) => {
+    const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/4a477dca-382d-489b-856c-49aef420891d`, {
+      method: "GET",
+      params: { user_id }
+    })
+    return response
+  }
 
   return {
     getChatHistory,
@@ -226,6 +233,7 @@ export const useChat = () => {
     deleteSessionChatDemo,
     getSelectSoundDemo,
     getGenerateSoundDemo,
-    usePushToTalkDemo
+    usePushToTalkDemo,
+    getSessionChatByUserId,
   }
 }
