@@ -196,7 +196,11 @@
     "send": "Send",
     "typing_here": "Type your message here...",
     "description": "This character is fictional. Please use discretion while chatting.",
-    "oldest_message": "oldest message"
+    "oldest_message": "oldest message",
+    "m": "Male",
+    "f": "Female",
+    "age": "Age",
+    "gender": "Gender"
   },
 
   "create_character": {

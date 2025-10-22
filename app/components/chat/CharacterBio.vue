@@ -3,21 +3,21 @@
     class="max-h-[calc(100vh-16px)] sm:overflow-y-auto relative transition-width duration-300"
     :class="isCollapse ? 'w-[0px]' : 'sm:w-[280px] xl:w-[320px]'"
   >
-    <div class="px-4 pb-4 flex flex-col gap-4">
+    <div class="w-full aspect-square px-4 pb-4 flex flex-col gap-4">
       <div
         v-if="!isMediaReady"
-        class="w-full h-full bg-gray-700 animate-pulse"
+        class="w-full xh-full bg-gray-700 animate-pulse"
       />
       <img
         v-if="!props.data.emotions_video"
         :src="currentImage"
-        class="w-full h-full object-cover rounded-[10px]"
+        class="w-full h-full object-cover rounded-xl"
         @load="onMediaReady"
       />
       <video
         v-else
         :src="currentVideo"
-        class="w-full h-full object-cover rounded-[10px]"
+        class="w-full h-full object-cover rounded-xl"
         muted
         loop
         playsinline
@@ -25,7 +25,26 @@
         @loadeddata="onMediaReady"
       />
 
-      <div class="space-y-2 mt-2">
+      <div class="flex justify-around text-xs glass-border py-2 bg-[#212C3B]" style="border-radius: 0.75rem;">
+        <div class="flex flex-col items-center gap-2 cursor-pointer transition-all duration-100 hover:opacity-90 active:scale-90">
+          <Icon class="w-4 h-4" name="famicons:person-outline"/>
+          <p>Profile</p>
+        </div>
+        <div class="flex flex-col items-center gap-2 cursor-pointer transition-all duration-100 hover:opacity-90 active:scale-90">
+          <Icon class="w-4 h-4" name="mdi:like-outline" />
+          <p>Like</p>
+        </div>
+        <div class="flex flex-col items-center gap-2 cursor-pointer transition-all duration-100 hover:opacity-90 active:scale-90">
+          <Icon class="w-4 h-4" name="lucide:share" />
+          <p>Share</p>
+        </div>
+        <div class="flex flex-col items-center gap-2 cursor-pointer transition-all duration-100 hover:opacity-90 active:scale-90">
+          <Icon class="w-4 h-4" name="octicon:report-24" />
+          <p>Report</p>
+        </div>
+      </div>
+
+      <!-- <div class="space-y-2 mt-2"> -->
         <BioCollapse :label="$t('location.appearance')">
           <div
             v-for="[key, value] in Object.entries(data?.appearance || {})"
@@ -95,7 +114,7 @@
         <BioCollapse :label="$t('location.traits')">
           <span class="text-sm mb-2">{{ data?.traits?.join(", ") || "-" }}</span>
         </BioCollapse>
-      </div>
+      <!-- </div> -->
     </div>
   </div>
 </template>
@@ -167,4 +186,5 @@ const onMediaReady = () => {
 
 </script>
 
-<style scoped></style>
+<style scoped>
+</style>
