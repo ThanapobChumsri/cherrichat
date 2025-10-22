@@ -3,6 +3,7 @@ const isTopUpModalOpen = ref(false)
 const isPdpaModalOpen = ref(false)
 const isDailyLoginModalOpen = ref(false)
 const isSignoutModalOpen = ref(false)
+const isCharacterProfileModalOpen = ref(false)
 
 export const useModal = () => {
 
@@ -38,6 +39,13 @@ export const useModal = () => {
     isSignoutModalOpen.value = false
   }
 
+  const onOpenCharacterProfileModal = () => {
+    isCharacterProfileModalOpen.value = true
+  }
+  const onCloseCharacterProfileModal = () => {
+    isCharacterProfileModalOpen.value = false
+  }
+
   return {
     isSoundModalOpen,
     onOpenSoundModal,
@@ -56,6 +64,10 @@ export const useModal = () => {
 
     isSignoutModalOpen,
     onOpenSignoutModal,
-    onCloseSignoutModal, 
+    onCloseSignoutModal,
+
+    isCharacterProfileModalOpen,
+    onOpenCharacterProfileModal,
+    onCloseCharacterProfileModal,
   }
 }

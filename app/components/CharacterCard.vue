@@ -1,5 +1,5 @@
 <template>
-  <div class="rounded-xl border border-[#2c2c30] bg-[#212126] overflow-hidden hover:shadow-xl shadow-[#D00000]/30 group cursor-pointer" @click="goToChat">
+  <div class="rounded-xl border border-[#2c2c30] bg-[#212126] overflow-hidden hover:shadow-xl shadow-[#D00000]/30 group cursor-pointer" @click="openCharacterProfile">
     <div class="w-full aspect-square overflow-hidden">
       <video
         ref="videoRef"
@@ -29,10 +29,16 @@ const props = defineProps({
   }
 })
 
+const emit = defineEmits(['openProfile'])
+
 const isMediaReady = ref(false)
 
 const onMediaReady = () => {
   isMediaReady.value = true
+}
+
+const openCharacterProfile = () => {
+  emit('openProfile', props.data)
 }
 
 const goToChat = () => {
@@ -56,7 +62,7 @@ const goToChat = () => {
     : null
   ;
 
-  let setVidelURL = props.data.emotions_video ? 
+  let setVidelURL = props.data.emotions_video ?
     Object.fromEntries(
       Object.entries(props.data.emotions_video).map(([key, value]) => [key, `${runtimeConfig.public.N8N_VIDEO}${value}`])
     )

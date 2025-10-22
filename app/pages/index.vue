@@ -84,11 +84,18 @@
                 : characterList.slice(1, tabActive + 1)"
               :key="index"
               :data="character"
+              @openProfile="openCharacterProfile"
             />
           </div>
         </div>
       </div>
     </div>
+
+    <!-- Character Profile Modal -->
+    <CharacterProfileModal
+      :character="selectedCharacter"
+      @startConversation="goToChat"
+    />
   </div>
 </template>
 
@@ -98,6 +105,7 @@ import CharacterCardSkeleton from "~/components/skeletons/CharacterCardSkeleton.
 import PDPAModal from "~/components/modal/PDPAModal.vue";
 import DailyLoginModal from "~/components/modal/DailyLoginModal.vue";
 import Banner from "~/components/Banner.vue";
+import CharacterProfileModal from "~/components/modal/CharacterProfileModal.vue";
 
 import { useCharacter } from "~/composables/useCharacter.js";
 import { useChat } from "#imports";
@@ -105,12 +113,14 @@ import { useBreakpoint } from "#imports";
 import { useUser } from "#imports";
 import { UButton } from "#components";
 import { useSearchBus } from "#imports";
+import { useModal } from "#imports";
 
 const searchBus = useSearchBus();
 const { getAllCharacter } = useCharacter();
 const { getSoundList } = useChat();
 const { useGetUserById } = useUser();
 const { isMobile } = useBreakpoint();
+const { onOpenCharacterProfileModal } = useModal();
 
 const characterList = ref([]);
 const loading = ref(true);
@@ -136,6 +146,7 @@ const tabItem = ref([
 
 const userInfo = useCookie("user-info");
 const search = ref("");
+const selectedCharacter = ref(null);
 
 // get user-info and set cookie on server before mounted
 await useAsyncData('user-info', async () => {
@@ -197,6 +208,60 @@ const onChangeTab = (index) => {
 
 const clickCreateCharacter = () => {
   navigateTo("/create-character");
+};
+
+const openCharacterProfile = (character) => {
+  selectedCharacter.value = character;
+  onOpenCharacterProfileModal();
+};
+
+const goToChat = (character) => {
+  const route = useRoute()
+  const userInfoData = JSON.parse(localStorage.getItem('user-info'));
+
+  if (!userInfoData) {
+    // Check if we're in demo mode
+    if (route.path.startsWith('/demo')) {
+      navigateTo('/demo/signin')
+    } else {
+      navigateTo('/signin')
+    }
+    return
+  }
+
+  const runtimeConfig = useRuntimeConfig()
+
+  let setImageURL = character.emotions ?
+    Object.fromEntries(
+      Object.entries(character.emotions).map(([key, value]) => [key, `${runtimeConfig.public.N8N_IMAGE}${value}`])
+    )
+    : null
+  ;
+
+  let setVidelURL = character.emotions_video ?
+    Object.fromEntries(
+      Object.entries(character.emotions_video).map(([key, value]) => [key, `${runtimeConfig.public.N8N_VIDEO}${value}`])
+    )
+    : null
+
+  localStorage.setItem('latest-chat', JSON.stringify({
+    character_info: character,
+    user_id: userInfoData.user_id,
+    character_id: character.id,
+    session_key: `session_${userInfoData.user_id}_${character.id}_ver_0`,
+    url_image: `${runtimeConfig.public.N8N_IMAGE}${character.url_image}`,
+    emotions: setImageURL,
+    url_video: `${runtimeConfig.public.N8N_VIDEO}${character.url_video}`,
+    emotions_video: setVidelURL,
+    original_place: character.original_place,
+  }))
+
+  // Navigate to appropriate chat page based on current mode
+  if (route.path.startsWith('/demo')) {
+    navigateTo('/demo/chat')
+  } else {
+    navigateTo('/chat')
+  }
 };
 </script>
 
