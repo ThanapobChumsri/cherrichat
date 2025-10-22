@@ -33,7 +33,7 @@
     
     <!-- Character zone -->
     <div class="hidden px-12 py-4 sm:block">
-      <p class="gradient-text text-[40px]">{{ characterData?.name }}</p>
+      <p class="gradient-text text-[40px] min-h-[60px]">{{ characterData?.name }}</p>
       <div class="flex gap-2 pt-2">
         <div class="flex items-center gap-4 w-[200px]">
           <div class="liquid-glass py-1 px-4 !bg-[#EF3E41] !text-[#34415C] font-medium">

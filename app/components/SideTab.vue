@@ -21,7 +21,9 @@
 <script setup>
 const { getSessionChatByUserId } = useChat()
 
+const route = useRoute();
 const userInfo = useCookie('user-info');
+
 const sessionList = ref([])
 
 if (userInfo.value) {
@@ -35,8 +37,11 @@ const clickResetSession = async () => {
 
 const clickSessionChat = (data) => {
   localStorage.setItem('latest-chat', JSON.stringify(data))
-  // navigateTo('/chat')
-  window.location.reload()
+  if (route.path === '/chat') {
+    window.location.reload()
+  } else {
+    navigateTo('/chat')
+  }
 }
 
 </script>
