@@ -191,12 +191,12 @@
                     <div class="space-y-2">
                       <div class="flex items-center justify-between">
                         <span class="text-white">Intimacy</span>
-                        <span class="text-sm text-yellow-400">{{ Math.round((relationshipData?.intimacy || 0) * 100) }}/100</span>
+                        <span class="text-sm text-yellow-400">{{ (relationshipData?.intimacy || 0) }}/100</span>
                       </div>
                       <div class="w-full h-2 bg-black rounded-full">
                         <div
                           class="h-2 bg-yellow-400 rounded-full"
-                          :style="{ width: `${(relationshipData?.intimacy || 0) * 100}%` }"
+                          :style="{ width: `${(relationshipData?.intimacy || 0)}%` }"
                         ></div>
                       </div>
                     </div>
@@ -204,12 +204,12 @@
                     <div class="space-y-2">
                       <div class="flex items-center justify-between">
                         <span class="text-white">Trust</span>
-                        <span class="text-sm text-yellow-400">{{ Math.round((relationshipData?.trust_level || 0) * 100) }}/100</span>
+                        <span class="text-sm text-yellow-400">{{ (relationshipData?.trust_level || 0) }}/100</span>
                       </div>
                       <div class="w-full h-2 bg-black rounded-full">
                         <div
                           class="h-2 bg-yellow-400 rounded-full"
-                          :style="{ width: `${(relationshipData?.trust_level || 0) * 100}%` }"
+                          :style="{ width: `${(relationshipData?.trust_level || 0)}%` }"
                         ></div>
                       </div>
                     </div>
@@ -217,12 +217,12 @@
                     <div class="space-y-2">
                       <div class="flex items-center justify-between">
                         <span class="text-white">Comfort</span>
-                        <span class="text-sm text-yellow-400">{{ Math.round((relationshipData?.comfort_level || 0) * 100) }}/100</span>
+                        <span class="text-sm text-yellow-400">{{ (relationshipData?.comfort_level || 0) }}/100</span>
                       </div>
                       <div class="w-full h-2 bg-black rounded-full">
                         <div
                           class="h-2 bg-yellow-400 rounded-full"
-                          :style="{ width: `${(relationshipData?.comfort_level || 0) * 100}%` }"
+                          :style="{ width: `${(relationshipData?.comfort_level || 0)}%` }"
                         ></div>
                       </div>
                     </div>
@@ -230,12 +230,12 @@
                     <div class="space-y-2">
                       <div class="flex items-center justify-between">
                         <span class="text-white">Interest</span>
-                        <span class="text-sm text-yellow-400">{{ Math.round((relationshipData?.interest_level || 0) * 100) }}/100</span>
+                        <span class="text-sm text-yellow-400">{{ (relationshipData?.interest_level || 0) }}/100</span>
                       </div>
                       <div class="w-full h-2 bg-black rounded-full">
                         <div
                           class="h-2 bg-yellow-400 rounded-full"
-                          :style="{ width: `${(relationshipData?.interest_level || 0) * 100}%` }"
+                          :style="{ width: `${(relationshipData?.interest_level || 0)}%` }"
                         ></div>
                       </div>
                     </div>
@@ -243,12 +243,12 @@
                     <div class="space-y-2">
                       <div class="flex items-center justify-between">
                         <span class="text-white">Affection</span>
-                        <span class="text-sm text-yellow-400">{{ Math.round((relationshipData?.affection_level || 0) * 100) }}/100</span>
+                        <span class="text-sm text-yellow-400">{{ (relationshipData?.affection_level || 0) }}/100</span>
                       </div>
                       <div class="w-full h-2 bg-black rounded-full">
                         <div
                           class="h-2 bg-yellow-400 rounded-full"
-                          :style="{ width: `${(relationshipData?.affection_level || 0) * 100}%` }"
+                          :style="{ width: `${(relationshipData?.affection_level || 0)}%` }"
                         ></div>
                       </div>
                     </div>
