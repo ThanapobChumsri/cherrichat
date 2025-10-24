@@ -32,7 +32,7 @@
     </div>
     
     <!-- Character zone -->
-    <div class="flex gap-2 sm:block p-2 pt-24 sm:px-12 sm:py-4">
+    <div class="fixed w-full sm:static bg-[#163854F2] sm:bg-transparent flex gap-2 sm:block p-2 mt-20 sm:px-12 sm:py-4">
       <img :src="latestChat.url_image" alt="character-image" class="sm:hidden h-16 aspect-square rounded-full" />
       <div class="flex-1 space-y-2">
         <p class="gradient-text text-xl sm:text-[32px] sm:min-h-[48px]">{{ characterData?.name }}</p>
@@ -65,7 +65,7 @@
     <div
       id="step4"
       ref="chatContainer"
-      class="flex-1 space-y-6 overflow-y-auto sm:rounded-lg sm:mb-4 px-2 sm:px-6"
+      class="flex-1 space-y-2 sm:rounded-lg mt-[180px] sm:mt-0 overflow-y-auto sm:mb-4 px-2 sm:px-6"
     >
       <InfiniteLoading top @infinite="getMoreChatHistory" class="mb-2">
         <template #spinner>
@@ -195,8 +195,8 @@
       
     </div>
 
-    <div class="p-2">
-      <UButton class="sm:hidden left-2 bottom-2 rounded-2xl bg-cherri-gradient text-white uhover" label="Reset Chat" trailingIcon="system-uicons:reset-hard" @click="clickResetSession" />
+    <div class="sm:hidden p-2">
+      <UButton class="left-2 bottom-2 rounded-2xl bg-cherri-gradient text-white uhover" label="Reset Chat" trailingIcon="system-uicons:reset-hard" @click="clickResetSession" />
     </div>
 
     <audio id="main-audio" />

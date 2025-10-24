@@ -1,8 +1,9 @@
 <template>
   <div class="min-h-screen relative flex"
-      :style="{
-        backgroundImage: `url(${coverImage})`,
-      }"
+    :style="{
+      backgroundImage: `url(${coverImage})`,
+      backgroundSize: 'cover',
+    }"
   >
     <SideTab />
     <div class="relative flex-1 flex flex-col" :class="{'sm:ml-20': userInfo?.user_id}">

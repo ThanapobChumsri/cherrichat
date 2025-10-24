@@ -6,9 +6,9 @@
       }"
       v-model="search" 
       trailing-icon="i-lucide-search" 
-      class="w-full rounded-sm"
-      color="info"
-      placeholder="ชื่อตัวละคร"
+      class="w-full"
+      color="neutral"
+      :placeholder="$t('navbar.search_placeholder')"
       @keyup.enter="onSearch"
     />
     <div class="grid grid-cols-2 sm:grid-cols-4 xl:grid-cols-6 gap-4">

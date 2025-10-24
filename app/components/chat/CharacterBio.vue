@@ -3,7 +3,7 @@
     class="max-h-[calc(100vh-16px)] sm:overflow-y-auto relative transition-width duration-300"
     :class="isCollapse ? 'w-[0px]' : 'sm:w-[280px] xl:w-[320px]'"
   >
-    <div class="w-full aspect-square px-4 pb-4 flex flex-col gap-4">
+    <div class="w-full aspect-square sm:px-4 pb-4 flex flex-col gap-4">
       <div
         v-if="!isMediaReady"
         class="w-full xh-full bg-gray-700 animate-pulse"

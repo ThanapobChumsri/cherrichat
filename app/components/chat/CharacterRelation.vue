@@ -3,7 +3,7 @@
     class="max-h-[calc(100vh-16px)] sm:overflow-y-auto relative transition-width duration-300"
     :class="isCollapse ? 'w-[0px]' : 'sm:w-[280px] xl:w-[320px]'"
   >
-    <div class="px-4 pb-4 flex flex-col gap-4">
+    <div class="sm:px-4 pb-4 flex flex-col gap-4">
       <div class="bg-bio">
         <div class="text-lg font-semibold mb-4">{{ $t("character.bio") }}</div>
         <div class="text-sm">
