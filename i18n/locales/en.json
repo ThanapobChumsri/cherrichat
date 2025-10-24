@@ -87,7 +87,8 @@
     "main": "Main",
     "feature": "Feature",
     "reaction": "Reaction",
-    "started": "Get started"
+    "started": "Get started",
+    "search_placeholder": "Search"
   },
 
   "footer": {
@@ -240,7 +241,14 @@
     "generate": "AI Generate",
     "create": "Create Character",
     "refresh_image": "Refresh Image",
-    "default_role_sounding": "Default Role Sounding"
+    "default_role_sounding": "Default Role Sounding",
+    "validation": {
+      "name_required": "Name required",
+      "tagline_required": "Tagline required",
+      "description_required": "Description required",
+      "greeting_required": "Greeting required",
+      "voice_required": "Voice required"
+    }
   },
 
   "payment": {
@@ -270,6 +278,11 @@
   "toast": {
     "something_wrong": "Something went wrong",
     "submit_register": "Successfully registered as a creator"
+  },
+
+  "microphone": {
+    "access_denied": "Cannot access microphone. Please allow permission",
+    "access_error": "Cannot access microphone"
   },
 
   "landing": {

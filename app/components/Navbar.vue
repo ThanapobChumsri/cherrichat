@@ -23,7 +23,7 @@
           <UInput
             color="red"
             class="input-liquid-glass"
-            placeholder="Search"
+            :placeholder="$t('navbar.search_placeholder')"
             @keydown.enter.prevent="onSearch"
             v-model="search"
           >

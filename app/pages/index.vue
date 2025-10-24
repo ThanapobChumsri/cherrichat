@@ -36,7 +36,7 @@
           <UInput
             color="red"
             class="input-liquid-glass w-full"
-            placeholder="Search"
+            :placeholder="$t('navbar.search_placeholder')"
             v-model="search"
             enterkeyhint="go"
             @keypress="

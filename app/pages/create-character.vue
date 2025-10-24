@@ -216,12 +216,14 @@ const form = reactive({
   default_role_detail: "",
   sound_id: "",
 });
+const { $t } = useI18n();
+
 const schema = object({
-  name: string().required("Name required"),
-  tagline: string().required("Tagline required"),
-  description: string().required("Description required"),
-  greeting: string().required("Greeting required"),
-  sound_id: string().required("Voice required"),
+  name: string().required($t("create_character.validation.name_required")),
+  tagline: string().required($t("create_character.validation.tagline_required")),
+  description: string().required($t("create_character.validation.description_required")),
+  greeting: string().required($t("create_character.validation.greeting_required")),
+  sound_id: string().required($t("create_character.validation.voice_required")),
 });
 const characterData = ref(null);
 const imageUrl = ref("");
