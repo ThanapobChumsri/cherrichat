@@ -103,6 +103,19 @@
             </div>
           </div>
 
+          <!-- Debug - Character Structure -->
+          <!-- <div class="px-6 mb-4">
+            <div class="p-4 bg-gray-800 text-xs text-white rounded-lg max-h-[200px] overflow-y-auto">
+              <div class="mb-2"><strong>Character Keys:</strong> {{ Object.keys(character || {}) }}</div>
+              <div class="mb-2"><strong>Direct Interests:</strong> {{ character?.interests }}</div>
+              <div class="mb-2"><strong>Knowledge Base:</strong> {{ character?.knowledge_base }}</div>
+              <div class="mb-2"><strong>Personality:</strong> {{ character?.personality }}</div>
+              <div class="mb-2"><strong>Skills:</strong> {{ character?.skills }}</div>
+              <div class="mb-2"><strong>MBTI:</strong> {{ character?.mbti }}</div>
+              <pre>{{ JSON.stringify(character, null, 2) }}</pre>
+            </div>
+          </div> -->
+
           <!-- Content Section -->
           <div class="px-6">
             <div
@@ -113,7 +126,7 @@
                 <!-- MBTI -->
                 <div class="pb-4 border-b border-[#404040]">
                   <h3 class="mb-2 text-lg font-semibold">MBTI</h3>
-                  <p class="text-gray-300">{{ character?.mbti || "INFJ" }}</p>
+                  <p class="text-gray-300">{{ character?.mbti || "-" }}</p>
                 </div>
 
                 <!-- Interests -->
@@ -121,8 +134,12 @@
                   <h3 class="mb-2 text-lg font-semibold">{{ t('modal.character_profile.interests') }}</h3>
                   <p class="text-sm text-gray-300">
                     {{
-                      character?.interests ||
-                      "Kisra AI เกมเป็นกิจวัตรหญิงสาวไทยผู้สร้าง AI เพื่อปกป้องผู้คน เธอชิงชอบอยู่ตามลำพัง กับร่างใดของริคของตนเอง"
+                      Array.isArray(character?.knowledge_base?.likes)
+                        ? character.knowledge_base.likes.join(", ")
+                        : character?.knowledge_base?.likes ||
+                          character?.personality?.likes ||
+                          character?.interests ||
+                          "-"
                     }}
                   </p>
                 </div>
@@ -132,8 +149,12 @@
                   <h3 class="mb-2 text-lg font-semibold">{{ t('modal.character_profile.dislikes') }}</h3>
                   <p class="text-sm text-gray-300">
                     {{
-                      character?.dislikes ||
-                      "Kisra AI เกมไม่กินกับริคอยจองไทยผู้สร้าง AI เพื่อปกป้องผู้คน เธอชิงชอบอยู่ตามลำพัง กับร่างใดของริคของตนเองโกฏิก"
+                      Array.isArray(character?.knowledge_base?.dislikes)
+                        ? character.knowledge_base.dislikes.join(", ")
+                        : character?.knowledge_base?.dislikes ||
+                          character?.personality?.dislikes ||
+                          character?.dislikes ||
+                          "-"
                     }}
                   </p>
                 </div>
@@ -143,8 +164,12 @@
                   <h3 class="mb-2 text-lg font-semibold">{{ t('modal.character_profile.hobbies') }}</h3>
                   <p class="text-sm text-gray-300">
                     {{
-                      character?.hobbies ||
-                      "Kisra AI เกมเป็นกิจวัตรหญิงสาวไทยผู้สร้าง AI เพื่อปกป้องผู้คน เธอชิงชอบอยู่ตามลำพัง กับร่างใดของริคของตนเองโกฏิก"
+                      Array.isArray(character?.knowledge_base?.hobbies)
+                        ? character.knowledge_base.hobbies.join(", ")
+                        : character?.knowledge_base?.hobbies ||
+                          character?.personality?.hobbies ||
+                          character?.hobbies ||
+                          "-"
                     }}
                   </p>
                 </div>
@@ -154,8 +179,12 @@
                   <h3 class="mb-2 text-lg font-semibold">{{ t('modal.character_profile.skills') }}</h3>
                   <p class="text-sm text-gray-300">
                     {{
-                      character?.skills ||
-                      "Kisra AI เกมเป็นกิจวัตรหญิงสาวไทยผู้สร้าง AI เพื่อปกป้องผู้คน เธอชิงชอบอยู่ตามลำพัง เคลื่อนไหวได้ย่างในกฎษฎีร้านอาหารบทสำหรับ"
+                      Array.isArray(character?.knowledge_base?.skills)
+                        ? character.knowledge_base.skills.join(", ")
+                        : character?.knowledge_base?.skills ||
+                          character?.personality?.skills ||
+                          character?.skills ||
+                          "-"
                     }}
                   </p>
                 </div>
@@ -165,8 +194,10 @@
                   <h3 class="mb-2 text-lg font-semibold">{{ t('modal.character_profile.memories') }}</h3>
                   <p class="text-sm text-gray-300">
                     {{
+                      character?.knowledge_base?.memories ||
+                      character?.personality?.memories ||
                       character?.memories ||
-                      "Kisra AI เกมเป็นกิจวัตรหญิงสาวไทยผู้สร้าง AI เพื่อปกป้องผู้คน เธอชิงชอบอยู่ตามลำพัง เคลื่อนไหวล่ำใย่ำค่าซาม่าบทสำหรับมากนักแสดงเคลื่อนไหว"
+                      "-"
                     }}
                   </p>
                 </div>
@@ -268,30 +299,30 @@
                     class="p-4 border border-gray-600 rounded-lg bg-[#2D2D2D]"
                   >
                     <div class="flex items-start space-x-3">
-                      <div class="w-10 h-10 bg-gray-600 rounded-full flex-shrink-0">
+                      <div class="flex-shrink-0 w-10 h-10 bg-gray-600 rounded-full">
                         <img
                           :src="comment.avatar"
                           :alt="comment.username"
-                          class="w-full h-full rounded-full object-cover"
+                          class="object-cover w-full h-full rounded-full"
                         >
                       </div>
                       <div class="flex-1">
-                        <div class="flex items-center space-x-2 mb-2">
+                        <div class="flex items-center mb-2 space-x-2">
                           <span class="font-semibold text-white">{{ comment.username }}</span>
                           <span class="text-xs text-gray-500">{{ comment.createdAt }}</span>
                         </div>
-                        <p class="text-sm text-gray-300 mb-3">
+                        <p class="mb-3 text-sm text-gray-300">
                           {{ comment.content }}
                         </p>
                         <div class="flex items-center space-x-3">
-                          <button class="flex items-center space-x-1 text-gray-400 hover:text-white transition-colors">
+                          <button class="flex items-center space-x-1 text-gray-400 transition-colors hover:text-white">
                             <Icon name="i-lucide-thumbs-up" class="w-4 h-4" />
                             <span class="text-xs">{{ comment.likes }}</span>
                           </button>
-                          <button class="flex items-center space-x-1 text-gray-400 hover:text-white transition-colors">
+                          <button class="flex items-center space-x-1 text-gray-400 transition-colors hover:text-white">
                             <Icon name="i-lucide-thumbs-down" class="w-4 h-4" />
                           </button>
-                          <button class="text-xs text-gray-400 hover:text-white transition-colors">
+                          <button class="text-xs text-gray-400 transition-colors hover:text-white">
                             Reply
                           </button>
                         </div>
@@ -303,8 +334,8 @@
                 <!-- Add Comment Form -->
                 <div class="mt-6 p-4 border border-gray-600 rounded-lg bg-[#2D2D2D]">
                   <div class="flex items-start space-x-3">
-                    <div class="w-10 h-10 bg-gray-600 rounded-full flex-shrink-0">
-                      <div class="w-full h-full rounded-full bg-gradient-to-br from-red-500 to-pink-500 flex items-center justify-center">
+                    <div class="flex-shrink-0 w-10 h-10 bg-gray-600 rounded-full">
+                      <div class="flex items-center justify-center w-full h-full rounded-full bg-gradient-to-br from-red-500 to-pink-500">
                         <Icon name="i-lucide-user" class="w-5 h-5 text-white" />
                       </div>
                     </div>
@@ -315,7 +346,7 @@
                         rows="3"
                       ></textarea>
                       <div class="flex justify-end mt-3">
-                        <button class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition-colors">
+                        <button class="px-4 py-2 text-sm font-medium text-white transition-colors bg-red-600 rounded-lg hover:bg-red-700">
                           Comment
                         </button>
                       </div>
