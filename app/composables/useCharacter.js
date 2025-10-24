@@ -73,10 +73,23 @@ export const useCharacter = () => {
     return response
   }
 
+  const sendLikeCharacter = async (payload) => {
+    const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/d9be86b5-ac09-4841-90ea-89c12b2e81ef`, {
+      method: "POST",
+      body: {
+        user_id: payload.user_id,
+        character_id: payload.character_id
+      }
+    })
+
+    return response
+  }
+
   return {
     getAllCharacter,
     useGenerateCharacter,
     useGenerateCharacterImage,
     useCreateCharacter,
+    sendLikeCharacter,
   }
 }

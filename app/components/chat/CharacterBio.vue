@@ -26,19 +26,19 @@
       />
 
       <div class="flex justify-around text-xs glass-border py-2 bg-[#212C3B]" style="border-radius: 0.75rem;">
-        <div class="flex flex-col items-center gap-2 cursor-pointer transition-all duration-100 hover:opacity-90 active:scale-90">
+        <div class="flex flex-col items-center gap-2 px-2 cursor-pointer transition-all duration-100 hover:opacity-90 active:scale-90">
           <Icon class="w-4 h-4" name="famicons:person-outline"/>
           <p>{{ $t('character.profile') }}</p>
         </div>
-        <div class="flex flex-col items-center gap-2 cursor-pointer transition-all duration-100 hover:opacity-90 active:scale-90">
-          <Icon class="w-4 h-4" name="mdi:like-outline" />
+        <div class="flex flex-col items-center gap-2 px-2 cursor-pointer transition-all duration-100 hover:opacity-90 active:scale-90" @click="clickLikeCharacter">
+          <Icon class="w-4 h-4" :name="isLike ? 'mdi:like' : 'mdi:like-outline'" />
           <p>{{ $t('character.like') }}</p>
         </div>
-        <div class="flex flex-col items-center gap-2 cursor-pointer transition-all duration-100 hover:opacity-90 active:scale-90">
+        <div class="flex flex-col items-center gap-2 px-2 cursor-pointer transition-all duration-100 hover:opacity-90 active:scale-90">
           <Icon class="w-4 h-4" name="lucide:share" />
           <p>{{ $t('character.share') }}</p>
         </div>
-        <div class="flex flex-col items-center gap-2 cursor-pointer transition-all duration-100 hover:opacity-90 active:scale-90">
+        <div class="flex flex-col items-center gap-2 px-2 cursor-pointer transition-all duration-100 hover:opacity-90 active:scale-90">
           <Icon class="w-4 h-4" name="octicon:report-24" />
           <p>{{ $t('character.report') }}</p>
         </div>
@@ -141,8 +141,11 @@ const props = defineProps({
   },
 });
 
+const { sendLikeCharacter } = useCharacter();
+
 const latestChat = ref({});
 const isMediaReady = ref(false)
+const isLike = ref(false)
 
 const currentImage = computed(() => {
   if (!latestChat.value || !props.emotion || !latestChat.value.emotions)
@@ -178,10 +181,20 @@ const refreshLocalStorage = () => {
   }
 
   latestChat.value = JSON.parse(latest_chat);
+  isLike.value = (latestChat.value.is_user_like)
 };
 
 const onMediaReady = () => {
   isMediaReady.value = true
+}
+
+const clickLikeCharacter = async () => {
+  isLike.value = !isLike.value
+  localStorage.setItem("latest-chat", JSON.stringify({
+    ...latestChat.value,
+    is_user_like: isLike.value
+  }))
+  await sendLikeCharacter({user_id: latestChat.value.user_id, character_id: latestChat.value.character_id})
 }
 
 </script>

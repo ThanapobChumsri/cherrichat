@@ -197,6 +197,7 @@ const getCharacterList = async () => {
     per_page: 100,
     search: search.value,
     is_active: true,
+    user_id: userInfo.value?.user_id || null
   });
   characterList.value = characterRes.data;
   tabActive.value = 1;
@@ -254,6 +255,7 @@ const goToChat = (character) => {
     url_video: `${runtimeConfig.public.N8N_VIDEO}${character.url_video}`,
     emotions_video: setVidelURL,
     original_place: character.original_place,
+    is_user_like: character.is_user_like,
   }))
 
   // Navigate to appropriate chat page based on current mode

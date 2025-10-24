@@ -78,6 +78,7 @@ const goToChat = () => {
     url_video: `${runtimeConfig.public.N8N_VIDEO}${props.data.url_video}`,
     emotions_video: setVidelURL,
     original_place: props.data.original_place,
+    is_user_like: props.data.is_user_like,
   }))
 
   // Navigate to appropriate chat page based on current mode

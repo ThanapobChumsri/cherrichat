@@ -125,30 +125,17 @@ const props = defineProps({
 
 const userInfo = ref(null);
 const topupPackageList = ref([]);
-const historyPaymentList = ref([]);
 const selectTab = ref("0");
 const couponCode = ref("");
-const hasMore = ref(true);
-let historyPaymentPage = 1;
-let perPage = 10;
 
 const tabItem = computed(() => [
   { key: "package", label: $t("payment.package") },
-  // { key: "history", label: $t('payment.history') },
   { key: "coupon", label: $t("payment.coupon.title") },
 ]);
 
 onMounted(async () => {
   const user_info = JSON.parse(localStorage.getItem("user-info"));
   userInfo.value = user_info;
-
-  const historyPaymentData = await useGetHistoryPayment({
-    user_id: userInfo.value.user_id,
-    page: historyPaymentPage,
-    per_page: perPage
-  });
-  historyPaymentList.value = historyPaymentData.data;
-  historyPaymentPage++;
 
   const topupPackageData = await useGetTopUpPackage();
   topupPackageList.value = topupPackageData;
