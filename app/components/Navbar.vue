@@ -1,13 +1,13 @@
 <template>
   <header
     class="fixed top-0 left-0 right-0 z-50 flex-1 px-1 py-2 sm:px-8 sm:py-4"
-    :class="{'left-20': userInfo?.user_id}"
+    :class="{'sm:left-20': userInfo?.user_id}"
   >
     <!-- Backdrop blur layer -->
     <div class="absolute inset-0 glass-effect -z-10"></div>
 
     <div
-      class="relative flex items-center justify-between h-[65px] rounded-xl bg-gradient shadow-blur sm:px-8 px-8"
+      class="relative flex items-center justify-between h-[65px] rounded-xl bg-gradient shadow-blur sm:px-8 px-4"
     >
       <!-- Left: Logo -->
       <div

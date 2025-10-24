@@ -236,6 +236,8 @@ b {
   --color-dark-cherri: #691A20;
   --color-dark-cherri-2: #240B04;
   /* --color-dark-cherri: #B51D32; */
+  --color-yellow: #FFBA08;
+  --color-dark-yellow: #AE5211; 
 }
 
 .bg-cherri-gradient {
@@ -245,6 +247,14 @@ b {
     var(--color-dark-cherri)
   );
   outline-style: none;
+}
+.bg-yellow-gradient {
+  background: linear-gradient(
+    to right,
+    var(--color-yellow) 30%,
+    var(--color-dark-yellow)
+  );
+  outline-style: none;  
 }
 
 .uhover {

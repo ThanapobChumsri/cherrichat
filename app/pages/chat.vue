@@ -50,16 +50,8 @@
       v-if="isMobile"
       :title="$t('character.bio')"
       aria-describedby="char-bio"
-      class="absolute top-24 right-4"
+      v-model:open="isCollapseBio"
     >
-      <UButton
-        :label="$t('character.bio')"
-        color="neutral"
-        variant="subtle"
-        icon="ri:arrow-left-s-line"
-        class="w-[140px]"
-      />
-
       <template #body>
         <CharacterBio
           :data="characterData"
@@ -75,16 +67,8 @@
       v-if="isMobile"
       :title="$t('location.info')"
       aria-describedby="char-relation"
-      class="absolute top-34 right-4"
+      v-model:open="isCollapseRelation"
     >
-      <UButton
-        :label="$t('location.info')"
-        color="neutral"
-        variant="subtle"
-        icon="ri:arrow-left-s-line"
-        class="w-[140px]"
-      />
-
       <template #body>
         <CharacterRelation
           :data="characterRelationData"

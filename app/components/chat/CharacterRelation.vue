@@ -143,7 +143,7 @@ const overall = ref({
   longest_streak: 0,
   first_interaction_at: "",
   last_interaction_at: "",
-  streak_started_at: 0,
+  streak_started_at: "",
 });
 const levels = [
   { level: 8, status: "soulmate", minPoints: 1000 },

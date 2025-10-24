@@ -5,7 +5,7 @@
       }"
   >
     <SideTab />
-    <div class="relative flex-1 flex flex-col" :class="{'ml-20': userInfo?.user_id}">
+    <div class="relative flex-1 flex flex-col" :class="{'sm:ml-20': userInfo?.user_id}">
       <Navbar />
       <div class="flex-1 pt-24 sm:pt-32" data-page-transition>
         <slot />

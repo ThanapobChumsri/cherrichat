@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen relative flex bg-neutral-50 dark:bg-zinc-900">
     <SideTab />
-    <div class="relative flex-1 flex flex-col" :class="{'ml-20': userInfo?.user_id}">
+    <div class="relative flex-1 flex flex-col" :class="{'sm:ml-20': userInfo?.user_id}">
       <Navbar />
       <div data-page-transition>
         <slot />

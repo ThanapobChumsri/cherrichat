@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed top-0 bottom-0 left-0 w-20 flex flex-col justify-between bg-[#19191A]" :class="{'hidden': !userInfo?.user_id}">
+  <div class="fixed top-0 bottom-0 left-0 w-20 hidden sm:flex flex-col justify-between bg-[#19191A]" :class="{'hidden': !userInfo?.user_id}">
     <div class="h-full scroll-y-auto pt-4 space-y-3">
       <p class="text-sm text-center opacity-80">{{ $t('navbar.character').toLowerCase() }}</p>
       <div
@@ -34,7 +34,7 @@ if (userInfo.value) {
 const clickResetSession = async () => {
   const latestChat = JSON.parse(localStorage.getItem('latest-chat'))
   if (latestChat) {
-    deleteSessionChat(latestChat)
+    await deleteSessionChat(latestChat)
     window.location.reload();
   }
 }

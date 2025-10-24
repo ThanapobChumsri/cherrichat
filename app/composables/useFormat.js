@@ -12,7 +12,7 @@ export const useFormat = () => {
   };
 
   const useFormattedDateTime = (datetime) => {
-    if (typeof datetime !== "string") return datetime;
+    if (typeof datetime !== "string" || datetime === "") return datetime;
 
     let formatted = new Date(datetime).toLocaleString("th-TH", {
       timeZone: "Asia/Bangkok",

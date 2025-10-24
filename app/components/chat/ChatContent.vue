@@ -32,9 +32,16 @@
     </div>
     
     <!-- Character zone -->
-    <div class="hidden px-12 py-4 sm:block">
-      <p class="gradient-text text-[40px] min-h-[60px]">{{ characterData?.name }}</p>
-      <div class="flex gap-2 pt-2">
+    <div class="flex gap-2 sm:block p-2 pt-24 sm:px-12 sm:py-4">
+      <img :src="latestChat.url_image" alt="character-image" class="sm:hidden h-16 aspect-square rounded-full" />
+      <div class="flex-1 space-y-2">
+        <p class="gradient-text text-xl sm:text-[32px] sm:min-h-[48px]">{{ characterData?.name }}</p>
+        <div class="flex sm:hidden gap-2">
+          <UButton :label="$t('character.bio')" class="w-full bg-cherri-gradient uhover text-white rounded-2xl" @click="emit('toggleCollapse', 'bio')"/>
+          <UButton :label="$t('location.info')" class="w-full bg-yellow-gradient uhover text-white rounded-2xl" @click="emit('toggleCollapse', 'relation')" />
+        </div>
+      </div>
+      <div class="hidden sm:flex gap-2 pt-2">
         <div class="flex items-center gap-4 w-[200px]">
           <div class="liquid-glass py-1 px-4 !bg-[#EF3E41] !text-[#34415C] font-medium">
             {{ $t('chat.age') }}
@@ -55,18 +62,10 @@
     </div>
 
     <!-- Chat zone -->
-    <!-- <div
-      id="step4"
-      ref="chatContainer"
-      class="flex-1 px-2 pt-24 overflow-y-auto sm:rounded-lg sm:mb-4 sm:px-6 sm:pt-6"
-      :style="{
-        background: `linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.3))`,
-      }"
-    > -->
     <div
       id="step4"
       ref="chatContainer"
-      class="flex-1 px-2 pt-24 overflow-y-auto sm:rounded-lg sm:mb-4 sm:px-6 sm:pt-0"
+      class="flex-1 space-y-6 overflow-y-auto sm:rounded-lg sm:mb-4 px-2 sm:px-6"
     >
       <InfiniteLoading top @infinite="getMoreChatHistory" class="mb-2">
         <template #spinner>
@@ -89,8 +88,10 @@
       <div
         v-for="(chat, index) in props.data"
         :key="index"
-        class="flex items-end mb-6 text-sm z-100"
-        :class="{ 'justify-end': chat.role === 'user' }"
+        class="flex items-end text-sm z-100"
+        :class="{ 
+          'justify-end': chat.role === 'user'
+        }"
       >
         <!-- image section -->
         <img
@@ -104,8 +105,8 @@
           <div
             class="px-4 py-3 rounded-tl-lg rounded-tr-lg"
             :class="{
-              'bg-[#FF9C08] rounded-bl-lg': chat.role === 'user',
-              'bg-[#EF3E41] rounded-br-lg border border-[#2c2c30]':
+              'bg-[#FFD470] rounded-bl-lg': chat.role === 'user',
+              'bg-[#F25C54] rounded-br-lg border border-[#2c2c30]':
                 chat.role !== 'user',
               'min-w-[200px] sm:min-w-[300px]': chat.content_type === 'loading',
             }"
@@ -114,9 +115,9 @@
               v-for="(msg, j) in useSplitTypeMessage(chat.content)"
               :key="j"
               :class="{
+                'text-black': chat.role === 'user',
                 'text-[#9898A2] italic': checkTypeMessage(msg) === 'action',
-                'mb-4 text-black':
-                  j !== useSplitTypeMessage(chat.content).length - 1,
+                'mb-4 text-black': j !== useSplitTypeMessage(chat.content).length - 1,
               }"
               v-html="useDisplayMessage(msg)"
             />
@@ -191,6 +192,11 @@
           <Icon name="tdesign:user-circle-filled" class="w-full h-full" />
         </div>
       </div>
+      
+    </div>
+
+    <div class="p-2">
+      <UButton class="sm:hidden left-2 bottom-2 rounded-2xl bg-cherri-gradient text-white uhover" label="Reset Chat" trailingIcon="system-uicons:reset-hard" @click="clickResetSession" />
     </div>
 
     <audio id="main-audio" />
@@ -288,6 +294,7 @@ const {
   getGenerateSound,
   getGenerateSoundDemo,
   isGenerateSound,
+  deleteSessionChat,
 } = useChat();
 const isDemoMode = computed(() => route.path.startsWith("/demo"));
 const { onOpenSoundModal } = useModal();
@@ -547,6 +554,14 @@ const getMoreChatHistory = async ($state) => {
   shouldScrollBottom.value = false;
   emit("getChatHistoryInfinite", $state, chatContainer);
 };
+
+const clickResetSession = async () => {
+  const latestChat = JSON.parse(localStorage.getItem('latest-chat'))
+  if (latestChat) {
+    await deleteSessionChat(latestChat)
+    window.location.reload();
+  }
+}
 </script>
 
 <style>
