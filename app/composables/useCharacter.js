@@ -85,11 +85,28 @@ export const useCharacter = () => {
     return response
   }
 
+  const getRelationship = async (user_id, character_id) => {
+    try {
+      const response = await $fetch(`${runtimeConfig.public.N8N_URL_V3}/1f83a92a-3ff3-4f22-8595-690c087411d1`, {
+        params: {
+          user_id: user_id,
+          character_id: character_id
+        }
+      });
+
+      return response;
+    } catch (error) {
+      $toast.error(t('toast.something_wrong'), String(error?.data?.message || error))
+      return null;
+    }
+  }
+
   return {
     getAllCharacter,
     useGenerateCharacter,
     useGenerateCharacterImage,
     useCreateCharacter,
     sendLikeCharacter,
+    getRelationship,
   }
 }

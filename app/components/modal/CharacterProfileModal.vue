@@ -32,7 +32,7 @@
               <div
                 class="px-3 py-1 text-sm font-medium text-white rounded-4xl bg-[#00000054]"
               >
-                Chat background example
+                {{ t('modal.character_profile.chat_background_example') }}
               </div>
             </div>
 
@@ -56,7 +56,7 @@
             <div
               class="px-3 py-1 text-xs font-medium text-[#FFBA08] rounded-3xl w-fit bg-[#D0870033]"
             >
-              Top 3 Popular
+              {{ t('modal.character_profile.top_3_popular') }}
             </div>
           </div>
         </div>
@@ -77,10 +77,7 @@
             class="flex items-center p-3 text-[#FF782A] rounded-lg bg-[#FF77233B]"
           >
             <Icon name="i-lucide-alert-triangle" class="w-5 h-5 mr-2" />
-            <span class="text-base font-medium"
-              >บทสนทนาอาจมีเนื้อหาไม่เหมาะสมสำหรับผู้ที่มี อายุต่ำกว่า 18
-              ปี</span
-            >
+            <span class="text-base font-medium">{{ t('modal.character_profile.age_warning') }}</span>
           </div>
         </div>
 
@@ -106,6 +103,19 @@
             </div>
           </div>
 
+          <!-- Debug - Character Structure -->
+          <!-- <div class="px-6 mb-4">
+            <div class="p-4 bg-gray-800 text-xs text-white rounded-lg max-h-[200px] overflow-y-auto">
+              <div class="mb-2"><strong>Character Keys:</strong> {{ Object.keys(character || {}) }}</div>
+              <div class="mb-2"><strong>Direct Interests:</strong> {{ character?.interests }}</div>
+              <div class="mb-2"><strong>Knowledge Base:</strong> {{ character?.knowledge_base }}</div>
+              <div class="mb-2"><strong>Personality:</strong> {{ character?.personality }}</div>
+              <div class="mb-2"><strong>Skills:</strong> {{ character?.skills }}</div>
+              <div class="mb-2"><strong>MBTI:</strong> {{ character?.mbti }}</div>
+              <pre>{{ JSON.stringify(character, null, 2) }}</pre>
+            </div>
+          </div> -->
+
           <!-- Content Section -->
           <div class="px-6">
             <div
@@ -116,139 +126,157 @@
                 <!-- MBTI -->
                 <div class="pb-4 border-b border-[#404040]">
                   <h3 class="mb-2 text-lg font-semibold">MBTI</h3>
-                  <p class="text-gray-300">{{ character?.mbti || "INFJ" }}</p>
+                  <p class="text-gray-300">{{ character?.mbti || "-" }}</p>
                 </div>
 
                 <!-- Interests -->
                 <div class="pb-4 border-b border-[#404040]">
-                  <h3 class="mb-2 text-lg font-semibold">Interests</h3>
+                  <h3 class="mb-2 text-lg font-semibold">{{ t('modal.character_profile.interests') }}</h3>
                   <p class="text-sm text-gray-300">
                     {{
-                      character?.interests ||
-                      "Kisra AI เกมเป็นกิจวัตรหญิงสาวไทยผู้สร้าง AI เพื่อปกป้องผู้คน เธอชิงชอบอยู่ตามลำพัง กับร่างใดของริคของตนเอง"
+                      Array.isArray(character?.knowledge_base?.likes)
+                        ? character.knowledge_base.likes.join(", ")
+                        : character?.knowledge_base?.likes ||
+                          character?.personality?.likes ||
+                          character?.interests ||
+                          "-"
                     }}
                   </p>
                 </div>
 
                 <!-- Dislikes -->
                 <div class="pb-4 border-b border-[#404040]">
-                  <h3 class="mb-2 text-lg font-semibold">Dislikes</h3>
+                  <h3 class="mb-2 text-lg font-semibold">{{ t('modal.character_profile.dislikes') }}</h3>
                   <p class="text-sm text-gray-300">
                     {{
-                      character?.dislikes ||
-                      "Kisra AI เกมไม่กินกับริคอยจองไทยผู้สร้าง AI เพื่อปกป้องผู้คน เธอชิงชอบอยู่ตามลำพัง กับร่างใดของริคของตนเองโกฏิก"
+                      Array.isArray(character?.knowledge_base?.dislikes)
+                        ? character.knowledge_base.dislikes.join(", ")
+                        : character?.knowledge_base?.dislikes ||
+                          character?.personality?.dislikes ||
+                          character?.dislikes ||
+                          "-"
                     }}
                   </p>
                 </div>
 
                 <!-- Hobbies -->
                 <div class="pb-4 border-b border-[#404040]">
-                  <h3 class="mb-2 text-lg font-semibold">Hobbies</h3>
+                  <h3 class="mb-2 text-lg font-semibold">{{ t('modal.character_profile.hobbies') }}</h3>
                   <p class="text-sm text-gray-300">
                     {{
-                      character?.hobbies ||
-                      "Kisra AI เกมเป็นกิจวัตรหญิงสาวไทยผู้สร้าง AI เพื่อปกป้องผู้คน เธอชิงชอบอยู่ตามลำพัง กับร่างใดของริคของตนเองโกฏิก"
+                      Array.isArray(character?.knowledge_base?.hobbies)
+                        ? character.knowledge_base.hobbies.join(", ")
+                        : character?.knowledge_base?.hobbies ||
+                          character?.personality?.hobbies ||
+                          character?.hobbies ||
+                          "-"
                     }}
                   </p>
                 </div>
 
                 <!-- Skills -->
                 <div class="pb-4 border-b border-[#404040]">
-                  <h3 class="mb-2 text-lg font-semibold">Skills</h3>
+                  <h3 class="mb-2 text-lg font-semibold">{{ t('modal.character_profile.skills') }}</h3>
                   <p class="text-sm text-gray-300">
                     {{
-                      character?.skills ||
-                      "Kisra AI เกมเป็นกิจวัตรหญิงสาวไทยผู้สร้าง AI เพื่อปกป้องผู้คน เธอชิงชอบอยู่ตามลำพัง เคลื่อนไหวได้ย่างในกฎษฎีร้านอาหารบทสำหรับ"
+                      Array.isArray(character?.knowledge_base?.skills)
+                        ? character.knowledge_base.skills.join(", ")
+                        : character?.knowledge_base?.skills ||
+                          character?.personality?.skills ||
+                          character?.skills ||
+                          "-"
                     }}
                   </p>
                 </div>
 
                 <!-- Memories -->
                 <div>
-                  <h3 class="mb-2 text-lg font-semibold">Memories</h3>
+                  <h3 class="mb-2 text-lg font-semibold">{{ t('modal.character_profile.memories') }}</h3>
                   <p class="text-sm text-gray-300">
                     {{
+                      character?.knowledge_base?.memories ||
+                      character?.personality?.memories ||
                       character?.memories ||
-                      "Kisra AI เกมเป็นกิจวัตรหญิงสาวไทยผู้สร้าง AI เพื่อปกป้องผู้คน เธอชิงชอบอยู่ตามลำพัง เคลื่อนไหวล่ำใย่ำค่าซาม่าบทสำหรับมากนักแสดงเคลื่อนไหว"
+                      "-"
                     }}
                   </p>
                 </div>
 
                 <!-- Relationship -->
                 <div class="p-4 bg-[#2D2D2D] rounded-lg">
-                  <h3 class="mb-4 text-lg font-semibold">Relationship</h3>
+                  <h3 class="mb-4 text-lg font-semibold">{{ t('modal.character_profile.relationship') }}</h3>
                   <div class="space-y-3">
                     <!-- Level -->
                     <div class="flex items-center justify-between">
-                      <span class="text-white">Level</span>
+                      <span class="text-white">{{ t('modal.character_profile.level') }}</span>
                       <span
                         class="px-2 py-1 text-xs text-black bg-[#FFD470] rounded-lg"
-                        >0/5</span
+                        >{{ relationshipData?.level || 0 }}/5</span
                       >
                     </div>
 
                     <!-- Relationship Stats -->
                     <div class="space-y-2">
                       <div class="flex items-center justify-between">
-                        <span class="text-white">Intimacy</span>
-                        <span class="text-sm text-yellow-400">2/20</span>
+                        <span class="text-white">{{ t('modal.character_profile.intimacy') }}</span>
+                        <span class="text-sm text-yellow-400">{{ (relationshipData?.intimacy || 0) }}/100</span>
                       </div>
                       <div class="w-full h-2 bg-black rounded-full">
                         <div
                           class="h-2 bg-yellow-400 rounded-full"
-                          style="width: 10%"
+                          :style="{ width: `${(relationshipData?.intimacy || 0)}%` }"
                         ></div>
                       </div>
                     </div>
 
                     <div class="space-y-2">
                       <div class="flex items-center justify-between">
-                        <span class="text-white">Trust</span>
-                        <span class="text-sm text-yellow-400">2/100</span>
+                        <span class="text-white">{{ t('modal.character_profile.trust') }}</span>
+                        <span class="text-sm text-yellow-400">{{ (relationshipData?.trust_level || 0) }}/100</span>
                       </div>
                       <div class="w-full h-2 bg-black rounded-full">
                         <div
                           class="h-2 bg-yellow-400 rounded-full"
-                          style="width: 2%"
+                          :style="{ width: `${(relationshipData?.trust_level || 0)}%` }"
                         ></div>
                       </div>
                     </div>
 
                     <div class="space-y-2">
                       <div class="flex items-center justify-between">
-                        <span class="text-white">Comfort</span>
-                        <span class="text-sm text-yellow-400">10/100</span>
+                        <span class="text-white">{{ t('modal.character_profile.comfort') }}</span>
+                        <span class="text-sm text-yellow-400">{{ (relationshipData?.comfort_level || 0) }}/100</span>
                       </div>
                       <div class="w-full h-2 bg-black rounded-full">
                         <div
                           class="h-2 bg-yellow-400 rounded-full"
-                          style="width: 10%"
+                          :style="{ width: `${(relationshipData?.comfort_level || 0)}%` }"
                         ></div>
                       </div>
                     </div>
 
                     <div class="space-y-2">
                       <div class="flex items-center justify-between">
-                        <span class="text-white">Attention</span>
-                        <span class="text-sm text-yellow-400">20/100</span>
+                        <span class="text-white">{{ t('modal.character_profile.interest') }}</span>
+                        <span class="text-sm text-yellow-400">{{ (relationshipData?.interest_level || 0) }}/100</span>
                       </div>
                       <div class="w-full h-2 bg-black rounded-full">
                         <div
                           class="h-2 bg-yellow-400 rounded-full"
-                          style="width: 20%"
+                          :style="{ width: `${(relationshipData?.interest_level || 0)}%` }"
                         ></div>
                       </div>
                     </div>
 
                     <div class="space-y-2">
                       <div class="flex items-center justify-between">
-                        <span class="text-white">Attention</span>
-                        <span class="text-sm text-yellow-400">10/100</span>
+                        <span class="text-white">{{ t('modal.character_profile.affection') }}</span>
+                        <span class="text-sm text-yellow-400">{{ (relationshipData?.affection_level || 0) }}/100</span>
                       </div>
                       <div class="w-full h-2 bg-black rounded-full">
                         <div
                           class="h-2 bg-yellow-400 rounded-full"
-                          style="width: 10%"
+                          :style="{ width: `${(relationshipData?.affection_level || 0)}%` }"
                         ></div>
                       </div>
                     </div>
@@ -257,11 +285,74 @@
               </div>
 
               <!-- Comment Tab -->
-              <div
-                v-else-if="activeTab === 'comment'"
-                class="py-12 text-center"
-              >
-                <p class="text-gray-400">Comments feature coming soon...</p>
+              <div v-else-if="activeTab === 'comment'" class="space-y-4">
+                <!-- Comments Header -->
+                <div class="flex items-center justify-between">
+                  <h3 class="text-lg font-semibold">{{ mockComments.length }} comments</h3>
+                </div>
+
+                <!-- Comment List -->
+                <div class="space-y-4">
+                  <div
+                    v-for="comment in mockComments"
+                    :key="comment.id"
+                    class="p-4 border border-gray-600 rounded-lg bg-[#2D2D2D]"
+                  >
+                    <div class="flex items-start space-x-3">
+                      <div class="flex-shrink-0 w-10 h-10 bg-gray-600 rounded-full">
+                        <img
+                          :src="comment.avatar"
+                          :alt="comment.username"
+                          class="object-cover w-full h-full rounded-full"
+                        >
+                      </div>
+                      <div class="flex-1">
+                        <div class="flex items-center mb-2 space-x-2">
+                          <span class="font-semibold text-white">{{ comment.username }}</span>
+                          <span class="text-xs text-gray-500">{{ comment.createdAt }}</span>
+                        </div>
+                        <p class="mb-3 text-sm text-gray-300">
+                          {{ comment.content }}
+                        </p>
+                        <div class="flex items-center space-x-3">
+                          <button class="flex items-center space-x-1 text-gray-400 transition-colors hover:text-white">
+                            <Icon name="i-lucide-thumbs-up" class="w-4 h-4" />
+                            <span class="text-xs">{{ comment.likes }}</span>
+                          </button>
+                          <button class="flex items-center space-x-1 text-gray-400 transition-colors hover:text-white">
+                            <Icon name="i-lucide-thumbs-down" class="w-4 h-4" />
+                          </button>
+                          <button class="text-xs text-gray-400 transition-colors hover:text-white">
+                            Reply
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Add Comment Form -->
+                <div class="mt-6 p-4 border border-gray-600 rounded-lg bg-[#2D2D2D]">
+                  <div class="flex items-start space-x-3">
+                    <div class="flex-shrink-0 w-10 h-10 bg-gray-600 rounded-full">
+                      <div class="flex items-center justify-center w-full h-full rounded-full bg-gradient-to-br from-red-500 to-pink-500">
+                        <Icon name="i-lucide-user" class="w-5 h-5 text-white" />
+                      </div>
+                    </div>
+                    <div class="flex-1">
+                      <textarea
+                        placeholder="Write a comment..."
+                        class="w-full p-3 bg-[#1A1A1A] border border-gray-600 rounded-lg text-white placeholder-gray-400 text-sm resize-none focus:outline-none focus:border-red-500 transition-colors"
+                        rows="3"
+                      ></textarea>
+                      <div class="flex justify-end mt-3">
+                        <button class="px-4 py-2 text-sm font-medium text-white transition-colors bg-red-600 rounded-lg hover:bg-red-700">
+                          Comment
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -275,7 +366,7 @@
               @click="startConversation"
               class="flex-1 w-8/12 px-6 py-3 font-bold bg-gradient liquid-glass cursor-pointer"
             >
-              Start a conversation
+              {{ t('modal.character_profile.start_conversation') }}
             </button>
             <!-- Secondary Action Buttons -->
             <button
@@ -299,12 +390,13 @@
 
 <script setup>
 import { useModal } from "#imports";
+import { useCharacter } from "#imports";
 
 const runtimeConfig = useRuntimeConfig();
 const { isCharacterProfileModalOpen, onCloseCharacterProfileModal } =
   useModal();
-const { sendLikeCharacter } = useCharacter();
-
+const { getRelationship, sendLikeCharacter } = useCharacter();
+const { t } = useI18n();
 const userInfo = useCookie('user-info')
 
 const modalOpen = computed({
@@ -332,11 +424,53 @@ const props = defineProps({
 const emit = defineEmits(["startConversation"]);
 
 const activeTab = ref("story");
+const relationshipData = ref(null);
 
 const tabs = [
-  { key: "story", label: "Story" },
-  { key: "comment", label: "Comment" },
+  { key: "story", label: t('modal.character_profile.story') },
+  { key: "comment", label: t('modal.character_profile.comment') },
 ];
+
+// Mock comments data
+const mockComments = ref([
+  {
+    id: 1,
+    username: "John Doe",
+    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face",
+    content: "I just tried this recipe and it was amazing! The instructions were clear and easy to follow, and the end result was delicious. I will definitely be making this again. Thanks for sharing!",
+    likes: 12,
+    createdAt: "2 hours ago"
+  },
+  {
+    id: 2,
+    username: "Terry.Wolf",
+    avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=40&h=40&fit=crop&crop=face",
+    content: "I really appreciate the insights and perspective shared in this article. It's definitely given me something to think about and has helped me see things from a different angle. Thank you for writing and sharing!",
+    likes: 8,
+    createdAt: "4 hours ago"
+  },
+  {
+    id: 3,
+    username: "Angie_Klein",
+    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop&crop=face",
+    content: "I really appreciate the insights and perspective shared in this article. It's definitely given me something to think about and has helped me see things from a different angle. Thank you for writing and sharing!",
+    likes: 5,
+    createdAt: "6 hours ago"
+  }
+]);
+
+// Watch for modal open and character change to fetch relationship data
+watch([modalOpen, () => props.character], async ([isOpen, character]) => {
+  if (isOpen && character && userInfo.value) {
+    try {
+      const relationship = await getRelationship(userInfo.value.user_id, character.id);
+      relationshipData.value = relationship;
+    } catch (error) {
+      console.error('Failed to fetch relationship data:', error);
+      relationshipData.value = null;
+    }
+  }
+}, { immediate: true });
 
 const closeModal = () => {
   onCloseCharacterProfileModal();
