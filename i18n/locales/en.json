@@ -47,6 +47,8 @@
   "reset_password_text2": "to send a new email",
   "email_already_in_use": "This email is already in use",
   "choose_different_password": "Please choose a new password different from your current one",
+  "recaptcha_disclaimer": "This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.",
+  "recaptcha_failed": "We could not verify you with reCAPTCHA. Please try again.",
   "lets_talk": "let's talk",
   "tagline": {
     "text_1": "Personal AI",
