@@ -28,6 +28,8 @@ import { ref, computed } from 'vue'
 import { useChat } from '#imports'
 import { inject } from '#imports';
 
+const { $t } = useI18n();
+
 const route = useRoute()
 const { usePushToTalk, usePushToTalkDemo, sendChatLoad } = useChat();
 const isDemoMode = computed(() => route.path.startsWith('/demo'))
@@ -79,7 +81,7 @@ async function requestMicrophonePermission() {
     if (navigator.permissions) {
       const result = await navigator.permissions.query({ name: 'microphone' })
       if (result.state === 'denied') {
-        alert('ไม่สามารถเข้าถึงไมโครโฟนได้ โปรดอนุญาตสิทธิ์')
+        alert($t('microphone.access_denied'))
         return false
       }
     }
@@ -89,7 +91,7 @@ async function requestMicrophonePermission() {
     return true
   } catch (err) {
     console.error('Microphone access denied:', err)
-    alert('ไม่สามารถเข้าถึงไมโครโฟนได้')
+    alert($t('microphone.access_error'))
     return false
   }
 }

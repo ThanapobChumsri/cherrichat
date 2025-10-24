@@ -87,7 +87,8 @@
     "main": "หน้าแรก",
     "feature": "ฟีเจอร์",
     "reaction": "การตอบโต้",
-    "started": "เริ่มต้นใช้งาน"
+    "started": "เริ่มต้นใช้งาน",
+    "search_placeholder": "ค้นหา"
   },
 
   "footer": {
@@ -240,7 +241,14 @@
     "generate": "AI ช่วยสร้าง",
     "create": "สร้างตัวละคร",
     "refresh_image": "โหลดรูปภาพใหม่",
-    "default_role_sounding": "เสียงบทบาทเริ่มต้น"
+    "default_role_sounding": "เสียงบทบาทเริ่มต้น",
+    "validation": {
+      "name_required": "ต้องใส่ชื่อ",
+      "tagline_required": "ต้องใส่แท็กไลน์",
+      "description_required": "ต้องใส่คำอธิบาย",
+      "greeting_required": "ต้องใส่คำทักทาย",
+      "voice_required": "ต้องเลือกเสียง"
+    }
   },
 
   "payment": {
@@ -270,6 +278,11 @@
   "toast": {
     "something_wrong": "เกิดข้อผิดพลาด",
     "submit_register": "สมัครเป็นครีเอเตอร์สำเร็จ"
+  },
+
+  "microphone": {
+    "access_denied": "ไม่สามารถเข้าถึงไมโครโฟนได้ โปรดอนุญาตสิทธิ์",
+    "access_error": "ไม่สามารถเข้าถึงไมโครโฟนได้"
   },
 
   "landing": {
