@@ -273,18 +273,20 @@
             <!-- Main Action Button -->
             <button
               @click="startConversation"
-              class="flex-1 w-8/12 px-6 py-3 font-bold bg-gradient liquid-glass"
+              class="flex-1 w-8/12 px-6 py-3 font-bold bg-gradient liquid-glass cursor-pointer"
             >
               Start a conversation
             </button>
             <!-- Secondary Action Buttons -->
             <button
-              class="w-2/12 p-3 text-white transition-colors bg-[#FFFFFF08] rounded-2xl border border-[#FFFFFF1A] hover:bg-gray-600"
+              class="w-2/12 p-3 text-white transition-colors bg-[#FFFFFF08] rounded-2xl border border-[#FFFFFF1A] hover:bg-gray-600 cursor-pointer"
+              :disabled="!userInfo"
+              @click="clickLikeCharacter"
             >
-              <Icon name="i-lucide-thumbs-up" class="w-5 h-5" />
+              <Icon :name="props.character.is_user_like ? 'mdi:like' : 'mdi:like-outline'" class="w-5 h-5" />
             </button>
             <button
-              class="w-2/12 p-3 text-white transition-colors bg-[#FFFFFF08] rounded-2xl border border-[#FFFFFF1A] hover:bg-gray-600"
+              class="w-2/12 p-3 text-white transition-colors bg-[#FFFFFF08] rounded-2xl border border-[#FFFFFF1A] hover:bg-gray-600 cursor-pointer"
             >
               <Icon name="i-lucide-share" class="w-5 h-5" />
             </button>
@@ -301,6 +303,9 @@ import { useModal } from "#imports";
 const runtimeConfig = useRuntimeConfig();
 const { isCharacterProfileModalOpen, onCloseCharacterProfileModal } =
   useModal();
+const { sendLikeCharacter } = useCharacter();
+
+const userInfo = useCookie('user-info')
 
 const modalOpen = computed({
   get: () => isCharacterProfileModalOpen.value,
@@ -312,6 +317,12 @@ const modalOpen = computed({
 });
 
 const props = defineProps({
+  index: {
+    type: Number,
+  },
+  characterList: {
+    type: Array,
+  },
   character: {
     type: Object,
     default: null,
@@ -335,6 +346,15 @@ const startConversation = () => {
   emit("startConversation", props.character);
   closeModal();
 };
+
+const clickLikeCharacter = async () => {
+  if (userInfo.value) {
+    props.characterList[props.index].is_user_like = !props.characterList[props.index].is_user_like
+    console.log(props.characterList[props.index].is_user_like)
+    await sendLikeCharacter({user_id: userInfo.value.user_id, character_id: props.character.id})
+  }
+}
+
 </script>
 
 <style scoped>

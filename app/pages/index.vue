@@ -93,6 +93,8 @@
 
     <!-- Character Profile Modal -->
     <CharacterProfileModal
+      :index="characterList.findIndex(e => e?.id === selectedCharacter?.id)"
+      :character-list="characterList"
       :character="selectedCharacter"
       @startConversation="goToChat"
     />

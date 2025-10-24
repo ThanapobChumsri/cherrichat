@@ -16,7 +16,7 @@
           <div class="text-[#9898A2] flex items-center">
             <div class="w-[40%]">Level</div>
             <div class="text-black font-bold bg-[#FFD470] px-3 py-1 rounded-lg">
-              {{ overall.level }}/{{ maxLevel }}
+              {{ overall.level }}/{{ maxLevel }} 
             </div>
           </div>
 
@@ -174,17 +174,6 @@ const StatisticsDisplayList = [
   "streak_started_at",
 ];
 
-const currentImage = computed(() => {
-  if (latestChat.value?.original_place && Object.keys(props.data).length) {
-    if (latestChat.value.original_place === props.data.current_place) {
-      return runtimeConfig.public.N8N_IMAGE + props.imageObject;
-    } else {
-      return runtimeConfig.public.N8N_IMAGE + props.image;
-    }
-  }
-  return "";
-});
-
 onMounted(() => {
   refreshLocalStorage();
   if (Object.keys(props.data).length) {
@@ -229,7 +218,7 @@ const refreshCharacterStatus = (newValue) => {
     longest_streak: Number(newValue.longest_streak),
     first_interaction_at: newValue.first_interaction_at,
     last_interaction_at: newValue.last_interaction_at,
-    streak_started_at: Number(newValue.streak_started_at),
+    streak_started_at: newValue.streak_started_at,
   };
 
   const index = levels.findIndex((l) => newValue.points >= l.minPoints);

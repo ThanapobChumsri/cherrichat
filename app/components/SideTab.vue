@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-const { getSessionChatByUserId } = useChat()
+const { getSessionChatByUserId, deleteSessionChat } = useChat()
 
 const route = useRoute();
 const userInfo = useCookie('user-info');
@@ -32,7 +32,11 @@ if (userInfo.value) {
 }
 
 const clickResetSession = async () => {
-  console.log('reset session chat')
+  const latestChat = JSON.parse(localStorage.getItem('latest-chat'))
+  if (latestChat) {
+    deleteSessionChat(latestChat)
+    window.location.reload();
+  }
 }
 
 const clickSessionChat = (data) => {
