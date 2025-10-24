@@ -1,6 +1,18 @@
 {
-  "app_name": "cherrichat AI",
+  "app_name": "CherriChat",
 
+  "signin_p": {
+    "tagline_1": "คุยกับ",
+    "tagline_2": "สัมผัสประสบการณ์การสนทนาอันชาญฉลาด",
+    "tagline_3": "ที่ออกแบบมาเพื่อให้เข้าใจคุณดียิ่งขึ้น",
+    "tagline_4": "เข้าสู่ระบบเพื่อพูดคุย",
+    "tagline_5": "สร้างบัญชีของคุณ",
+    "continue_google": "เข้าสู่ระบบด้วย Google"
+  },
+
+  "email": "อีเมล",
+  "password": "รหัสผ่าน",
+  "confirm_password": "ยืนยันรหัสผ่าน",
   "signin": "เข้าสู่ระบบ",
   "signup": "สมัครบัญชีใช้งาน",
   "or": "หรือ",
@@ -138,7 +150,11 @@
       "first_interaction_at": "วันที่คุยครั้งแรก",
       "last_interaction_at": "วันที่คุยครั้งล่าสุด",
       "streak_started_at": "วันที่เริ่มคุยต่อเนื่อง"
-    }
+    },
+    "profile": "โปรไฟล์",
+    "like": "ชอบ",
+    "share": "แชร์",
+    "report": "รีพอร์ท"
   },
 
   "location": {

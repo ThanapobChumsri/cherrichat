@@ -1,6 +1,18 @@
 {
-  "app_name": "cherrichat AI",
+  "app_name": "CherriChat",
 
+  "signin_p": {
+    "tagline_1": "Talk with",
+    "tagline_2": "Experience intelligent conversations",
+    "tagline_3": "designed to understand you better",
+    "tagline_4": "Log in to your design account",
+    "tagline_5": "Create your account",
+    "continue_google": "Continue with Google"
+  },
+
+  "email": "Emaill Address",
+  "password": "Password",
+  "confirm_password": "Confirm Password",
   "signin": "Sign in",
   "signup": "Sign up",
   "or": "or",
@@ -138,7 +150,11 @@
       "first_interaction_at": "First Interaction At",
       "last_interaction_at": "Latest Interaction At",
       "streak_started_at": "Streak Started At"
-    }
+    },
+    "profile": "Profile",
+    "like": "Like",
+    "share": "Share",
+    "report": "Report"
   },
 
   "location": {

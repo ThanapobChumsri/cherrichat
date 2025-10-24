@@ -6,8 +6,8 @@
     >
       <div class="mx-auto sm:mx-0 sm:pl-32 py-44">
         <Icon name="gridicons:chat" class="w-[90px] h-[90px]"/>
-        <h2 class="text-[44px]/[64px] xl:text-[48px]/[64px] font-bold text-balance">Talk with <br>CherriChat</h2>
-        <h3 class="text-[24px] text-balance">Experience intelligent conversations <br>designed to understand you better</h3>
+        <h2 class="text-[44px]/[64px] xl:text-[48px]/[64px] font-bold text-balance">{{ $t('signin_p.tagline_1') }} <br>{{ $t('app_name') }}</h2>
+        <h3 class="text-[24px] text-balance">{{ $t('signin_p.tagline_2') }} <br>{{ $t('signin_p.tagline_3') }}</h3>
       </div>
     </div>
     <div
@@ -24,8 +24,8 @@
     >
       <div class="w-[600px] p-8 space-y-8 flex flex-col items-center">
         <img :src="logo" alt="" class="max-h-[60px] sm:max-h-[80px] w-auto" />
-        <p class="text-[24px] sm:text-[32px] font-medium">Log in to your design account</p>
-        <UButton block size="lg" class="p-2 border-[1px] border-[#333333] bg-black cursor-pointer" icon="flat-color-icons:google" variant="ghost" color="neutral" label="Continue with Google" @click="onSigninGoogle" />
+        <p class="text-[24px] sm:text-[32px] font-medium">{{ $t('signin_p.tagline_4') }}</p>
+        <UButton block size="lg" class="p-2 border-[1px] border-[#333333] bg-black cursor-pointer" icon="flat-color-icons:google" variant="ghost" color="neutral" :label="$t('signin_p.continue_google')" @click="onSigninGoogle" />
         <USeparator :label="$t('or')" size="md" />
         <UForm 
           ref="formRef"
@@ -34,7 +34,7 @@
           class="space-y-4 w-full"
           @submit="onSigninRegister"
         >
-          <UFormField label="Email Address" name="email">
+          <UFormField :label="$t('email')" name="email">
             <UInput 
               v-model="form.email"
               class="w-full border-[1px] border-[#333333]"
@@ -43,7 +43,7 @@
               variant="ghost"
             />
           </UFormField>
-          <UFormField label="Password" name="password">
+          <UFormField :label="$t('password')" name="password">
             <UInput 
               v-model="form.password"
               class="w-full border-[1px] border-[#333333]"

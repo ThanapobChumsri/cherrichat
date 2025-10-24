@@ -28,19 +28,19 @@
       <div class="flex justify-around text-xs glass-border py-2 bg-[#212C3B]" style="border-radius: 0.75rem;">
         <div class="flex flex-col items-center gap-2 cursor-pointer transition-all duration-100 hover:opacity-90 active:scale-90">
           <Icon class="w-4 h-4" name="famicons:person-outline"/>
-          <p>Profile</p>
+          <p>{{ $t('character.profile') }}</p>
         </div>
         <div class="flex flex-col items-center gap-2 cursor-pointer transition-all duration-100 hover:opacity-90 active:scale-90">
           <Icon class="w-4 h-4" name="mdi:like-outline" />
-          <p>Like</p>
+          <p>{{ $t('character.like') }}</p>
         </div>
         <div class="flex flex-col items-center gap-2 cursor-pointer transition-all duration-100 hover:opacity-90 active:scale-90">
           <Icon class="w-4 h-4" name="lucide:share" />
-          <p>Share</p>
+          <p>{{ $t('character.share') }}</p>
         </div>
         <div class="flex flex-col items-center gap-2 cursor-pointer transition-all duration-100 hover:opacity-90 active:scale-90">
           <Icon class="w-4 h-4" name="octicon:report-24" />
-          <p>Report</p>
+          <p>{{ $t('character.report') }}</p>
         </div>
       </div>
 

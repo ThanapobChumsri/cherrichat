@@ -164,26 +164,6 @@ const clickSelectPackage = async (package_id) => {
   }
 };
 
-const getHistoryPayment = async ($state) => {
-  const response = await useGetHistoryPayment({
-    user_id: userInfo.value.user_id,
-    page: historyPaymentPage,
-    per_page: perPage,
-  });
-  const hasRealData =
-    Array.isArray(response.data) &&
-    response.data.some((item) => Object.keys(item).length > 0);
-
-  if (hasRealData) {
-    historyPaymentList.value.push(...response.data);
-    historyPaymentPage++;
-    $state.loaded();
-  } else {
-    hasMore.value = false;
-    $state.complete();
-  }
-};
-
 const clickRedeemCoupon = async () => {
   const response = await useRedeemCoupon(
     userInfo.value.user_id,

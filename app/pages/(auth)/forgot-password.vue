@@ -22,7 +22,7 @@
         class="space-y-4 w-full"
         @submit="clickForgotPassword"
       >
-        <UFormField label="Email Address" name="email">
+        <UFormField :label="$t('email')" name="email">
           <UInput 
             v-model="form.email"
             class="w-full border-[1px] border-[#333333]"
