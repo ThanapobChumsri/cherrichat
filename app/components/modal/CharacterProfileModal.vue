@@ -183,7 +183,7 @@
                       <span class="text-white">Level</span>
                       <span
                         class="px-2 py-1 text-xs text-black bg-[#FFD470] rounded-lg"
-                        >0/5</span
+                        >{{ relationshipData?.level || 0 }}/5</span
                       >
                     </div>
 
@@ -191,12 +191,12 @@
                     <div class="space-y-2">
                       <div class="flex items-center justify-between">
                         <span class="text-white">Intimacy</span>
-                        <span class="text-sm text-yellow-400">2/20</span>
+                        <span class="text-sm text-yellow-400">{{ Math.round((relationshipData?.intimacy || 0) * 100) }}/100</span>
                       </div>
                       <div class="w-full h-2 bg-black rounded-full">
                         <div
                           class="h-2 bg-yellow-400 rounded-full"
-                          style="width: 10%"
+                          :style="{ width: `${(relationshipData?.intimacy || 0) * 100}%` }"
                         ></div>
                       </div>
                     </div>
@@ -204,12 +204,12 @@
                     <div class="space-y-2">
                       <div class="flex items-center justify-between">
                         <span class="text-white">Trust</span>
-                        <span class="text-sm text-yellow-400">2/100</span>
+                        <span class="text-sm text-yellow-400">{{ Math.round((relationshipData?.trust_level || 0) * 100) }}/100</span>
                       </div>
                       <div class="w-full h-2 bg-black rounded-full">
                         <div
                           class="h-2 bg-yellow-400 rounded-full"
-                          style="width: 2%"
+                          :style="{ width: `${(relationshipData?.trust_level || 0) * 100}%` }"
                         ></div>
                       </div>
                     </div>
@@ -217,38 +217,38 @@
                     <div class="space-y-2">
                       <div class="flex items-center justify-between">
                         <span class="text-white">Comfort</span>
-                        <span class="text-sm text-yellow-400">10/100</span>
+                        <span class="text-sm text-yellow-400">{{ Math.round((relationshipData?.comfort_level || 0) * 100) }}/100</span>
                       </div>
                       <div class="w-full h-2 bg-black rounded-full">
                         <div
                           class="h-2 bg-yellow-400 rounded-full"
-                          style="width: 10%"
+                          :style="{ width: `${(relationshipData?.comfort_level || 0) * 100}%` }"
                         ></div>
                       </div>
                     </div>
 
                     <div class="space-y-2">
                       <div class="flex items-center justify-between">
-                        <span class="text-white">Attention</span>
-                        <span class="text-sm text-yellow-400">20/100</span>
+                        <span class="text-white">Interest</span>
+                        <span class="text-sm text-yellow-400">{{ Math.round((relationshipData?.interest_level || 0) * 100) }}/100</span>
                       </div>
                       <div class="w-full h-2 bg-black rounded-full">
                         <div
                           class="h-2 bg-yellow-400 rounded-full"
-                          style="width: 20%"
+                          :style="{ width: `${(relationshipData?.interest_level || 0) * 100}%` }"
                         ></div>
                       </div>
                     </div>
 
                     <div class="space-y-2">
                       <div class="flex items-center justify-between">
-                        <span class="text-white">Attention</span>
-                        <span class="text-sm text-yellow-400">10/100</span>
+                        <span class="text-white">Affection</span>
+                        <span class="text-sm text-yellow-400">{{ Math.round((relationshipData?.affection_level || 0) * 100) }}/100</span>
                       </div>
                       <div class="w-full h-2 bg-black rounded-full">
                         <div
                           class="h-2 bg-yellow-400 rounded-full"
-                          style="width: 10%"
+                          :style="{ width: `${(relationshipData?.affection_level || 0) * 100}%` }"
                         ></div>
                       </div>
                     </div>
@@ -297,10 +297,13 @@
 
 <script setup>
 import { useModal } from "#imports";
+import { useCharacter } from "#imports";
 
 const runtimeConfig = useRuntimeConfig();
 const { isCharacterProfileModalOpen, onCloseCharacterProfileModal } =
   useModal();
+const { getRelationship } = useCharacter();
+const userInfo = useCookie('user-info')
 
 const modalOpen = computed({
   get: () => isCharacterProfileModalOpen.value,
@@ -321,11 +324,25 @@ const props = defineProps({
 const emit = defineEmits(["startConversation"]);
 
 const activeTab = ref("story");
+const relationshipData = ref(null);
 
 const tabs = [
   { key: "story", label: "Story" },
   { key: "comment", label: "Comment" },
 ];
+
+// Watch for modal open and character change to fetch relationship data
+watch([modalOpen, () => props.character], async ([isOpen, character]) => {
+  if (isOpen && character && userInfo.value) {
+    try {
+      const relationship = await getRelationship(userInfo.value.user_id, character.id);
+      relationshipData.value = relationship;
+    } catch (error) {
+      console.error('Failed to fetch relationship data:', error);
+      relationshipData.value = null;
+    }
+  }
+}, { immediate: true });
 
 const closeModal = () => {
   onCloseCharacterProfileModal();
