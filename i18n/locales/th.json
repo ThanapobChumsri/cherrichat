@@ -396,6 +396,27 @@
     "signout": {
       "title": "ออกจากระบบ",
       "description": "คุณต้องการออกจากระบบหรือไม่"
+    },
+    "character_profile": {
+      "chat_background_example": "ตัวอย่างพื้นหลังการสนทนา",
+      "top_3_popular": "ยอดนิยม 3 อันดับ",
+      "age_warning": "บทสนทนาอาจมีเนื้อหาไม่เหมาะสมสำหรับผู้ที่มีอายุต่ำกว่า 18 ปี",
+      "story": "เรื่องราว",
+      "comment": "ความคิดเห็น",
+      "interests": "สิ่งที่สนใจ",
+      "dislikes": "สิ่งที่ไม่ชอบ",
+      "hobbies": "งานอดิเรก",
+      "skills": "ทักษะ",
+      "memories": "ความทรงจำ",
+      "relationship": "ความสัมพันธ์",
+      "level": "ระดับ",
+      "intimacy": "ความใกล้ชิด",
+      "trust": "ความไว้วางใจ",
+      "comfort": "ความสบายใจ",
+      "interest": "ความสนใจ",
+      "affection": "ความชื่นชอบ",
+      "start_conversation": "เริ่มบทสนทนา",
+      "comments_coming_soon": "ฟีเจอร์ความคิดเห็นจะมาเร็วๆ นี้..."
     }
   }
 }

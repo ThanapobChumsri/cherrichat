@@ -396,6 +396,27 @@
     "signout": {
       "title": "Sign out",
       "description": "Are you sure want to sign out"
+    },
+    "character_profile": {
+      "chat_background_example": "Chat background example",
+      "top_3_popular": "Top 3 Popular",
+      "age_warning": "Content may not be suitable for users under 18 years old",
+      "story": "Story",
+      "comment": "Comment",
+      "interests": "Interests",
+      "dislikes": "Dislikes",
+      "hobbies": "Hobbies",
+      "skills": "Skills",
+      "memories": "Memories",
+      "relationship": "Relationship",
+      "level": "Level",
+      "intimacy": "Intimacy",
+      "trust": "Trust",
+      "comfort": "Comfort",
+      "interest": "Interest",
+      "affection": "Affection",
+      "start_conversation": "Start a conversation",
+      "comments_coming_soon": "Comments feature coming soon..."
     }
   }
 }
