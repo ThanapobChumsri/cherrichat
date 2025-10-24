@@ -4,7 +4,7 @@
     :class="{'sm:left-20': userInfo?.user_id}"
   >
     <!-- Backdrop blur layer -->
-    <div class="absolute inset-0 glass-effect -z-10"></div>
+    <div class="absolute inset-0 w-full glass-effect -z-10"></div>
 
     <div
       class="relative flex items-center justify-between h-[65px] rounded-xl bg-gradient shadow-blur sm:px-8 px-4"
@@ -205,7 +205,47 @@ const onSearch = () => {
 }
 
 .glass-effect {
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  background: linear-gradient(
+    to top,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.02) 20%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  backdrop-filter:
+    blur(5px)
+    contrast(1.1)
+    brightness(1.1);
+  -webkit-backdrop-filter:
+    blur(5px)
+    contrast(1.1)
+    brightness(1.1);
+  /* box-shadow removed to eliminate bottom border */
+}
+
+.glass-effect::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  backdrop-filter: blur(25px) saturate(180%);
+  -webkit-backdrop-filter: blur(25px) saturate(180%);
+  mask: linear-gradient(
+    to top,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 30%,
+    rgba(255, 255, 255, 0.7) 60%,
+    white 100%
+  );
+  -webkit-mask: linear-gradient(
+    to top,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 30%,
+    rgba(255, 255, 255, 0.7) 60%,
+    white 100%
+  );
+  pointer-events: none;
 }
 </style>

@@ -29,6 +29,25 @@ export default defineNuxtConfig({
       N8N_VIDEO: process.env.N8N_VIDEO,
 
       WS_URL: process.env.WS_URL,
+      RECAPTCHA_SITE_KEY: process.env.RECAPTCHA_SITE_KEY,
+    },
+  },
+  security: {
+    headers: {
+      contentSecurityPolicy: {
+        value: [
+          "default-src 'self'",
+          "img-src 'self' data: https://www.gstatic.com https://www.google.com",
+          "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+          "font-src 'self' https://fonts.gstatic.com",
+          "script-src 'self' https://www.google.com https://www.gstatic.com",
+          "frame-src 'self' https://www.google.com https://www.gstatic.com",
+          "child-src 'self' https://www.google.com https://www.gstatic.com",
+          "connect-src 'self' https://www.google.com https://www.gstatic.com",
+          "frame-ancestors 'self'"
+        ].join('; ')
+      },
+      contentSecurityPolicyReportOnly: false,
     },
   },
   i18n: {

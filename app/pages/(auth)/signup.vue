@@ -63,7 +63,18 @@
               type="password"
             />
           </UFormField>
-          <UButton type="submit" class="w-full justify-center liquid-glass bg-gradient" loading-auto>{{ $t('signup') }}</UButton>
+          <div id="signup-recaptcha" class="w-full"></div>
+          <p v-if="showRecaptchaNotice" class="text-xs text-[#94A3B8]">
+            {{ $t('recaptcha_disclaimer') }}
+          </p>
+          <UButton
+            type="submit"
+            class="w-full justify-center liquid-glass bg-gradient"
+            :loading="submitting"
+            :disabled="submitting"
+          >
+            {{ $t('signup') }}
+          </UButton>
         </UForm>
         <USeparator size="md" />
         <p class="text-center text-sm">{{ $t('have_account') }} <span class="underline cursor-pointer" @click="navigateTo('/signin')">{{ $t('signin' )}}</span></p>
@@ -85,7 +96,10 @@ definePageMeta({
 
 const { signin, signup } = useAuth();
 const { $toast } = useNuxtApp()
-const { locale } = useI18n()
+const { locale, t } = useI18n()
+const runtimeConfig = useRuntimeConfig();
+
+const recaptchaSiteKey = runtimeConfig.public.RECAPTCHA_SITE_KEY;
 
 const form = ref({
   email: '',
@@ -93,6 +107,13 @@ const form = ref({
   confirm_password: '',
 })
 const formRef = ref(null)
+const submitting = ref(false)
+const recaptchaWidgetId = ref(null)
+const recaptchaToken = ref('')
+const recaptchaReady = ref(false)
+let recaptchaInitPromise
+
+const showRecaptchaNotice = computed(() => Boolean(recaptchaSiteKey))
 
 const schema = computed(() => {
   return yup.object({
@@ -119,11 +140,166 @@ const onSigninGoogle = async () => {
 }
 
 const onSignup = async () => {
-  const response = await signup(form.value)
-  if (response) {
-    navigateTo('/signin')
+  if (submitting.value) {
+    return
+  }
+
+  submitting.value = true
+
+  if (process.client && recaptchaSiteKey) {
+    const initialized = await initRecaptcha()
+    if (initialized && window.grecaptcha && recaptchaWidgetId.value !== null) {
+      try {
+        window.grecaptcha.execute(recaptchaWidgetId.value)
+        return
+      } catch (error) {
+        console.error('Failed to execute reCAPTCHA', error)
+      }
+    }
+  }
+
+  await submitSignup()
+}
+
+async function submitSignup () {
+  try {
+    const payload = { ...form.value }
+    if (recaptchaToken.value) {
+      payload.recaptcha_token = recaptchaToken.value
+    }
+    const response = await signup(payload)
+    if (response) {
+      navigateTo('/signin')
+    }
+  } finally {
+    submitting.value = false
+    resetRecaptcha()
   }
 }
+
+const onRecaptchaSuccess = async (token) => {
+  recaptchaToken.value = token
+  await submitSignup()
+}
+
+const onRecaptchaError = () => {
+  resetRecaptcha()
+  submitting.value = false
+  $toast.error(t('toast.something_wrong'), t('recaptcha_failed'))
+}
+
+const onRecaptchaExpired = () => {
+  resetRecaptcha()
+  submitting.value = false
+}
+
+const initRecaptcha = () => {
+  if (!process.client || !recaptchaSiteKey) {
+    return Promise.resolve(false)
+  }
+
+  if (recaptchaReady.value) {
+    return Promise.resolve(true)
+  }
+
+  if (recaptchaInitPromise) {
+    return recaptchaInitPromise
+  }
+
+  recaptchaInitPromise = new Promise((resolve) => {
+    const activate = (grecaptcha) => {
+      if (!grecaptcha) {
+        resolve(false)
+        return
+      }
+
+      if (recaptchaReady.value) {
+        resolve(true)
+        return
+      }
+
+      try {
+        recaptchaWidgetId.value = grecaptcha.render('signup-recaptcha', {
+          sitekey: recaptchaSiteKey,
+          size: 'invisible',
+          callback: onRecaptchaSuccess,
+          'error-callback': onRecaptchaError,
+          'expired-callback': onRecaptchaExpired,
+        })
+        recaptchaReady.value = true
+        resolve(true)
+      } catch (error) {
+        console.error('Failed to render reCAPTCHA', error)
+        resolve(false)
+      }
+    }
+
+    const handleReady = (grecaptcha) => {
+      if (!grecaptcha) {
+        resolve(false)
+        return
+      }
+
+      try {
+        grecaptcha.ready(() => activate(grecaptcha))
+      } catch (error) {
+        console.error('Failed to initialize reCAPTCHA', error)
+        resolve(false)
+      }
+    }
+
+    if (window.grecaptcha) {
+      handleReady(window.grecaptcha)
+      return
+    }
+
+    const scriptId = 'google-recaptcha-script'
+    const existingScript = document.getElementById(scriptId)
+
+    const onLoad = () => handleReady(window.grecaptcha)
+    const onError = (error) => {
+      console.error('Failed to load reCAPTCHA script', error)
+      resolve(false)
+    }
+
+    if (existingScript) {
+      existingScript.addEventListener('load', onLoad, { once: true })
+      existingScript.addEventListener('error', onError, { once: true })
+      return
+    }
+
+    const script = document.createElement('script')
+    script.id = scriptId
+    script.src = 'https://www.google.com/recaptcha/api.js?render=explicit'
+    script.async = true
+    script.defer = true
+    script.onload = onLoad
+    script.onerror = onError
+    document.head.appendChild(script)
+  }).finally(() => {
+    recaptchaInitPromise = null
+  })
+
+  return recaptchaInitPromise
+}
+
+const resetRecaptcha = () => {
+  if (!process.client) {
+    recaptchaToken.value = ''
+    return
+  }
+
+  if (window.grecaptcha && recaptchaWidgetId.value !== null) {
+    window.grecaptcha.reset(recaptchaWidgetId.value)
+  }
+  recaptchaToken.value = ''
+}
+
+onMounted(() => {
+  if (process.client && recaptchaSiteKey) {
+    initRecaptcha()
+  }
+})
 
 </script>
 
