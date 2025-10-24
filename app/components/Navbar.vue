@@ -1,10 +1,13 @@
 <template>
-  <header 
-    class="flex-1 top-0 z-50 sm:px-8 sm:py-4 px-1 py-2 fixed left-0 right-0"
+  <header
+    class="fixed top-0 left-0 right-0 z-50 flex-1 px-1 py-2 sm:px-8 sm:py-4"
     :class="{'left-20': userInfo?.user_id}"
   >
+    <!-- Backdrop blur layer -->
+    <div class="absolute inset-0 glass-effect -z-10"></div>
+
     <div
-      class="flex items-center justify-between h-[65px] rounded-xl bg-gradient shadow-blur sm:px-8 px-8"
+      class="relative flex items-center justify-between h-[65px] rounded-xl bg-gradient shadow-blur sm:px-8 px-8"
     >
       <!-- Left: Logo -->
       <div
@@ -15,8 +18,8 @@
       </div>
 
       <!-- Right: Menu -->
-      <div class="flex items-center sm:space-x-6 space-x-2 text-white">
-        <div class="hidden sm:flex items-center">
+      <div class="flex items-center space-x-2 text-white sm:space-x-6">
+        <div class="items-center hidden sm:flex">
           <UInput
             color="red"
             class="input-liquid-glass"
@@ -27,7 +30,7 @@
             <template #leading>
               <Icon
                 name="i-lucide-search"
-                class="text-white opacity-50 flex items-center w-6"
+                class="flex items-center w-6 text-white opacity-50"
               />
             </template>
           </UInput>
@@ -47,7 +50,7 @@
         >
           <Icon
             name="tdesign:user-circle-filled"
-            class="sm:w-full sm:h-full w-6 h-6"
+            class="w-6 h-6 sm:w-full sm:h-full"
           />
         </div>
       </div>
@@ -135,6 +138,7 @@ const onSearch = () => {
 </script>
 
 <style scoped>
+
 .bg-gradient {
   border-radius: 16px;
   background: linear-gradient(271.93deg, #691a20 -18.01%, #d00000 96.17%)
@@ -198,5 +202,10 @@ const onSearch = () => {
 }
 :deep(.input-liquid-glass .ring) {
   --tw-ring-shadow: unset !important;
+}
+
+.glass-effect {
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
 }
 </style>
