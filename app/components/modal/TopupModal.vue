@@ -17,11 +17,44 @@
     <template #header>
       <div class="space-y-2">
         <p class="text-[24px] sm:text-[36px] font-semibold">{{ $t('payment.title') }}</p>
-        <p class="text-[14px] opacity-[50%]">Starting from 1 Coin = 1 Message</p>
+        <p class="text-[12px] opacity-[50%]">Starting from 1 Coin = 1 Message</p>
       </div>
     </template>
     <template #body>
-      <UTabs
+      <div class="space-y-2 h-[524px] sm:h-[390px] overflow-y-scroll">
+        <div 
+          v-for="(packages, index) in topupPackageList"
+          class="flex justify-between rounded-[8px] p-4 sm:p-6 bg-[linear-gradient(314.28deg,rgba(40,40,40,0.72)_19.54%,rgba(56,56,56,0.72)_99.22%)]"
+        >
+          <div class="space-y-1">
+            <div class="flex items-center gap-2">
+              <img :src="CoinImg" alt="coin_image" class="w-6" />
+              <p class="text-[12px]">Starter Pack</p>
+              <UBadge v-show="index === 0" size="sm" color="neutral">Best Price</UBadge>
+            </div>
+            <div class="sm:flex items-end gap-2">
+              <p class="text-sm sm:text-base font-semibold">{{ packages.notes.split("=")[1].split(" ")[1] }} Coins</p>
+              <div class="flex gap-2 font-light">
+                <p class="text-xs sm:text-sm text-[#989898]">({{ Number(packages.max_amount) }} + {{ packages.notes.split("=")[1].split(" ")[1] - packages.max_amount }}) |</p>
+                <p class="text-xs sm:text-sm text-[#34852A]">+{{ Math.round(((packages.notes.split("=")[1].split(" ")[1] - Number(packages.max_amount)) / Number(packages.max_amount) ) * 100) }}% Bonus</p>
+              </div>
+            </div>
+            <p class="text-xs text-[#989898]" :class="{ 'hidden': index !== 0}">Perfect for beginners to get started</p>
+          </div>
+          <div class="flex flex-col items-center gap-2 sm:gap-4">
+            <UButton 
+              :ui="{ label: 'text-white font-semibold' }" 
+              :label="`${packages.max_amount} ฿`"
+              @click="clickSelectPackage(packages.id)"
+              class="bg-cherri-gradient uhover w-24 sm:w-full"
+              :size="isMobile ? 'sm' : 'md'"
+            />
+            <p class="text-center text-xs sm:text-sm text-[#989898]">{{ packages.rate }} Coins /THB</p>
+          </div>
+        </div>
+        
+      </div>
+      <!-- <UTabs
         v-model="selectTab"
         :items="tabItem"
         :ui="{
@@ -88,7 +121,7 @@
             >
           </div>
         </template>
-      </UTabs>
+      </UTabs> -->
     </template>
   </UModal>
 </template>
@@ -106,6 +139,7 @@ const {
   useRedeemCoupon,
 } = usePayment();
 const { isTopUpModalOpen } = useModal();
+const { isMobile } = useBreakpoint();
 
 const isDemoMode = computed(() => route.path.startsWith("/demo"));
 const modalOpen = computed({
