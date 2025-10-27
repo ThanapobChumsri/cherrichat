@@ -32,7 +32,7 @@
     </div>
     
     <!-- Character zone -->
-    <div class="fixed w-full sm:static bg-[#163854F2] sm:bg-transparent flex gap-2 sm:block p-2 mt-20 sm:px-12 sm:py-4">
+    <div class="fixed w-full sm:static bg-[#163854F2] sm:bg-transparent flex gap-2 sm:block p-2 mt-20 sm:mt-0 sm:px-12 sm:py-4">
       <img :src="latestChat.url_image" alt="character-image" class="sm:hidden h-16 aspect-square rounded-full" />
       <div class="flex-1 space-y-2">
         <p class="gradient-text text-xl sm:text-[32px] sm:min-h-[48px]">{{ characterData?.name }}</p>

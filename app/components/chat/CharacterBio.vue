@@ -51,7 +51,7 @@
             :key="key"
             class="text-sm mb-2"
           >
-            <p class="text-[#9898A2]">{{ $t(`location.${key}`) }}</p>
+            <!-- <p class="text-[#9898A2]">{{ $t(`location.${key}`) }}</p> -->
             <span>{{ value }}</span>
           </div>
         </BioCollapse>
@@ -79,11 +79,15 @@
           </BioCollapse>
         </div>
 
-        <div v-for="(value, key) in data?.personality" :key="key">
-          <div v-if="key !== 'age' && key !== 'ethnicity'">
+        <div 
+          v-for="[key, value] in Object.entries(data?.personality || {}).filter(
+            ([k]) => k !== 'age' && k !== 'ethnicity'
+          )"
+          :key="key">
+          <!-- <div v-if="key !== 'age' && key !== 'ethnicity'"> -->
             <BioCollapse
               :label="$t(`location.${key}`)"
-              class="text-sm mb-2"
+              class="text-sm"
             >
               <div v-if="typeof value == 'string' || typeof value == 'number'">
                 {{ value }}
@@ -97,9 +101,9 @@
                   :key="objectKey"
                   class="text-sm mb-2"
                 >
-                  <p class="text-[#9898A2]">
+                  <!-- <p class="text-[#9898A2]">
                     {{ $t(`location.${objectKey}`) }}
-                  </p>
+                  </p> -->
                   <span>{{
                     typeof subValue == "object"
                       ? subValue?.join(", ")
@@ -108,7 +112,7 @@
                 </div>
               </div>
             </BioCollapse>
-          </div>
+          <!-- </div> -->
         </div>
 
         <BioCollapse :label="$t('location.traits')">

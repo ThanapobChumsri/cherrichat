@@ -22,7 +22,7 @@
 
           <div>
             <div class="flex justify-between text-sm mb-2">
-              <p class="text-white text-base">{{ $t("character.point") }}</p>
+              <p class="text-white">{{ $t("character.point") }}</p>
               <p class="font-semibold text-[#DDDDDDAD]">
                 {{ overall.points }} /{{ nextPointLevel }}
               </p>
@@ -36,7 +36,7 @@
 
           <div v-for="status in statusDisplayList" :key="status">
             <div class="flex justify-between text-sm mb-2">
-              <p class="text-white text-base">
+              <p class="text-white">
                 {{ $t(`character.${status}`) }}
               </p>
               <p class="font-semibold text-[#FFBA08]">{{ overall[status] }} /100</p>
@@ -56,7 +56,7 @@
           :key="key"
           class="text-sm mb-2"
         >
-          <p class="text-white text-base">{{ key }}</p>
+          <!-- <p class="text-white text-base">{{ key }}</p> -->
           <span>{{ value }}</span>
         </div>
       </BioCollapse>
@@ -72,7 +72,7 @@
           :key="stat"
           class="flex justify-between text-sm mb-2"
         >
-          <p class="text-white text-base">
+          <p class="text-white">
             {{ $t(`character.statistics.${stat}`, "-") }}
           </p>
           <p>
