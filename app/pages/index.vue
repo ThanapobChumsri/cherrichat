@@ -7,55 +7,7 @@
       <div
         class="flex flex-col sm:flex-row sm:justify-between gap-5 sm:gap-20 px-4 sm:px-16 w-full"
       >
-        <!-- Left section -->
-        <div
-          class="w-full sm:w-1/2 text-center sm:text-left mt-4 sm:mt-0 space-y-4 sm:space-y-10"
-        >
-          <div class="text-xl sm:text-[36px] font-extrabold text-white">
-            {{ $t('index.section1.title') }}
-          </div>
-          <div class="text-sm sm:text-[16px] text-[#94A3B8]">
-            {{ $t('index.section1.sub_title') }}
-          </div>
-          <div class="flex justify-center sm:justify-start">
-            <UButton
-              v-if="userInfo?.user_type === 'creator'"
-              :size="isMobile ? 'md' : 'xl'"
-              class="w-[140px] sm:w-[200px] flex justify-center liquid-glass !rounded-lg !h-[42px] bg-gradient cursor-pointer"
-              @click="clickCreateCharacter"
-            >
-              <div class="flex items-center w-full">
-                <div class="w-full">
-                  {{ $t("index.section1.create_character") }}
-                </div>
-              </div>
-            </UButton>
-          </div>
-        </div>
-        <div class="flex sm:hidden items-center w-full">
-          <UInput
-            color="red"
-            class="input-liquid-glass w-full"
-            :placeholder="$t('navbar.search_placeholder')"
-            v-model="search"
-            enterkeyhint="go"
-            @keypress="
-              (e) => {
-                if (e.key === 'Enter') getCharacterList();
-              }
-            "
-          >
-            <template #leading>
-              <Icon
-                name="i-lucide-search"
-                class="text-white opacity-50 flex items-center w-6"
-              />
-            </template>
-          </UInput>
-        </div>
-
-        <!-- Right section -->
-        <div class="w-full sm:w-1/2">
+        <div class="w-full">
           <div class="flex justify-center items-start mb-8">
             <!-- Tabs -->
 
@@ -70,13 +22,15 @@
                 :class="tabActive === tab.value ? 'active-bg' : ''"
                 style="border-radius: 8px !important"
               >
-                <div class="w-full truncate">{{ $t(`index.section2.${tab.label}`) }}</div>
+                <div class="w-full truncate">
+                  {{ $t(`index.section2.${tab.label}`) }}
+                </div>
               </UButton>
             </div>
           </div>
 
           <!-- Character grid -->
-          <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+          <div class="hidden md:grid md:grid-cols-6 gap-4 mb-8">
             <CharacterCardSkeleton v-if="loading" :count="12" />
             <CharacterCard
               v-for="(character, index) in tabActive === 1
@@ -87,13 +41,118 @@
               @openProfile="openCharacterProfile"
             />
           </div>
+
+          <!-- Mobile: Carousel -->
+          <div class="md:hidden mb-8 relative grid">
+            <CharacterCardSkeleton v-if="loading" :count="2" />
+
+            <div v-else class="relative overflow-hidden">
+              <!-- Carousel Container -->
+              <div
+                ref="carouselRef"
+                class="flex"
+                :style="{
+                  transform: `translateX(calc(-${currentSlide * 100}%))`,
+                  transition: isTransitioning
+                    ? 'transform 0.3s ease-in-out'
+                    : 'none',
+                }"
+                @transitionend="handleTransitionEnd"
+              >
+                <!-- Clone last page -->
+                <div class="flex-shrink-0 w-full flex gap-4 px-4">
+                  <div
+                    v-for="(character, index) in getLastItems()"
+                    :key="`clone-last-${index}`"
+                    class="flex-shrink-0 w-[calc(50%-8px)]"
+                  >
+                    <CharacterCard
+                      :data="character"
+                      @openProfile="openCharacterProfile"
+                    />
+                  </div>
+                </div>
+
+                <!-- Original items grouped by pages -->
+                <div
+                  v-for="(page, pageIndex) in paginatedCharacters"
+                  :key="`page-${pageIndex}`"
+                  class="flex-shrink-0 w-full flex gap-4 px-4"
+                >
+                  <div
+                    v-for="(character, index) in page"
+                    :key="`original-${pageIndex}-${index}`"
+                    class="flex-shrink-0 w-[calc(50%-8px)]"
+                  >
+                    <CharacterCard
+                      :data="character"
+                      @openProfile="openCharacterProfile"
+                    />
+                  </div>
+                </div>
+
+                <!-- Clone first page -->
+                <div class="flex-shrink-0 w-full flex gap-4 px-4">
+                  <div
+                    v-for="(character, index) in getFirstItems()"
+                    :key="`clone-first-${index}`"
+                    class="flex-shrink-0 w-[calc(50%-8px)]"
+                  >
+                    <CharacterCard
+                      :data="character"
+                      @openProfile="openCharacterProfile"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Navigation Arrows -->
+              <button
+                @click="prevSlide"
+                class="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-[#FFFFFF80] rounded-2xl flex items-center justify-center text-gray-700 hover:bg-gray-900 transition z-10"
+              >
+                <svg
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
+              </button>
+
+              <button
+                @click="nextSlide"
+                class="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-[#FFFFFF80] rounded-2xl flex items-center justify-center text-gray-700 hover:bg-gray-900 transition z-10"
+              >
+                <svg
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- Character Profile Modal -->
     <CharacterProfileModal
-      :index="characterList.findIndex(e => e?.id === selectedCharacter?.id)"
+      :index="characterList.findIndex((e) => e?.id === selectedCharacter?.id)"
       :character-list="characterList"
       :character="selectedCharacter"
       @startConversation="goToChat"
@@ -151,22 +210,20 @@ const search = ref("");
 const selectedCharacter = ref(null);
 
 // get user-info and set cookie on server before mounted
-await useAsyncData('user-info', async () => {
-    if (userInfo.value) {
-      const response = await useGetUserById(userInfo.value);
-      userInfo.value = {
-        ...userInfo.value,
-        user_type: response.user_type,
-        pdpa_consent: response.pdpa_consent,
-        chat_tutorial: response.chat_tutorial,
-      };
-    }
+await useAsyncData("user-info", async () => {
+  if (userInfo.value) {
+    const response = await useGetUserById(userInfo.value);
+    userInfo.value = {
+      ...userInfo.value,
+      user_type: response.user_type,
+      pdpa_consent: response.pdpa_consent,
+      chat_tutorial: response.chat_tutorial,
+    };
   }
-)
+});
 
 onMounted(async () => {
   searchBus.on(async (term) => {
-    
     search.value = term;
     await getCharacterList();
   });
@@ -179,14 +236,11 @@ onMounted(async () => {
   }
 });
 
-watch(
-  search,
-  async (newValue) => {
-    if (!newValue) {
-      await getCharacterList();
-    }
+watch(search, async (newValue) => {
+  if (!newValue) {
+    await getCharacterList();
   }
-)
+});
 
 const getSoundListData = async () => {
   const soundRes = await getSoundList();
@@ -199,7 +253,7 @@ const getCharacterList = async () => {
     per_page: 100,
     search: search.value,
     is_active: true,
-    user_id: userInfo.value?.user_id || null
+    user_id: userInfo.value?.user_id || null,
   });
   characterList.value = characterRes.data;
   tabActive.value = 1;
@@ -219,54 +273,130 @@ const openCharacterProfile = (character) => {
 };
 
 const goToChat = (character) => {
-  const route = useRoute()
-  const userInfoData = JSON.parse(localStorage.getItem('user-info'));
+  const route = useRoute();
+  const userInfoData = JSON.parse(localStorage.getItem("user-info"));
 
   if (!userInfoData) {
     // Check if we're in demo mode
-    if (route.path.startsWith('/demo')) {
-      navigateTo('/demo/signin')
+    if (route.path.startsWith("/demo")) {
+      navigateTo("/demo/signin");
     } else {
-      navigateTo('/signin')
+      navigateTo("/signin");
     }
-    return
+    return;
   }
 
-  const runtimeConfig = useRuntimeConfig()
+  const runtimeConfig = useRuntimeConfig();
 
-  let setImageURL = character.emotions ?
-    Object.fromEntries(
-      Object.entries(character.emotions).map(([key, value]) => [key, `${runtimeConfig.public.N8N_IMAGE}${value}`])
-    )
-    : null
-  ;
+  let setImageURL = character.emotions
+    ? Object.fromEntries(
+        Object.entries(character.emotions).map(([key, value]) => [
+          key,
+          `${runtimeConfig.public.N8N_IMAGE}${value}`,
+        ]),
+      )
+    : null;
+  let setVidelURL = character.emotions_video
+    ? Object.fromEntries(
+        Object.entries(character.emotions_video).map(([key, value]) => [
+          key,
+          `${runtimeConfig.public.N8N_VIDEO}${value}`,
+        ]),
+      )
+    : null;
 
-  let setVidelURL = character.emotions_video ?
-    Object.fromEntries(
-      Object.entries(character.emotions_video).map(([key, value]) => [key, `${runtimeConfig.public.N8N_VIDEO}${value}`])
-    )
-    : null
-
-  localStorage.setItem('latest-chat', JSON.stringify({
-    character_info: character,
-    user_id: userInfoData.user_id,
-    character_id: character.id,
-    session_key: `session_${userInfoData.user_id}_${character.id}_ver_0`,
-    url_image: `${runtimeConfig.public.N8N_IMAGE}${character.url_image}`,
-    emotions: setImageURL,
-    url_video: `${runtimeConfig.public.N8N_VIDEO}${character.url_video}`,
-    emotions_video: setVidelURL,
-    original_place: character.original_place,
-    is_user_like: character.is_user_like,
-  }))
+  localStorage.setItem(
+    "latest-chat",
+    JSON.stringify({
+      character_info: character,
+      user_id: userInfoData.user_id,
+      character_id: character.id,
+      session_key: `session_${userInfoData.user_id}_${character.id}_ver_0`,
+      url_image: `${runtimeConfig.public.N8N_IMAGE}${character.url_image}`,
+      emotions: setImageURL,
+      url_video: `${runtimeConfig.public.N8N_VIDEO}${character.url_video}`,
+      emotions_video: setVidelURL,
+      original_place: character.original_place,
+      is_user_like: character.is_user_like,
+    }),
+  );
 
   // Navigate to appropriate chat page based on current mode
-  if (route.path.startsWith('/demo')) {
-    navigateTo('/demo/chat')
+  if (route.path.startsWith("/demo")) {
+    navigateTo("/demo/chat");
   } else {
-    navigateTo('/chat')
+    navigateTo("/chat");
   }
 };
+
+const currentSlide = ref(1);
+const slidesPerView = 2;
+const carouselRef = ref(null);
+const isTransitioning = ref(true);
+
+const filteredCharacters = computed(() => {
+  return tabActive.value === 1
+    ? characterList.value
+    : characterList.value.slice(1, tabActive.value + 1);
+});
+
+// แบ่งเป็นหน้าๆ ละ 2 items
+const paginatedCharacters = computed(() => {
+  const chars = filteredCharacters.value;
+  const pages = [];
+
+  for (let i = 0; i < chars.length; i += slidesPerView) {
+    pages.push(chars.slice(i, i + slidesPerView));
+  }
+
+  return pages;
+});
+
+const totalPages = computed(() => paginatedCharacters.value.length);
+
+const getLastItems = () => {
+  const pages = paginatedCharacters.value;
+  return pages[pages.length - 1] || [];
+};
+
+const getFirstItems = () => {
+  const pages = paginatedCharacters.value;
+  return pages[0] || [];
+};
+
+const nextSlide = () => {
+  if (!isTransitioning.value) return;
+  currentSlide.value++;
+};
+
+const prevSlide = () => {
+  if (!isTransitioning.value) return;
+  currentSlide.value--;
+};
+
+const handleTransitionEnd = () => {
+  if (currentSlide.value >= totalPages.value + 1) {
+    isTransitioning.value = false;
+    currentSlide.value = 1;
+    setTimeout(() => {
+      isTransitioning.value = true;
+    }, 50);
+  } else if (currentSlide.value <= 0) {
+    isTransitioning.value = false;
+    currentSlide.value = totalPages.value;
+    setTimeout(() => {
+      isTransitioning.value = true;
+    }, 50);
+  }
+};
+
+watch(
+  () => tabActive.value,
+  () => {
+    currentSlide.value = 1;
+    isTransitioning.value = true;
+  },
+);
 </script>
 
 <style>
@@ -285,24 +415,23 @@ const goToChat = (character) => {
   border-radius: 9999px;
   border: 1px solid rgba(255, 255, 255, 0.25);
   color: white;
-  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 1),
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 1),
     /* inner shadow ล่าง */ inset 0 1px 2px rgba(255, 255, 255, 1),
     /* outer shadow ฟุ้ง */ 0 4px 12px rgba(0, 0, 0, 0.25),
     /* glow ขอบจาง ๆ */ 0 0 6px rgba(255, 255, 255, 0.5);
   /* --- กำหนด mask --- */
   -webkit-mask-image:
-    /* base capsule (ไม่ให้ shape ขาด) */ linear-gradient(
-      white,
-      white
-    ),
+    /* base capsule (ไม่ให้ shape ขาด) */
+    linear-gradient(white, white),
     /* fade ล่างซ้าย */
-      radial-gradient(
+    radial-gradient(
         circle at bottom left,
         rgba(0, 0, 0, 0) 0%,
         rgba(0, 0, 0, 1) 40%
       ),
     /* fade บนขวา */
-      radial-gradient(
+    radial-gradient(
         circle at top right,
         rgba(0, 0, 0, 0) 0%,
         rgba(0, 0, 0, 1) 40%
