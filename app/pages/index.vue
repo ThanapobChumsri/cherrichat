@@ -3,7 +3,7 @@
     <PDPAModal />
     <DailyLoginModal />
     <div class="min-h-screen w-full bg-cover bg-center">
-      <Banner />
+      <div class="px-45"><Banner /></div>
       <div
         class="flex flex-col sm:flex-row sm:justify-between gap-5 sm:gap-20 px-4 sm:px-16 w-full"
       >

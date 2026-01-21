@@ -6,7 +6,8 @@ html {
   scroll-behavior: smooth;
 }
 
-html, body {
+html,
+body {
   font-family: "Prompt", sans-serif;
   background-color: #18181C;
 }
@@ -237,34 +238,33 @@ b {
   --color-dark-cherri-2: #240B04;
   /* --color-dark-cherri: #B51D32; */
   --color-yellow: #FFBA08;
-  --color-dark-yellow: #AE5211; 
+  --color-dark-yellow: #AE5211;
 }
 
 .bg-cherri-gradient {
-  background: linear-gradient(
-    to right,
-    var(--color-cherri) 30%,
-    var(--color-dark-cherri)
-  );
+  background: linear-gradient(to right,
+      var(--color-cherri) 30%,
+      var(--color-dark-cherri));
   outline-style: none;
 }
+
 .bg-yellow-gradient {
-  background: linear-gradient(
-    to right,
-    var(--color-yellow) 30%,
-    var(--color-dark-yellow)
-  );
-  outline-style: none;  
+  background: linear-gradient(to right,
+      var(--color-yellow) 30%,
+      var(--color-dark-yellow));
+  outline-style: none;
 }
 
 .uhover {
   justify-content: center;
   transition: all 200ms;
 }
+
 .uhover:hover {
   opacity: 80%;
   cursor: pointer;
 }
+
 .uhover:active {
   scale: 95%;
 }
@@ -280,7 +280,7 @@ b {
     0 0 6px rgba(255, 255, 255, 0.5);
 
   -webkit-mask-image:
-    linear-gradient(white,white),
+    linear-gradient(white, white),
     radial-gradient(circle at bottom left,
       rgba(0, 0, 0, 0) -10%,
       rgba(0, 0, 0, 1) 40%),
@@ -293,4 +293,14 @@ b {
 button:disabled {
   filter: brightness(0.5);
   cursor: not-allowed;
+}
+
+.gradient-text {
+  background: linear-gradient(271.93deg, #F5F0E0 6.58%, #EF3E41 102.47%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* สำคัญสำหรับ Chrome/Safari */
+  color: transparent;
+  /* เผื่อบาง browser */
 }
