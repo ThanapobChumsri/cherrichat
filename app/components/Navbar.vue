@@ -1,6 +1,6 @@
 <template>
   <header
-    class="fixed top-0 left-0 right-0 z-50 flex-1 px-1 py-2 sm:px-8 sm:py-4"
+    class="fixed top-0 left-0 right-0 z-50 flex-1 px-4 py-2 sm:px-8 sm:py-4"
     :class="{'sm:left-20': userInfo?.user_id}"
   >
     <!-- Backdrop blur layer -->
