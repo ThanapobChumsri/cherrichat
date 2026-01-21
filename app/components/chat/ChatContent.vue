@@ -106,7 +106,7 @@
             class="px-4 py-3 rounded-tl-lg rounded-tr-lg"
             :class="{
               'bg-[#FFD470] rounded-bl-lg': chat.role === 'user',
-              'bg-[#F25C54] rounded-br-lg border border-[#2c2c30]':
+              'bg-[#121823] rounded-br-lg border border-[#2c2c30]':
                 chat.role !== 'user',
               'min-w-[200px] sm:min-w-[300px]': chat.content_type === 'loading',
             }"
@@ -115,8 +115,8 @@
               v-for="(msg, j) in useSplitTypeMessage(chat.content)"
               :key="j"
               :class="{
-                'text-black': chat.role === 'user',
-                'text-[#9898A2] italic': checkTypeMessage(msg) === 'action',
+                'text-[#8F792F]': chat.role === 'user',
+                '!text-[#666666] italic': checkTypeMessage(msg) === 'action',
                 'mb-4 text-black': j !== useSplitTypeMessage(chat.content).length - 1,
               }"
               v-html="useDisplayMessage(msg)"

@@ -90,7 +90,8 @@
     "feature": "ฟีเจอร์",
     "reaction": "การตอบโต้",
     "started": "เริ่มต้นใช้งาน",
-    "search_placeholder": "ค้นหา"
+    "search_placeholder": "ค้นหา",
+    "reset_chat": "รีเซ็ตแชท"
   },
 
   "footer": {

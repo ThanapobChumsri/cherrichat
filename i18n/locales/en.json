@@ -90,7 +90,8 @@
     "feature": "Feature",
     "reaction": "Reaction",
     "started": "Get started",
-    "search_placeholder": "Search"
+    "search_placeholder": "Search",
+    "reset_chat": "Reset chat"
   },
 
   "footer": {

@@ -1,6 +1,12 @@
 <template>
   <div class="fixed top-0 bottom-0 left-0 w-20 flex-col justify-between bg-[#19191A]" :class="!userInfo?.user_id ? 'hidden' : 'hidden sm:flex'">
-    <p class="text-sm text-center my-4 opacity-80">{{ $t('navbar.character').toLowerCase() }}</p>
+    <div v-if="route.path != '/'"  class="w-full aspect-square p-2">
+      <div class="flex justify-center items-center w-full h-full rounded-full uhover" 
+      style="background: linear-gradient(314.28deg, #282828 19.54%, #383838 99.22%); " @click="goBack">
+        <UIcon name="lets-icons:back" class="w-10 h-10 bg-white"/>
+      </div>
+    </div>
+    <p class="text-sm text-center my-4 opacity-40">{{ $t('navbar.character').toLowerCase() }}</p>
     <div class="flex-1 overflow-auto space-y-3">
       <div
         v-for="(session, index) in sessionList"
@@ -10,7 +16,8 @@
         <img :src="session.url_image" alt="character-image" class="rounded-full uhover" @click="clickSessionChat(session)" />
       </div>
     </div>
-    <div class="w-full aspect-square p-2">
+    <p class="text-sm text-center my-4 opacity-40">{{ $t('navbar.reset_chat').toLowerCase() }}</p>
+    <div v-if="route.path == '/chat'" class="w-full aspect-square p-2">
       <div class="flex justify-center items-center w-full h-full rounded-full bg-cherri-gradient uhover" @click="clickResetSession">
         <UIcon name="system-uicons:reset-hard" class="w-10 h-10 bg-white"/>
       </div>
@@ -46,6 +53,10 @@ const clickSessionChat = (data) => {
   } else {
     navigateTo('/chat')
   }
+}
+
+const goBack = () => {
+  navigateTo('/')
 }
 
 </script>
