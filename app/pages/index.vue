@@ -60,7 +60,7 @@
                 @transitionend="handleTransitionEnd"
               >
                 <!-- Clone last page -->
-                <div class="flex-shrink-0 w-full flex gap-4 px-4">
+                <div class="flex-shrink-0 w-full flex gap-4">
                   <div
                     v-for="(character, index) in getLastItems()"
                     :key="`clone-last-${index}`"
@@ -77,7 +77,7 @@
                 <div
                   v-for="(page, pageIndex) in paginatedCharacters"
                   :key="`page-${pageIndex}`"
-                  class="flex-shrink-0 w-full flex gap-4 px-4"
+                  class="flex-shrink-0 w-full flex gap-4"
                 >
                   <div
                     v-for="(character, index) in page"
@@ -92,7 +92,7 @@
                 </div>
 
                 <!-- Clone first page -->
-                <div class="flex-shrink-0 w-full flex gap-4 px-4">
+                <div class="flex-shrink-0 w-full flex gap-4">
                   <div
                     v-for="(character, index) in getFirstItems()"
                     :key="`clone-first-${index}`"
