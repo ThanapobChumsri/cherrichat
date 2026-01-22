@@ -65,7 +65,7 @@
 
       <!-- Character Name -->
       <div class="mt-6 flex justify-center">
-        <div class="grid w-80 grid-cols-[48px_1fr_48px] items-center gap-2">
+        <div class="grid w-100 grid-cols-[48px_1fr_48px] items-center gap-2">
           <button
             @click="prevSlide"
             class="w-12 h-12 bg-[#FFFFFF80] rounded-2xl flex items-center justify-center text-gray-700 hover:bg-[#FFFFFFA0] transition"
