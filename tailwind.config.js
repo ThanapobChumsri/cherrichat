@@ -2,6 +2,10 @@
 module.exports = {
   content: [],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        ip: "390px", // >= iPhone 12/13/14/15 (390px)
+      },
+    },
   },
 };

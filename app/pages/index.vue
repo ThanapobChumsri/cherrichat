@@ -109,7 +109,7 @@
               <!-- Navigation Arrows -->
               <button
                 @click="prevSlide"
-                class="absolute -left-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-[#FFFFFF80] rounded-2xl flex items-center justify-center text-gray-700 hover:bg-gray-900 transition z-999"
+                class="absolute left-2 ip:-left-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-[#FFFFFF80] rounded-2xl flex items-center justify-center text-gray-700 hover:bg-gray-900 transition z-999"
               >
                 <svg
                   class="w-6 h-6"
@@ -128,7 +128,7 @@
 
               <button
                 @click="nextSlide"
-                class="absolute -right-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-[#FFFFFF80] rounded-2xl flex items-center justify-center text-gray-700 hover:bg-gray-900 transition z-999"
+                class="absolute right-2 ip:-right-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-[#FFFFFF80] rounded-2xl flex items-center justify-center text-gray-700 hover:bg-gray-900 transition z-999"
               >
                 <svg
                   class="w-6 h-6"
