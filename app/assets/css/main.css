@@ -118,39 +118,33 @@ b {
 }
 
 .liquid-glass {
-  text-shadow: unset;
-  background: #FFFFFF1A;
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  position: relative;
+  overflow: hidden;
 
-  border-radius: 9999px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: white;
+  /* ทำให้พื้นหลังเข้มขึ้นนิด เพื่อดันคอนทราสต์ตัวหนังสือ */
+  background: rgba(0, 0, 0, 0.25);
+  /* เดิมคุณใช้ #FFFFFF1A / #FFFFFF33 ซึ่งสว่างไป */
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 16px;
+  /* แนะนำให้กำหนดให้ชัด ไม่ชนกับ rounded ใน tailwind */
+
+  /* ช่วยให้อ่านง่ายขึ้นมาก */
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55);
+
   box-shadow:
-    /* inner shadow บน */
-    inset 0 1px 2px rgba(255, 255, 255, 1),
-    /* inner shadow ล่าง */
-    inset 0 1px 2px rgba(255, 255, 255, 1),
-    /* outer shadow ฟุ้ง */
-    0 4px 12px rgba(0, 0, 0, 0.25),
-    /* glow ขอบจาง ๆ */
-    0 0 6px rgba(255, 255, 255, 0.5);
-  /* --- กำหนด mask --- */
-  -webkit-mask-image:
-    /* base capsule (ไม่ให้ shape ขาด) */
-    linear-gradient(white,
-      white),
-    /* fade ล่างซ้าย */
-    radial-gradient(circle at bottom left,
-      rgba(0, 0, 0, 0) -10%,
-      rgba(0, 0, 0, 1) 40%),
-    /* fade บนขวา */
-    radial-gradient(circle at top right,
-      rgba(0, 0, 0, 0) -10%,
-      rgba(0, 0, 0, 1) 40%);
-
-  -webkit-mask-composite: destination-in, destination-in, destination-in;
+    inset 0 1px 2px rgba(255, 255, 255, 0.35),
+    0 6px 18px rgba(0, 0, 0, 0.35);
 }
+
+.liquid-glass>* {
+  position: relative;
+  z-index: 1;
+}
+
 
 .liquid-glass:hover {
   opacity: 0.8;
@@ -177,6 +171,16 @@ b {
       rgba(255, 255, 255, 0) 50%,
       rgba(255, 255, 255, 0.4) 90%) border-box;
   border: #691a20 1.5px solid transparent;
+}
+
+.bg-top10 {
+  background: #EA193C66;
+
+  border: 1px solid;
+
+  border-image-source: linear-gradient(249.16deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 49.51%, rgba(255, 255, 255, 0.4) 100%);
+
+
 }
 
 .driver-popover {
@@ -303,4 +307,12 @@ button:disabled {
   /* สำคัญสำหรับ Chrome/Safari */
   color: transparent;
   /* เผื่อบาง browser */
+}
+
+.crown-icon {
+  background: linear-gradient(180deg,
+      #f7cb3b 0%,
+      #dbd27d 97.95%);
+  box-shadow: 0px 4px 7.3px 0px #E4D60F40;
+
 }
