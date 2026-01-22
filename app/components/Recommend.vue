@@ -23,8 +23,7 @@
           >
             <img
               :src="
-                `${runtimeConfig.public.N8N_IMAGE}${char?.url_image}` ||
-                defaultUserAvatar
+                imgSrc(char?.url_image)
               "
               :alt="char?.name"
               class="object-cover rounded-2xl w-44 h-44 xl:w-40 xl:h-40 2xl:w-44 2xl:h-44"
@@ -38,8 +37,7 @@
           >
             <img
               :src="
-                `${runtimeConfig.public.N8N_IMAGE}${currentCharacter?.url_image}` ||
-                defaultUserAvatar
+                imgSrc(currentCharacter?.url_image)
               "
               :alt="currentCharacter?.name"
               class="w-60 h-60 object-cover rounded-3xl shadow-2xl cursor-pointer hover:scale-105 transition-transform bg-black"
@@ -54,8 +52,7 @@
           >
             <img
               :src="
-                `${runtimeConfig.public.N8N_IMAGE}${char?.url_image}` ||
-                defaultUserAvatar
+                imgSrc(char?.url_image)
               "
               :alt="char?.name"
               class="object-cover rounded-2xl w-44 h-44 xl:w-40 xl:h-40 2xl:w-44 2xl:h-44"
@@ -109,8 +106,7 @@
           >
             <img
               :src="
-                `${runtimeConfig.public.N8N_IMAGE}${getSideCharacters('left', 1)[0]?.url_image ?? ''}` ||
-                defaultUserAvatar
+                imgSrc(getSideCharacters('left', 1)[0]?.url_image)
               "
               :alt="getSideCharacters('left', 1)[0]?.name"
               class="h-40 sm:mr-0 mr-20 object-cover rounded-2xl brightness-75"
@@ -124,8 +120,7 @@
           >
             <img
               :src="
-                `${runtimeConfig.public.N8N_IMAGE}${currentCharacter?.url_image}` ||
-                defaultUserAvatar
+                imgSrc(currentCharacter?.url_image)
               "
               :alt="currentCharacter?.name"
               class="w-56 h-56 object-cover rounded-3xl shadow-2xl"
@@ -138,8 +133,7 @@
           >
             <img
               :src="
-                `${runtimeConfig.public.N8N_IMAGE}${getSideCharacters('right', 1)[0]?.url_image ?? ''}` ||
-                defaultUserAvatar
+                imgSrc(getSideCharacters('right', 1)[0]?.url_image)
               "
               :alt="getSideCharacters('right', 1)[0]?.name"
               class="h-40 sm:ml-0 ml-20 object-cover rounded-2xl brightness-75"
@@ -226,6 +220,9 @@ const prevSlide = () => {
 const openCharacterProfile = (data) => {
   emit("openProfile", data);
 };
+
+const imgSrc = (url) =>
+  url ? `${runtimeConfig.public.N8N_IMAGE}${url}` : defaultUserAvatar;
 </script>
 
 <style scoped>
