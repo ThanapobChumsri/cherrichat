@@ -46,7 +46,7 @@
           <div class="md:hidden mb-8 relative grid">
             <CharacterCardSkeleton v-if="loading" :count="2" />
 
-            <div v-else class="relative overflow-hidden">
+            <div v-else class="overflow-hidden">
               <!-- Carousel Container -->
               <div
                 ref="carouselRef"
@@ -109,7 +109,7 @@
               <!-- Navigation Arrows -->
               <button
                 @click="prevSlide"
-                class="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-[#FFFFFF80] rounded-2xl flex items-center justify-center text-gray-700 hover:bg-gray-900 transition z-10"
+                class="absolute -left-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-[#FFFFFF80] rounded-2xl flex items-center justify-center text-gray-700 hover:bg-gray-900 transition z-999"
               >
                 <svg
                   class="w-6 h-6"
@@ -128,7 +128,7 @@
 
               <button
                 @click="nextSlide"
-                class="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-[#FFFFFF80] rounded-2xl flex items-center justify-center text-gray-700 hover:bg-gray-900 transition z-10"
+                class="absolute -right-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-[#FFFFFF80] rounded-2xl flex items-center justify-center text-gray-700 hover:bg-gray-900 transition z-999"
               >
                 <svg
                   class="w-6 h-6"
@@ -147,7 +147,7 @@
             </div>
           </div>
 
-          <Top10 class="mb-8"/>
+          <Top10 class="mb-8" />
         </div>
       </div>
     </div>
