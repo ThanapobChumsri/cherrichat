@@ -34,6 +34,7 @@
           <!-- Center Character (larger) -->
           <div
             class="relative inline-block rounded-3xl p-[1px] bg-[linear-gradient(180deg,#FFE58E_0%,#E5E3D0_97.95%)]"
+            @click="openCharacterProfile(currentCharacter)"
           >
             <img
               :src="
@@ -119,6 +120,7 @@
           <!-- Center -->
           <div
             class="relative z-10 inline-block rounded-3xl p-[1px] bg-[linear-gradient(180deg,#FFE58E_0%,#E5E3D0_97.95%)]"
+            @click="openCharacterProfile(currentCharacter)"
           >
             <img
               :src="
@@ -183,7 +185,7 @@ const { width } = useWindowSize();
 const { getRecommend } = useRecommend();
 const sideCount = computed(() => (width.value >= 1280 ? 3 : 2)); // xl = 1280
 const characters = ref([]);
-
+const emit = defineEmits(["openProfile"]);
 onMounted(async () => {
   let res = await getRecommend();
   characters.value = res;
@@ -220,6 +222,9 @@ const prevSlide = () => {
   currentIndex.value =
     (currentIndex.value - 1 + characters.value.length) %
     characters.value.length;
+};
+const openCharacterProfile = (data) => {
+  emit("openProfile", data);
 };
 </script>
 

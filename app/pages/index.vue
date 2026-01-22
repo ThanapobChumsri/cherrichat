@@ -149,7 +149,7 @@
 
           <Top10 class="mb-8" />
 
-          <Recommend class="mb-8" />
+          <Recommend class="mb-8" @openProfile="openCharacterProfile" />
         </div>
       </div>
     </div>
