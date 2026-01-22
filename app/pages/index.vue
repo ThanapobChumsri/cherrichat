@@ -148,6 +148,8 @@
           </div>
 
           <Top10 class="mb-8" />
+
+          <Recommend class="mb-8" />
         </div>
       </div>
     </div>
@@ -170,6 +172,7 @@ import DailyLoginModal from "~/components/modal/DailyLoginModal.vue";
 import Banner from "~/components/Banner.vue";
 import CharacterProfileModal from "~/components/modal/CharacterProfileModal.vue";
 import Top10 from "~/components/Top10.vue";
+import Recommend from "~/components/Recommend.vue";
 
 import { useCharacter } from "~/composables/useCharacter.js";
 import { useChat } from "#imports";
