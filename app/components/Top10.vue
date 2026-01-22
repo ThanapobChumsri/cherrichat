@@ -1,5 +1,5 @@
 <template>
-  <div class="top10-container">
+  <div v-if="top10List.length > 0" class="top10-container">
     <!-- Header -->
 
     <!-- Desktop Layout -->
@@ -8,10 +8,7 @@
       :style="{ backgroundImage: `url(${top10bg})` }"
     >
       <div class="absolute top-6 flex items-center gap-2 mb-6 lg:mb-8">
-        <Icon
-          name="material-symbols:crown"
-          class="crown-icon text-4xl"
-        />
+        <Icon name="material-symbols:crown" class="crown-icon text-4xl" />
         <h2 class="text-[32px] font-bold text-white">
           Top 10 weekly interaction users
         </h2>
@@ -26,8 +23,10 @@
                 class="podium-shadow podium-shadow--2 relative mb-[-30px] z-10"
               >
                 <img
-                  :src="topUsers[1].avatar"
-                  :alt="topUsers[1].name"
+                  referrerpolicy="no-referrer"
+                  crossorigin="anonymous"
+                  :src="topUsers[1]?.avatar_url || defaultUserAvatar"
+                  :alt="topUsers[1]?.username"
                   class="w-24 h-24 rounded-full object-cover border-4 border-blue-400"
                 />
                 <div
@@ -40,7 +39,7 @@
                 class="bg-top10 backdrop-blur-sm border border-red-800/30 rounded-2xl px-6 pt-12 pb-4 min-w-[160px]"
               >
                 <p class="text-white font-semibold text-center mb-1 text-sm">
-                  {{ topUsers[1].name }}
+                  {{ topUsers[1]?.username }}
                 </p>
                 <div class="flex items-center justify-center gap-1">
                   <Icon
@@ -48,7 +47,7 @@
                     class="text-yellow-400 text-sm"
                   />
                   <span class="text-white text-[16px]"
-                    >{{ topUsers[1].points }} pts</span
+                    >{{ topUsers[1]?.total_points }} pts</span
                   >
                 </div>
               </div>
@@ -64,8 +63,10 @@
                 class="podium-shadow podium-shadow--1 relative mb-[-50px] z-10"
               >
                 <img
-                  :src="topUsers[0].avatar"
-                  :alt="topUsers[0].name"
+                  referrerpolicy="no-referrer"
+                  crossorigin="anonymous"
+                  :src="topUsers[0]?.avatar_url || defaultUserAvatar"
+                  :alt="topUsers[0]?.username"
                   class="w-36 h-36 rounded-full object-cover border-4 border-yellow-400"
                 />
                 <div
@@ -78,7 +79,7 @@
                 class="bg-top10 backdrop-blur-sm border border-red-800/30 rounded-2xl px-8 pt-16 pb-5 min-w-[200px]"
               >
                 <p class="text-white font-bold text-center mb-1 text-base">
-                  {{ topUsers[0].name }}
+                  {{ topUsers[0]?.username }}
                 </p>
                 <div class="flex items-center justify-center gap-1">
                   <Icon
@@ -86,7 +87,7 @@
                     class="text-yellow-400"
                   />
                   <span class="text-white text-[16px]"
-                    >{{ topUsers[0].points }} pts</span
+                    >{{ topUsers[0]?.total_points }} pts</span
                   >
                 </div>
               </div>
@@ -98,8 +99,10 @@
                 class="podium-shadow podium-shadow--3 relative mb-[-30px] z-10"
               >
                 <img
-                  :src="topUsers[2].avatar"
-                  :alt="topUsers[2].name"
+                  referrerpolicy="no-referrer"
+                  crossorigin="anonymous"
+                  :src="topUsers[2]?.avatar_url || defaultUserAvatar"
+                  :alt="topUsers[2]?.username"
                   class="w-24 h-24 rounded-full object-cover border-4 border-orange-400"
                 />
                 <div
@@ -112,7 +115,7 @@
                 class="bg-top10 backdrop-blur-sm border border-red-800/30 rounded-2xl px-6 pt-12 pb-4 min-w-[160px]"
               >
                 <p class="text-white font-semibold text-center mb-1 text-sm">
-                  {{ topUsers[2].name }}
+                  {{ topUsers[2]?.username }}
                 </p>
                 <div class="flex items-center justify-center gap-1">
                   <Icon
@@ -120,7 +123,7 @@
                     class="text-yellow-400 text-sm"
                   />
                   <span class="text-white text-[16px]"
-                    >{{ topUsers[2].points }} pts</span
+                    >{{ topUsers[2]?.total_points }} pts</span
                   >
                 </div>
               </div>
@@ -132,23 +135,27 @@
         <div class="basis-1/2 min-w-0">
           <div class="grid grid-cols-1 gap-3">
             <div
-              v-for="user in remainingUsers"
-              :key="user.rank"
+              v-for="(user, index) in remainingUsers"
+              :key="index"
               class="liquid-glass backdrop-blur-sm border border-slate-600/30 !rounded-xl !bg-gray-600 px-4 py-3 flex items-center gap-3"
             >
               <span class="text-white font-bold text-lg min-w-[24px]">{{
-                user.rank
+                index + 4
               }}</span>
               <img
-                :src="user.avatar"
-                :alt="user.name"
+                referrerpolicy="no-referrer"
+                crossorigin="anonymous"
+                :src="user?.avatar_url || defaultUserAvatar"
+                :alt="user?.username"
                 class="w-10 h-10 rounded-full object-cover"
               />
               <div class="flex-1">
-                <p class="text-white font-bold text-[16px]">{{ user.name }}</p>
+                <p class="text-white font-bold text-[16px]">
+                  {{ user?.username }}
+                </p>
               </div>
               <span class="text-white text-[16px]"
-                >{{ user.points }} pts</span
+                >{{ user?.total_points }} pts</span
               >
             </div>
           </div>
@@ -171,13 +178,15 @@
         </h2>
       </div>
       <!-- Top 3 Podium Mobile -->
-      <div class="flex items-end justify-center gap-3 mb-6">
+      <div class="flex items-end justify-center gap-2 mb-6">
         <!-- Rank 2 -->
         <div class="flex flex-col items-center flex-1">
           <div class="podium-shadow podium-shadow--2 relative mb-[-20px] z-10">
             <img
-              :src="topUsers[1].avatar"
-              :alt="topUsers[1].name"
+              referrerpolicy="no-referrer"
+              crossorigin="anonymous"
+              :src="topUsers[1]?.avatar_url || defaultUserAvatar"
+              :alt="topUsers[1]?.username"
               class="w-18 h-18 rounded-full object-cover border-3 border-blue-400"
             />
             <div
@@ -187,12 +196,12 @@
             </div>
           </div>
           <div
-            class="bg-top10 backdrop-blur-sm border border-red-800/30 rounded-xl px-3 pt-8 pb-2 w-full"
+            class="bg-top10 backdrop-blur-sm border border-red-800/30 rounded-xl px-1 pt-8 pb-2 w-full"
           >
             <p
               class="text-white font-semibold text-center mb-0.5 text-xs truncate"
             >
-              {{ topUsers[1].name }}
+              {{ topUsers[1]?.username }}
             </p>
             <div class="flex items-center justify-center gap-1">
               <Icon
@@ -200,7 +209,7 @@
                 class="text-yellow-400 text-xs"
               />
               <span class="text-white text-xs"
-                >{{ topUsers[1].points }} pts</span
+                >{{ topUsers[1]?.total_points }} pts</span
               >
             </div>
           </div>
@@ -214,8 +223,10 @@
           />
           <div class="podium-shadow podium-shadow--1 relative mb-[-30px] z-10">
             <img
-              :src="topUsers[0].avatar"
-              :alt="topUsers[0].name"
+              referrerpolicy="no-referrer"
+              crossorigin="anonymous"
+              :src="topUsers[0]?.avatar_url || defaultUserAvatar"
+              :alt="topUsers[0]?.username"
               class="w-24 h-24 rounded-full object-cover border-3 border-yellow-400"
             />
             <div
@@ -225,10 +236,10 @@
             </div>
           </div>
           <div
-            class="bg-top10 backdrop-blur-sm border border-red-800/30 rounded-xl px-3 pt-10 pb-2 w-full"
+            class="bg-top10 backdrop-blur-sm border border-red-800/30 rounded-xl px-1 pt-10 pb-2 w-full"
           >
             <p class="text-white font-bold text-center mb-0.5 text-sm truncate">
-              {{ topUsers[0].name }}
+              {{ topUsers[0]?.username }}
             </p>
             <div class="flex items-center justify-center gap-1">
               <Icon
@@ -236,7 +247,7 @@
                 class="text-yellow-400 text-xs"
               />
               <span class="text-white text-sm"
-                >{{ topUsers[0].points }} pts</span
+                >{{ topUsers[0]?.total_points }} pts</span
               >
             </div>
           </div>
@@ -246,8 +257,10 @@
         <div class="flex flex-col items-center flex-1">
           <div class="podium-shadow podium-shadow--3 relative mb-[-20px] z-10">
             <img
-              :src="topUsers[2].avatar"
-              :alt="topUsers[2].name"
+              referrerpolicy="no-referrer"
+              crossorigin="anonymous"
+              :src="topUsers[2]?.avatar_url || defaultUserAvatar"
+              :alt="topUsers[2]?.username"
               class="w-18 h-18 rounded-full object-cover border-3 border-orange-400"
             />
             <div
@@ -257,12 +270,12 @@
             </div>
           </div>
           <div
-            class="bg-top10 backdrop-blur-sm border border-red-800/30 rounded-xl px-3 pt-8 pb-2 w-full"
+            class="bg-top10 backdrop-blur-sm border border-red-800/30 rounded-xl px-1 pt-8 pb-2 w-full"
           >
             <p
               class="text-white font-semibold text-center mb-0.5 text-xs truncate"
             >
-              {{ topUsers[2].name }}
+              {{ topUsers[2]?.username }}
             </p>
             <div class="flex items-center justify-center gap-1">
               <Icon
@@ -270,7 +283,7 @@
                 class="text-yellow-400 text-xs"
               />
               <span class="text-white text-xs"
-                >{{ topUsers[2].points }} pts</span
+                >{{ topUsers[2]?.total_points }} pts</span
               >
             </div>
           </div>
@@ -280,24 +293,24 @@
       <!-- Ranks 4-10 List Mobile -->
       <div class="space-y-2">
         <div
-          v-for="user in remainingUsers"
-          :key="user.rank"
+          v-for="(user, index) in remainingUsers"
+          :key="index"
           class="liquid-glass backdrop-blur-sm border border-slate-600/30 !rounded-xl !bg-gray-600 px-3 py-2.5 flex items-center gap-3"
         >
           <span class="text-white font-bold text-sm min-w-[20px]">{{
-            user.rank
+            index + 4
           }}</span>
           <img
-            :src="user.avatar"
-            :alt="user.name"
+            referrerpolicy="no-referrer"
+            crossorigin="anonymous"
+            :src="user?.avatar_url || defaultUserAvatar"
+            :alt="user?.username"
             class="w-9 h-9 rounded-full object-cover"
           />
           <div class="flex-1">
-            <p class="text-white font-bold text-sm">{{ user.name }}</p>
+            <p class="text-white font-bold text-sm">{{ user?.username }}</p>
           </div>
-          <span class="text-white text-xs"
-            >{{ user.points }} pts</span
-          >
+          <span class="text-white text-xs">{{ user?.total_points }} pts</span>
         </div>
       </div>
     </div>
@@ -307,71 +320,20 @@
 <script setup>
 import top10bg from "~/assets/images/BG_Top_10.png";
 import top10bgMobile from "~/assets/images/BG_Top_10_Mobile.png";
-const mockUsers = [
-  {
-    rank: 1,
-    name: "Bryan Wolf",
-    points: 43,
-    avatar: "https://i.pravatar.cc/150?img=12",
-  },
-  {
-    rank: 2,
-    name: "Meghan Jepsen",
-    points: 40,
-    avatar: "https://i.pravatar.cc/150?img=5",
-  },
-  {
-    rank: 3,
-    name: "Alex Turner",
-    points: 38,
-    avatar: "https://i.pravatar.cc/150?img=13",
-  },
-  {
-    rank: 4,
-    name: "Marsha Fisher",
-    points: 36,
-    avatar: "https://i.pravatar.cc/150?img=1",
-  },
-  {
-    rank: 5,
-    name: "Juanita Cormier",
-    points: 35,
-    avatar: "https://i.pravatar.cc/150?img=20",
-  },
-  {
-    rank: 6,
-    name: "Yenifer Scott",
-    points: 34,
-    avatar: "https://i.pravatar.cc/150?img=23",
-  },
-  {
-    rank: 7,
-    name: "Tamara Schmidt",
-    points: 33,
-    avatar: "https://i.pravatar.cc/150?img=9",
-  },
-  {
-    rank: 8,
-    name: "Ricardo Veum",
-    points: 32,
-    avatar: "https://i.pravatar.cc/150?img=14",
-  },
-  {
-    rank: 9,
-    name: "Gary Sanford",
-    points: 31,
-    avatar: "https://i.pravatar.cc/150?img=33",
-  },
-  {
-    rank: 10,
-    name: "Becky Bartell",
-    points: 30,
-    avatar: "https://i.pravatar.cc/150?img=16",
-  },
-];
+import { useTop10 } from "#imports";
+import defaultUserAvatar from "@/assets/images/default_user.png";
 
-const topUsers = computed(() => mockUsers.slice(0, 3));
-const remainingUsers = computed(() => mockUsers.slice(3));
+const { getTop10User } = useTop10();
+
+const top10List = ref([]);
+
+const topUsers = computed(() => top10List.value.slice(0, 3) || []);
+const remainingUsers = computed(() => top10List.value.slice(3) || []);
+
+onMounted(async () => {
+  let res = await getTop10User();
+  top10List.value = res;
+});
 </script>
 
 <style scoped>
