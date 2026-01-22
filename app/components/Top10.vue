@@ -10,9 +10,9 @@
       <div class="absolute top-6 flex items-center gap-2 mb-6 lg:mb-8">
         <Icon
           name="material-symbols:crown"
-          class="crown-icon text-2xl lg:text-3xl"
+          class="crown-icon text-4xl"
         />
-        <h2 class="text-lg lg:text-xl font-bold text-white">
+        <h2 class="text-[32px] font-bold text-white">
           Top 10 weekly interaction users
         </h2>
       </div>
@@ -47,7 +47,7 @@
                     name="material-symbols:star-shine-rounded"
                     class="text-yellow-400 text-sm"
                   />
-                  <span class="text-white text-sm font-medium"
+                  <span class="text-white text-[16px]"
                     >{{ topUsers[1].points }} pts</span
                   >
                 </div>
@@ -85,7 +85,7 @@
                     name="material-symbols:star-shine-rounded"
                     class="text-yellow-400"
                   />
-                  <span class="text-white font-semibold"
+                  <span class="text-white text-[16px]"
                     >{{ topUsers[0].points }} pts</span
                   >
                 </div>
@@ -119,7 +119,7 @@
                     name="material-symbols:star-shine-rounded"
                     class="text-yellow-400 text-sm"
                   />
-                  <span class="text-white text-sm font-medium"
+                  <span class="text-white text-[16px]"
                     >{{ topUsers[2].points }} pts</span
                   >
                 </div>
@@ -145,9 +145,9 @@
                 class="w-10 h-10 rounded-full object-cover"
               />
               <div class="flex-1">
-                <p class="text-white font-medium text-sm">{{ user.name }}</p>
+                <p class="text-white font-bold text-[16px]">{{ user.name }}</p>
               </div>
-              <span class="text-white text-sm font-medium"
+              <span class="text-white text-[16px]"
                 >{{ user.points }} pts</span
               >
             </div>
@@ -199,7 +199,7 @@
                 name="material-symbols:star-shine-rounded"
                 class="text-yellow-400 text-xs"
               />
-              <span class="text-white text-xs font-medium"
+              <span class="text-white text-xs"
                 >{{ topUsers[1].points }} pts</span
               >
             </div>
@@ -233,9 +233,9 @@
             <div class="flex items-center justify-center gap-1">
               <Icon
                 name="material-symbols:star-shine-rounded"
-                class="text-yellow-400 text-sm"
+                class="text-yellow-400 text-xs"
               />
-              <span class="text-white text-sm font-semibold"
+              <span class="text-white text-sm"
                 >{{ topUsers[0].points }} pts</span
               >
             </div>
@@ -269,7 +269,7 @@
                 name="material-symbols:star-shine-rounded"
                 class="text-yellow-400 text-xs"
               />
-              <span class="text-white text-xs font-medium"
+              <span class="text-white text-xs"
                 >{{ topUsers[2].points }} pts</span
               >
             </div>
@@ -293,9 +293,9 @@
             class="w-9 h-9 rounded-full object-cover"
           />
           <div class="flex-1">
-            <p class="text-white font-medium text-sm">{{ user.name }}</p>
+            <p class="text-white font-bold text-sm">{{ user.name }}</p>
           </div>
-          <span class="text-white text-xs font-medium"
+          <span class="text-white text-xs"
             >{{ user.points }} pts</span
           >
         </div>
