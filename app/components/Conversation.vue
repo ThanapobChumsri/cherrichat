@@ -75,13 +75,15 @@
           <!-- Character Avatar with Badge -->
           <div class="flex items-center gap-3 mb-3">
             <div class="relative">
-              <img
-                :src="getImageUrl(conv.url_image)"
-                :alt="conv.name"
-                class="w-14 h-14 rounded-full object-cover ring-2 ring-white/10"
-              />
+              <div class="avatar-gradient-border">
+                <img
+                  :src="getImageUrl(conv.url_image)"
+                  :alt="conv.name"
+                  class="w-14 h-14 rounded-full object-cover"
+                />
+              </div>
               <div
-                class="absolute -bottom-1 -right-1 w-5 h-5 bg-gradient rounded-full border-2 border-gray-900 flex items-center justify-center shadow"
+                class="absolute bottom-2 right-0 w-5 h-5 bg-gradient rounded-full flex items-center justify-center shadow"
               >
                 <Icon name="mdi:star" class="text-white text-xs" />
               </div>
@@ -135,13 +137,15 @@
               <!-- Character Avatar with Badge -->
               <div class="flex items-center gap-3 mb-3">
                 <div class="relative">
-                  <img
-                    :src="getImageUrl(conv.url_image)"
-                    :alt="conv.name"
-                    class="w-14 h-14 rounded-full object-cover ring-2 ring-white/10"
-                  />
+                  <div class="avatar-gradient-border">
+                    <img
+                      :src="getImageUrl(conv.url_image)"
+                      :alt="conv.name"
+                      class="w-14 h-14 rounded-full object-cover"
+                    />
+                  </div>
                   <div
-                    class="absolute -bottom-1 -right-1 w-5 h-5 bg-gradient rounded-full border-2 border-gray-900 flex items-center justify-center shadow"
+                    class="absolute bottom-2 right-0 w-5 h-5 bg-gradient rounded-full flex items-center justify-center shadow"
                   >
                     <Icon name="mdi:star" class="text-white text-xs" />
                   </div>
@@ -235,6 +239,20 @@ const startConversationWithMessage = (conv, message) => {
 <style scoped>
 .conversation-container {
   @apply w-full;
+}
+
+/* Gradient border for avatar */
+.avatar-gradient-border {
+  position: relative;
+  border-radius: 50%;
+  padding: 2px;
+  background: linear-gradient(271.93deg, #691a20 -18.01%, #d00000 96.17%);
+  display: inline-block;
+}
+
+.avatar-gradient-border img {
+  display: block;
+  border-radius: 50%;
 }
 
 /* Line clamp helper (if you don't have tailwind line-clamp plugin) */
