@@ -121,6 +121,8 @@
     "name": "Name",
     "age": "Age",
     "ethnicity": "Ethnicity",
+    "nationality": "Nationality",
+    "occupation": "Occupation",
     "bio": "Character Bio",
     "original_place": "Original Place",
     "current_place": "Current Place",

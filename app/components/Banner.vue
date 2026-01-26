@@ -26,6 +26,7 @@
           <UButton
             class="font-bold text-[18px] xl:text-[20px] liquid-glass w-full active-bg h-[48px]"
             style="border-radius: 54px !important"
+            @click="goToLiveChat"
           >
             <div
               class="px-6 xl:px-8 truncate w-full flex justify-center items-center gap-2"
@@ -106,6 +107,7 @@
           <UButton
             class="font-bold text-[16px] min-[400px]:text-[18px] liquid-glass w-full active-bg h-[44px] min-[400px]:h-[48px]"
             style="border-radius: 54px !important"
+            @click="goToLiveChat"
           >
             <div class="w-full flex justify-center items-center gap-2">
               <Icon name="streamline:live-video-remix" /> Live
@@ -125,6 +127,18 @@ import chatAll from "@/assets/images/chat-box-all.png";
 import bgMobile from "@/assets/images/BG_Live_chat_Mobile.png";
 import chatBox1 from "@/assets/images/chat_box_1.png";
 import chatBox2 from "@/assets/images/chat_box_2.png";
+
+const LIVE_CHAT_CHARACTER_ID = "a4c64ef2-b9fe-4b48-97b2-c7748cd2eb81";
+
+const goToLiveChat = () => {
+  // Set character_id ใน localStorage
+  if (process.client) {
+    localStorage.setItem("live-chat-character-id", LIVE_CHAT_CHARACTER_ID);
+  }
+
+  // Navigate to live-chat page
+  navigateTo("/live-chat");
+};
 </script>
 
 <style scoped></style>

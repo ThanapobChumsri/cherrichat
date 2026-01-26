@@ -121,6 +121,8 @@
     "name": "ชื่อ",
     "age": "อายุ",
     "ethnicity": "สัญชาติ",
+    "nationality": "สัญชาติ",
+    "occupation": "อาชีพ",
     "bio": "ข้อมูลตัวละคร",
     "original_place": "สถานที่เริ่มต้น",
     "current_place": "สถานที่ปัจจุบัน",
