@@ -238,6 +238,15 @@ const initChatRoom = async (chatData) => {
   }
 
   await openChatConnection(latestChat.value);
+
+  // ตรวจสอบว่ามี pending message หรือไม่
+  const pendingMessage = localStorage.getItem("pending-message");
+  if (pendingMessage) {
+    // ลบ pending message ออก
+    localStorage.removeItem("pending-message");
+    // ส่ง message
+    await sendNewChat(pendingMessage);
+  }
 };
 
 const pushChatHistory = (content, role, type, id) => {

@@ -8,13 +8,13 @@
         class="flex flex-col sm:flex-row sm:justify-between gap-5 sm:gap-20 px-4 sm:px-16 w-full"
       >
         <div class="w-full">
-          <div class="flex justify-center items-start mb-8">
+          <div class="flex justify-center items-start mb-8  gap-1 sm:gap-4">
             <!-- Tabs -->
 
             <div
               v-for="(tab, index) in tabItem"
               :key="index"
-              class="w-1/4 px-1 sm:px-4"
+              class="w-1/4"
               @click="onChangeTab(tab.value)"
             >
               <UButton
@@ -150,6 +150,14 @@
           <Top10 class="mb-8" />
 
           <Recommend class="mb-8" @openProfile="openCharacterProfile" />
+
+          <Conversation
+            class="mb-8"
+            :conversations="conversationCharacters"
+            :featured-count="2"
+            @startChat="goToChat"
+            @startChatWithMessage="goToChatWithMessage"
+          />
         </div>
       </div>
     </div>
@@ -173,6 +181,7 @@ import Banner from "~/components/Banner.vue";
 import CharacterProfileModal from "~/components/modal/CharacterProfileModal.vue";
 import Top10 from "~/components/Top10.vue";
 import Recommend from "~/components/Recommend.vue";
+import Conversation from "~/components/Conversation.vue";
 
 import { useCharacter } from "~/composables/useCharacter.js";
 import { useChat } from "#imports";
@@ -335,6 +344,13 @@ const goToChat = (character) => {
   }
 };
 
+const goToChatWithMessage = ({ character, message }) => {
+  // เก็บ message ที่ต้องการส่งไว้ใน localStorage
+  localStorage.setItem("pending-message", message);
+  // จากนั้นไปหน้าแชทปกติ
+  goToChat(character);
+};
+
 const currentSlide = ref(1);
 const slidesPerView = 2;
 const carouselRef = ref(null);
@@ -359,6 +375,13 @@ const paginatedCharacters = computed(() => {
 });
 
 const totalPages = computed(() => paginatedCharacters.value.length);
+
+// Filter characters that have conversation array
+const conversationCharacters = computed(() => {
+  return characterList.value.filter(
+    (char) => char.conversation && char.conversation.length > 0,
+  );
+});
 
 const getLastItems = () => {
   const pages = paginatedCharacters.value;
