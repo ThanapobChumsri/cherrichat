@@ -2,7 +2,7 @@
   <div>
     <!-- ===================== DESKTOP / WEB ===================== -->
     <div
-      class="hidden lg:block relative overflow-visible mb-4 lg:mb-8 xl:mb-12 mx-4 lg:mx-8 xl:mx-16 bg-cover bg-center bg-no-repeat h-[320px] xl:h-[400px] from-dark-cherri-2 from-[10%] via-cherri-2 via-[70%] to-dark-cherri-2 to-[100%] rounded-[16px]"
+      class="hidden lg:block relative overflow-visible mb-4 lg:mb-8 xl:mb-12 mx-4 lg:mx-8 bg-cover bg-center bg-no-repeat h-[320px] xl:h-[400px] from-dark-cherri-2 from-[10%] via-cherri-2 via-[70%] to-dark-cherri-2 to-[100%] rounded-[16px]"
       :style="{ backgroundImage: `url(${bg})` }"
     >
       <div class="relative z-[1] px-6 lg:px-10 xl:px-16 py-6 xl:py-8 h-full flex">
