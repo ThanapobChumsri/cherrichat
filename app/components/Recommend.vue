@@ -20,6 +20,7 @@
             v-for="(char, index) in getSideCharacters('left', sideCount)"
             :key="`left-${index}`"
             class="character-card-small opacity-60 hover:opacity-80 transition-opacity cursor-pointer"
+            @click="goToCharacter(char)"
           >
             <img
               :src="
@@ -49,6 +50,7 @@
             v-for="(char, index) in getSideCharacters('right', sideCount)"
             :key="`right-${index}`"
             class="character-card-small opacity-60 hover:opacity-80 transition-opacity cursor-pointer"
+            @click="goToCharacter(char)"
           >
             <img
               :src="
@@ -102,14 +104,15 @@
         <div class="relative flex items-center justify-center h-[190px]">
           <!-- Left (half visible) -->
           <div
-            class="absolute left-0 -bottom-20 -translate-y-1/2 -translate-x-1/2 z-0"
+            class="absolute left-0 -bottom-20 -translate-y-1/2 -translate-x-1/2 z-0 cursor-pointer"
+            @click="goToCharacter(getSideCharacters('left', 1)[0])"
           >
             <img
               :src="
                 imgSrc(getSideCharacters('left', 1)[0]?.url_image)
               "
               :alt="getSideCharacters('left', 1)[0]?.name"
-              class="h-40 sm:mr-0 mr-20 object-cover rounded-2xl brightness-75"
+              class="h-40 sm:mr-0 mr-20 object-cover rounded-2xl brightness-75 hover:brightness-90 transition-all"
             />
           </div>
 
@@ -129,14 +132,15 @@
 
           <!-- Right (half visible) -->
           <div
-            class="absolute right-0 -bottom-20 -translate-y-1/2 translate-x-1/2 z-0"
+            class="absolute right-0 -bottom-20 -translate-y-1/2 translate-x-1/2 z-0 cursor-pointer"
+            @click="goToCharacter(getSideCharacters('right', 1)[0])"
           >
             <img
               :src="
                 imgSrc(getSideCharacters('right', 1)[0]?.url_image)
               "
               :alt="getSideCharacters('right', 1)[0]?.name"
-              class="h-40 sm:ml-0 ml-20 object-cover rounded-2xl brightness-75"
+              class="h-40 sm:ml-0 ml-20 object-cover rounded-2xl brightness-75 hover:brightness-90 transition-all"
             />
           </div>
         </div>
@@ -217,6 +221,18 @@ const prevSlide = () => {
     (currentIndex.value - 1 + characters.value.length) %
     characters.value.length;
 };
+
+const goToCharacter = (character) => {
+  // หา index ของตัวละครที่คลิก
+  const targetIndex = characters.value.findIndex(
+    (char) => char.id === character.id
+  );
+
+  if (targetIndex !== -1) {
+    currentIndex.value = targetIndex;
+  }
+};
+
 const openCharacterProfile = (data) => {
   emit("openProfile", data);
 };
